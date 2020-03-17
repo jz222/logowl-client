@@ -1,0 +1,73 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8rem;
+    background-color: var(--color-3);
+}
+
+.navExit {
+    animation: navExit 1.5s forwards;
+}
+
+.box {
+    width: 100%;
+    max-width: 40rem;
+    margin: 10rem auto 0 auto;
+
+    button {
+        width: 100%;
+        height: 5rem;
+        padding: 0 1rem;
+        border-radius: var(--border-radius);
+    }
+
+    input {
+        margin: 2.5rem 0 2rem 0;
+
+        &:last-of-type {
+            margin: 0 0 3rem 0;
+        }
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-3);
+        font-size: 2rem;
+        color: var(--color-2);
+
+        span {
+            margin-left: 1rem;
+        }
+    }
+
+    p {
+        margin-top: 2rem;
+        padding: 0.5rem 0;
+        border-radius: var(--border-radius);
+        background-color: var(--color-4);
+        text-align: center;
+        color: var(--color-2);
+    }
+}
+
+.boxExit {
+    animation: boxExit .5s forwards;
+}
+
+@keyframes navExit {
+    to {
+        transform: translateX(calc(-100% + 28rem));
+        background-color: var(--color-1);
+        height: 100vh;
+    }
+}
+
+@keyframes boxExit {
+    to {
+        opacity: 0;
+    }
+}

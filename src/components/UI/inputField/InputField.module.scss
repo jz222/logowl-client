@@ -1,0 +1,12 @@
+.inputField {
+    width: 100%;
+    padding: 0 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 0 1px var(--color-2-darker);
+    font-size: 1.6rem;
+}
+
+.large {
+    @extend .inputField;
+    height: 5rem;
+}

@@ -1,0 +1,1 @@
+export const signIn = { url: '/auth/signin', method: 'POST', noAuthRequired: true };
