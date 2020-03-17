@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
 
-import styling from './Errors.module.scss';
 import Event from '../UI/event/Event';
+import Title from '../UI/title/Title';
+import Placeholder from '../UI/placeholder/Placeholder';
+
+import styling from './Errors.module.scss';
 
 const Errors = () => {
-    const [state, setState] = useState({
+    const [{ logs }, setState] = useState({
         logs: []
     });
     
+    const placeholder = (
+        <Placeholder title='No errors available'></Placeholder>
+    );
+    
+    const errors = (
+        <ul className={styling.content}>
+            {logs.map(log => (
+                <Event key={log.id} />
+            ))}
+        </ul>
+    );
+    
     return (
         <>
-            <ul className={styling.content}>
-                {state.logs.map(log => (
-                    <Event key={log.id} />
-                ))}
-            </ul>
+            <Title>Errors</Title>
+            
+            {logs.length ? errors : placeholder}
         </>
     )
 };
