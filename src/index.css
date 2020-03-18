@@ -2,7 +2,7 @@
     --color-1: #111b54;
 
     --color-2: white;
-    --color-2-darker: #EDF3FF;
+    --color-2-darker: #E5ECF9;
     --color-2-dark: #5B6F8C;
 
     --color-3: #0368ff;
@@ -11,7 +11,7 @@
 
     --max-width: 140rem;
     --border-radius: 7px;
-    --shadow: var(--color-2-darker) 0 1px 10px 0;
+    --shadow: var(--color-2-darker) 0 5px 20px 0;
 }
 
 html {
@@ -52,6 +52,7 @@ button,
 input {
     border: none;
     background: none;
+    font-size: unset;
 }
 
 button {
@@ -83,6 +84,13 @@ h4 {
 h5 {
     margin: 0;
     font-size: 1.8rem;
+    font-weight: normal;
+    color: var(--color-2-dark);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--color-2-darker);
 }
 
 a {

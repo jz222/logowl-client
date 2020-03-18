@@ -1,0 +1,156 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+}
+
+.box {
+    width: 100%;
+    max-width: 80rem;
+    display: flex;
+    flex-direction: column;
+    margin: 5rem auto;
+    padding: 4.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-2-darker);
+    background-color: var(--color-2);
+    box-shadow: var(--shadow);
+    text-align: center;
+
+    button:first-of-type {
+        margin-right: 2rem;
+    }
+
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+
+    h5 {
+        margin-bottom: 4rem;
+    }
+
+    hr {
+        width: 80%;
+        margin: 3rem auto;
+    }
+}
+
+.stepper {
+    width: 100%;
+    max-width: 40rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-2-dark);
+}
+
+.bubble {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-2-darker);
+    transition: background-color 0.4s, color 0.4s;
+    font-size: 1.8rem;
+    font-weight: normal;
+}
+
+.highlighted {
+    background-color: var(--color-3);
+    color: var(--color-2);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    > div,
+    > input {
+        width: 50%;
+    }
+
+    input:first-of-type {
+        margin-right: 2rem;
+    }
+
+    span {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--color-4);
+    }
+}
+
+.organization {
+    input {
+        width: 80%;
+    }
+}
+
+.user {
+    .row:first-of-type {
+        margin-bottom: 2rem;
+    }
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem 0;
+    color: var(--color-2-dark);
+
+    > div:last-child {
+        margin-top: 1rem;
+    }
+}
+
+.success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.failure {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+
+    span {
+        padding: 0.2rem 0.7rem;
+        border-radius: var(--border-radius);
+        background-color: var(--color-4);
+        color: var(--color-2);
+
+        &:first-letter {
+            text-transform: capitalize;
+        }
+    }
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem auto 0 auto;
+}

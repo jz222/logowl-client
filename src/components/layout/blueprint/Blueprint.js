@@ -20,7 +20,7 @@ const Blueprint = ({ children, history }) => {
             const expirationTime = localStorage.getItem('expiration-time');
             
             if (!accessPass || !expirationTime || new Date(parseInt(expirationTime)) < new Date()) {
-                history.push('/login');
+                history.push('/auth/login');
                 return;
             }
             
@@ -31,7 +31,7 @@ const Blueprint = ({ children, history }) => {
             
         } catch (error) {
             console.error(error);
-            history.push('/login');
+            history.push('/auth/login');
         }
     }, [dispatch, history]);
     

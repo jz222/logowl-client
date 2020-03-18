@@ -1,0 +1,1 @@
+export const getAllErrors = { url: '/logging/error', method: 'GET' };

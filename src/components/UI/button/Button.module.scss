@@ -1,0 +1,27 @@
+.button {
+    width: 14rem;
+    height: 4.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-3);
+    transition: background-color 0.2s, color 0.2s;
+    color: var(--color-2);
+
+    &:disabled {
+        background-color: var(--color-2-darker);
+        transition: none;
+        color: var(--color-2-dark);
+        cursor: default;
+    }
+}
+
+.light {
+    @extend .button;
+    box-shadow: 0 0 0 1px var(--color-3);
+    background-color: var(--color-2);
+    color: var(--color-3);
+
+    &:hover {
+        background-color: var(--color-3);
+        color: var(--color-2);
+    }
+}

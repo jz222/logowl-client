@@ -34,6 +34,7 @@ const SignIn = ({ history }) => {
     
     const signIn = async (e) => {
         try {
+            e.persist();
             e.preventDefault();
             
             setState(prevState => ({ ...prevState, loading: true }));

@@ -1,3 +1,4 @@
 import connectivity from './connectivity';
+import regex from './regex';
 
-export default { connectivity }
+export default { connectivity, regex }

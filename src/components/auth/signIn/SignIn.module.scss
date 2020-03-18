@@ -60,9 +60,9 @@
 
 @keyframes navExit {
     to {
-        transform: translateX(calc(-100% + 28rem));
-        background-color: var(--color-1);
         height: 100vh;
+        background-color: var(--color-1);
+        transform: translateX(calc(-100% + 28rem));
     }
 }
 
