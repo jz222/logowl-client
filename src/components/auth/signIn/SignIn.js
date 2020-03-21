@@ -54,7 +54,7 @@ const SignIn = ({ history }) => {
             nav.current.classList.add(styling.navExit);
             box.current.classList.add(styling.boxExit);
             
-            setTimeout(() => history.push('/'), 1700);
+            setTimeout(() => history.push('/services'), 1500);
             
         } catch (error) {
             setState(prevState => ({ ...prevState, loading: false, error: error.message }));
@@ -65,12 +65,16 @@ const SignIn = ({ history }) => {
     const expirationTime = localStorage.getItem('expiration-time');
     
     if (accessPass && expirationTime && new Date(parseInt(expirationTime)) > new Date()) {
-        history.push('/');
+        history.push('/services');
     }
     
     return (
         <>
-            <nav className={styling.nav} ref={nav} />
+            <nav className={styling.nav} ref={nav}>
+                <div>
+                    <span>LOGGY</span>
+                </div>
+            </nav>
             
             <main>
                 <div className={styling.box} ref={box}>

@@ -13,7 +13,7 @@ const App = () => {
             <Route path='/auth/setup' component={Setup} />
             
             <Blueprint>
-                <Route exact path='/errors' component={Errors} />
+                <Route exact path='/services/:id' component={Errors} />
                 <Route path='' />
             </Blueprint>
         </Switch>

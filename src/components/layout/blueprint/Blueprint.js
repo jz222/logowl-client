@@ -31,15 +31,16 @@ const Blueprint = ({ children, history }) => {
             
         } catch (error) {
             console.error(error);
+            localStorage.clear();
             history.push('/auth/login');
         }
     }, [dispatch, history]);
     
     useEffect(() => {
-        if (!store.userId) {
+        if (!store.id) {
             fetchUserData();
         }
-    }, [fetchUserData, store.userId]);
+    }, [fetchUserData, store.id]);
     
     const spinner = (
         <div className={styling.spinner}>
@@ -61,7 +62,7 @@ const Blueprint = ({ children, history }) => {
         </>
     );
     
-    return (loading && !store.userId) ? spinner : blueprint;
+    return (loading && !store.id) ? spinner : blueprint;
 };
 
 export default withRouter(Blueprint);

@@ -1,5 +1,5 @@
 :root {
-    --color-1: #111b54;
+    --color-1: #182f55;
 
     --color-2: white;
     --color-2-darker: #E5ECF9;
@@ -7,7 +7,7 @@
 
     --color-3: #0368ff;
 
-    --color-4: #FF9999;
+    --color-4: #ff0353;
 
     --max-width: 140rem;
     --border-radius: 7px;
@@ -43,7 +43,7 @@ main {
     width: 100%;
     max-width: var(--max-width);
     display: block;
-    margin: 8rem auto 0 auto;
+    margin: 0 auto;
     padding: 2rem 2rem 2rem 2rem;
     overflow: hidden;
 }

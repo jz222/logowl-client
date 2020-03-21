@@ -28,11 +28,10 @@ const Errors = () => {
     
     useEffect(() => {
         fetchLogs();
-        setInterval(() => fetchLogs(), 2500);
     }, []);
     
     const placeholder = (
-        <Placeholder title='No errors available'></Placeholder>
+        <Placeholder title='No errors available'/>
     );
     
     const errors = (
