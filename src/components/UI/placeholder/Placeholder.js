@@ -7,9 +7,9 @@ const Placeholder = ({ title, children }) => {
     return (
         <div className={styling.wrapper}>
             <div className={styling.icon}>
-                <FiActivity/>
+                <FiActivity />
             </div>
-        
+            
             <h3>{title}</h3>
             
             {children}

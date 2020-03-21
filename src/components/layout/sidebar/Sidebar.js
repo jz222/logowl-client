@@ -14,7 +14,7 @@ const Sidebar = ({ history }) => {
     
     const currentPath = history.location.pathname.split('/')[1];
     
-    const getStyling = (path) => currentPath === path ? styling.active : '';
+    const getStyling = (path) => (currentPath === path) ? styling.active : '';
     
     return (
         <aside className={styling.sidebar}>
@@ -40,7 +40,7 @@ const Sidebar = ({ history }) => {
                 </ul>
             </div>
         </aside>
-    )
+    );
 };
 
 export default withRouter(Sidebar);

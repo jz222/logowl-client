@@ -2,7 +2,7 @@ import config from 'config';
 
 import actions from './actions/';
 
-const request = async (type, payload = {}) => {
+const request = async (type, payload = {}, url) => {
     const action = actions[type];
     
     if (!action) {
@@ -20,7 +20,7 @@ const request = async (type, payload = {}) => {
         ...(action.method === 'POST') && { body: JSON.stringify(payload) }
     };
     
-    const res = await fetch(config.connectivity.backendURL + action.url, opts);
+    const res = await fetch(config.connectivity.backendURL + (url || action.url), opts);
     
     return await res.json();
 };

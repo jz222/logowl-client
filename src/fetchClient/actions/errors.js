@@ -1,1 +1,1 @@
-export const getAllErrors = { url: '/logging/error', method: 'GET' };
+export const getAllErrors = { method: 'GET' };

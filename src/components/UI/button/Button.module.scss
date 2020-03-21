@@ -1,6 +1,7 @@
 .button {
-    width: 14rem;
+    min-width: 14rem;
     height: 4.5rem;
+    padding: 0 2rem;
     border-radius: var(--border-radius);
     background-color: var(--color-3);
     transition: background-color 0.2s, color 0.2s;

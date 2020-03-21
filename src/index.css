@@ -44,7 +44,7 @@ main {
     max-width: var(--max-width);
     display: block;
     margin: 0 auto;
-    padding: 2rem 2rem 2rem 2rem;
+    padding: 2rem 2rem 2rem;
     overflow: hidden;
 }
 

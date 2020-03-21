@@ -1,0 +1,57 @@
+.spinner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem;
+
+    > div {
+        margin-bottom: 1rem;
+    }
+}
+
+.error {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 40% 20% 20% 20%;
+
+    div {
+        min-width: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    > div:nth-child(n+2) {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.cell {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-1);
+
+    div:last-child {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--color-2-dark);
+    }
+}
+
+.count {
+    @extend .cell;
+    text-align: center;
+}
+
+.page {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
