@@ -16,14 +16,7 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 40% 20% 20% 20%;
-
-    div {
-        min-width: 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
+    grid-template-columns: 35% 20% 15% 15% 15%;
 
     > div:nth-child(n+2) {
         display: flex;
@@ -32,9 +25,16 @@
 }
 
 .cell {
+    min-width: 0;
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--color-1);
+
+    div {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
     div:last-child {
         font-size: 1.4rem;

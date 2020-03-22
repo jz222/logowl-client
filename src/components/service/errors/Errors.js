@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import Placeholder from 'components/UI/placeholder/Placeholder';
+import Evolution from 'components/UI/evolution/Evolution';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
@@ -20,7 +21,6 @@ const Errors = ({ id }) => {
         fetchError: '',
         fetchedAll: false
     });
-    
     
     const { errors, loading, pageLoading, currentPage, fetchError, fetchedAll } = state;
     
@@ -42,7 +42,12 @@ const Errors = ({ id }) => {
             }
             
             if (res.length < 5) {
-                setState(prevState => ({ ...prevState, pageLoading: false, fetchedAll: true }));
+                setState(prevState => ({
+                    ...prevState,
+                    errors: [...prevState.errors, ...res],
+                    pageLoading: false,
+                    fetchedAll: true
+                }));
                 return;
             }
             
@@ -149,11 +154,16 @@ const Errors = ({ id }) => {
     const errorList = (
         <ul>
             {errors.map(error => (
+                
                 <Event key={error.fingerprint}>
                     <div className={styling.error}>
                         <div className={styling.cell}>
                             <div>{error.message}</div>
                             <div>{error.type}</div>
+                        </div>
+                        
+                        <div>
+                            <Evolution data={error.evolution} />
                         </div>
                         
                         <div>
@@ -178,6 +188,7 @@ const Errors = ({ id }) => {
                         </div>
                     </div>
                 </Event>
+            
             ))}
         </ul>
     );

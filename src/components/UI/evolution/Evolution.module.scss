@@ -1,0 +1,55 @@
+.evolution {
+    width: 100%;
+    max-width: 25rem;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--color-2-darker);
+}
+
+.bar {
+    position: relative;
+    width: calc(72% / 15);
+    height: 80%;
+    margin-right: 2%;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    transition: height 0.4s;
+    cursor: default;
+
+    &:hover {
+        background-color: var(--color-2-darker);
+
+        .tooltip {
+            display: flex;
+        }
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+
+.bullet {
+    width: 100%;
+    display: inline-block;
+    padding-top: 100%;
+    border-radius: 50%;
+    background-color: var(--color-3);
+}
+
+.tooltip {
+    position: absolute;
+    bottom: -3.5rem;
+    left: calc(50% - 9rem);
+    width: 18rem;
+    height: 3rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius);
+    background-color: var(--color-2-dark);
+    font-size: 1.2rem;
+    color: var(--color-2);
+}
