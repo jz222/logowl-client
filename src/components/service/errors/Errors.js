@@ -86,7 +86,7 @@ const Errors = ({ id }) => {
             const fetchingTime = new Date().getTime() - fetchingStart;
             
             if (fetchingTime < 800) {
-                await utils.sleep(700);
+                await utils.sleep(250);
             }
             
             setState(prevState => ({ ...prevState, errors: res, loading: false }));
