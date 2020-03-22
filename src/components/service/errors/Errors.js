@@ -21,8 +21,14 @@ const Errors = ({ id }) => {
         fetchedAll: false
     });
     
+    
     const { errors, loading, pageLoading, currentPage, fetchError, fetchedAll } = state;
     
+    
+    /**
+     * Fetches the next page of errors.
+     * @returns {Promise<void>}
+     */
     const fetchErrorsWithPointer = async () => {
         try {
             setState(prevState => ({ ...prevState, pageLoading: true }));
@@ -31,11 +37,11 @@ const Errors = ({ id }) => {
             
             const res = await fetchClient('getAllErrors', null, pointer);
             
-            if (!Array.isArray(res) && res && res.message) {
+            if (!Array.isArray(res)) {
                 throw new Error((res && res.message) || 'failed to fetch errors');
             }
             
-            if (res === null || res.length < 5) {
+            if (res.length < 5) {
                 setState(prevState => ({ ...prevState, pageLoading: false, fetchedAll: true }));
                 return;
             }
@@ -48,9 +54,11 @@ const Errors = ({ id }) => {
             }));
             
         } catch (error) {
+            console.error(error);
             setState(prevState => ({ ...prevState, pageLoading: false, fetchError: error.message }));
         }
     };
+    
     
     /**
      * Fetches all the latest logs for a given service.
@@ -58,14 +66,21 @@ const Errors = ({ id }) => {
      */
     const fetchErrors = useCallback(async () => {
         try {
-            setState(prevState => ({ ...prevState, loading: true }));
+            setState(prevState => ({
+                ...prevState,
+                loading: true,
+                pageLoading: false,
+                currentPage: 0,
+                fetchError: '',
+                fetchedAll: false
+            }));
             
             const fetchingStart = new Date().getTime();
             
             const res = await fetchClient('getAllErrors', null, '/event/' + id + '/error/all');
             
             if (!Array.isArray(res)) {
-                throw new Error((res && res.message) || 'failed to fetch errors');
+                throw new Error((res && res.message) || 'failed to fetch list of errors');
             }
             
             const fetchingTime = new Date().getTime() - fetchingStart;
@@ -74,14 +89,10 @@ const Errors = ({ id }) => {
                 await utils.sleep(700);
             }
             
-            setState(prevState => ({
-                ...prevState,
-                errors: res,
-                loading: false,
-                currentPage: 0
-            }));
+            setState(prevState => ({ ...prevState, errors: res, loading: false }));
             
         } catch (error) {
+            console.error(error);
             setState(prevState => ({ ...prevState, loading: false, fetchError: error.message }));
         }
     }, [id]);
@@ -125,6 +136,15 @@ const Errors = ({ id }) => {
     );
     
     
+    const fetchFailedPlaceholder = (
+        <Placeholder title='No errors available'>
+            <h4>Failed to fetch errors</h4>
+            
+            <div>{fetchError}</div>
+        </Placeholder>
+    );
+    
+    
     // List of errors
     const errorList = (
         <ul>
@@ -161,6 +181,12 @@ const Errors = ({ id }) => {
             ))}
         </ul>
     );
+    
+    
+    if (fetchError) {
+        return fetchFailedPlaceholder;
+    }
+    
     
     const content = errors.length ? errorList : placeholder;
     

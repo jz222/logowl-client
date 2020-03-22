@@ -2,5 +2,10 @@
     width: 100%;
     padding: 2.5rem 1rem;
     border-bottom: 1px solid var(--color-2-darker);
+    transition: transform 0.2s;
     cursor: pointer;
+
+    &:hover {
+        transform: translateX(1rem);
+    }
 }
