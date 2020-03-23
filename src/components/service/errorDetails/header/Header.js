@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    FiActivity,
-    FiCheckCircle,
-    FiChevronDown,
-    FiChevronRight,
-    FiChevronUp,
-    FiClock,
-    FiXCircle
-} from 'react-icons/fi';
+import { FiActivity, FiCheckCircle, FiChevronDown, FiChevronRight, FiChevronUp, FiClock, FiXCircle } from 'react-icons/fi';
 import { IoIosFingerPrint } from 'react-icons/io';
 
 import Toggle from 'components/UI/toggle/Toggle';
@@ -94,6 +86,7 @@ const Header = ({ type, message, evolution, fingerprint, count, createdAt, updat
                     <Toggle checked={resolved} onChange={resolveHandler} />
                 </div>
             </div>
+        
         </section>
     );
 };
