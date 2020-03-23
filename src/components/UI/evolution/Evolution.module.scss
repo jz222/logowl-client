@@ -16,7 +16,6 @@
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
     transition: height 0.4s;
-    cursor: default;
 
     &:hover {
         background-color: var(--color-2-darker);
@@ -32,6 +31,9 @@
 }
 
 .bullet {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     display: inline-block;
     padding-top: 100%;
@@ -51,5 +53,6 @@
     border-radius: var(--border-radius);
     background-color: var(--color-2-dark);
     font-size: 1.2rem;
+    font-weight: 500;
     color: var(--color-2);
 }

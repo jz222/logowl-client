@@ -1,0 +1,22 @@
+.back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    transition: color 0.2s;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-2-dark);
+    cursor: pointer;
+
+    &:disabled {
+        cursor: default;
+
+        &:hover {
+            color: var(--color-2-dark);
+        }
+    }
+
+    &:hover {
+        color: var(--color-1);
+    }
+}

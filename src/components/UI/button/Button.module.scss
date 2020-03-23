@@ -4,8 +4,13 @@
     padding: 0 2rem;
     border-radius: var(--border-radius);
     background-color: var(--color-3);
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
     color: var(--color-2);
+    outline: none;
+
+    &:focus {
+        box-shadow: 0 0 0 4px var(--color-3-lighter);
+    }
 
     &:disabled {
         background-color: var(--color-2-darker);

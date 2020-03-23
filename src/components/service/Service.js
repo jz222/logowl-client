@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Errors from './errors/Errors';
 import { Menu, Tab } from 'components/UI/menu/Menu';
 
-const Service = ({ match }) => {
+const Service = ({ history, match }) => {
     const [{ activeTab }, setState] = useState({
         activeTab: 'errors'
     });
@@ -18,7 +18,7 @@ const Service = ({ match }) => {
                 <Tab active={activeTab === 'errors'} click={() => tabHandler('errors')}>Errors</Tab>
             </Menu>
             
-            {activeTab === 'errors' && <Errors id={match.params.id} />}
+            {activeTab === 'errors' && <Errors id={match.params.id} history={history} />}
         </>
     );
 };

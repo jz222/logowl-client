@@ -78,8 +78,8 @@ const SignIn = ({ history }) => {
             
             <main>
                 <div className={styling.box} ref={box}>
-                    <h1>Login</h1>
-                    <h4>Login with your credentials below</h4>
+                    <h1>Sign In</h1>
+                    <h4>Sign in with your credentials below</h4>
                     
                     <p hidden={!error}>{error}</p>
                     

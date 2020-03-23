@@ -13,6 +13,7 @@
         border-radius: var(--border-radius);
         background-color: var(--color-2);
         transition: border-radius 0.2s;
+        font-weight: 500;
         color: var(--color-1);
         cursor: pointer;
     }
@@ -35,8 +36,7 @@
         cursor: pointer;
 
         &:hover {
-            background-color: var(--color-2-darker);
-            color: var(--color-1);
+            color: var(--color-3);
         }
     }
 }

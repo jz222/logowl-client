@@ -9,7 +9,7 @@ const Sidebar = ({ history }) => {
         localStorage.removeItem('access-pass');
         localStorage.removeItem('expiration-time');
         
-        history.push('/auth/login');
+        history.push('/auth/signin');
     };
     
     const currentPath = history.location.pathname.split('/')[1];

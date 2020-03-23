@@ -12,7 +12,7 @@ import utils from 'utils';
 
 import styling from './Errors.module.scss';
 
-const Errors = ({ id }) => {
+const Errors = ({ id, history }) => {
     const [state, setState] = useState({
         errors: [],
         loading: true,
@@ -102,6 +102,13 @@ const Errors = ({ id }) => {
         }
     }, [id]);
     
+    const openErrorDetails = (error) => {
+        history.push({
+            pathname: '/services/error/' + (error.id || '0'),
+            state: { ...error, errorListPath: history.location }
+        });
+    };
+    
     
     useEffect(() => {
         fetchErrors();
@@ -156,7 +163,7 @@ const Errors = ({ id }) => {
             {errors.map(error => (
                 
                 <Event key={error.fingerprint}>
-                    <div className={styling.error}>
+                    <div className={styling.error} onClick={() => openErrorDetails(error)}>
                         <div className={styling.cell}>
                             <div>{error.message}</div>
                             <div>{error.type}</div>
