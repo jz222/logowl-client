@@ -23,6 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: appear 1s forwards;
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--color-2);
@@ -46,8 +47,33 @@
             color: var(--color-2);
         }
     }
+
+    li:nth-child(1) {
+        animation: appear 1s 0.1s backwards;
+    }
+
+    li:nth-child(2) {
+        animation: appear 1s 0.2s backwards;
+    }
+
+    li:nth-child(3) {
+        animation: appear 1s 0.3s backwards;
+    }
+
+    li:nth-child(4) {
+        animation: appear 1s 0.4s backwards;
+    }
 }
 
 .active {
     color: var(--color-2);
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -71,6 +71,10 @@ const ErrorDetails = ({ history, match }) => {
                 <FiChevronLeft /> All errors
             </button>
             
+            <section>
+                <div></div>
+            </section>
+            
             <h2>{message}</h2>
             
             <hr />
