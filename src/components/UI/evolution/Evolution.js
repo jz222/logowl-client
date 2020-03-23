@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import utils from 'utils';
 
@@ -6,18 +6,7 @@ import styling from './Evolution.module.scss';
 
 const Evolution = ({ data = {} }) => {
     
-    const prepareData = useCallback((data) => {
-        const format = (key) => ({ day: key, count: data[key] });
-        const ascending = (a, b) => a.day - b.day;
-        
-        const evolution = Object.keys(data).map(format).sort(ascending);
-        const reducedEvolution = evolution.slice(Math.max(evolution.length - 15, 0));
-        const largest = reducedEvolution.reduce((a, c) => c.count > a ? c.count : a, 0);
-        
-        return { evolution: reducedEvolution, largest };
-    }, []);
-    
-    const { evolution, largest } = useMemo(() => prepareData(data), [data, prepareData]);
+    const { evolution, largest } = useMemo(() => utils.computeEvolution(data), [data]);
     
     const calculateHeight = (count, largest) => Math.max(count * 100 / largest, 35) + '%';
     

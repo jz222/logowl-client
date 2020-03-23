@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FiChevronLeft } from 'react-icons/all';
+import { FiChevronLeft } from 'react-icons/fi';
+
+import Header from './header/Header';
 
 import styling from './ErrorDetails.module.scss';
 
@@ -22,6 +24,7 @@ const ErrorDetails = ({ history, match }) => {
         clientIp: '',
         count: 0,
         timestamp: 0,
+        resolved: false,
         createdAt: '',
         updatedAt: '',
         errorListPath: ''
@@ -45,6 +48,7 @@ const ErrorDetails = ({ history, match }) => {
         clientIp,
         count,
         timestamp,
+        resolved,
         createdAt,
         updatedAt,
         errorListPath
@@ -58,6 +62,11 @@ const ErrorDetails = ({ history, match }) => {
     }, [history.location.state]);
     
     
+    const resolveHandler = () => {
+        setState(prevState => ({ ...prevState, resolved: !prevState.resolved }))
+    };
+    
+    
     const backHandler = () => history.push(errorListPath);
     
     
@@ -65,17 +74,24 @@ const ErrorDetails = ({ history, match }) => {
         fetchErrorDetails();
     }, [fetchErrorDetails]);
     
+    
     return (
         <>
             <button className={styling.back} onClick={backHandler} disabled={!errorListPath}>
                 <FiChevronLeft /> All errors
             </button>
             
-            <section>
-                <div></div>
-            </section>
-            
-            <h2>{message}</h2>
+            <Header
+                type={type}
+                message={message}
+                evolution={evolution}
+                fingerprint={fingerprint}
+                count={count}
+                createdAt={createdAt}
+                updatedAt={updatedAt}
+                resolved={resolved}
+                resolveHandler={resolveHandler}
+            />
             
             <hr />
         </>

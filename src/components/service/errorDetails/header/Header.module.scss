@@ -1,0 +1,117 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+}
+
+.identity {
+    padding-right: 4rem;
+
+    h2 {
+        margin: 0.5rem 0 1.5rem 0;
+        font-family: monospace;
+    }
+
+    .label {
+        display: flex;
+        align-items: center;
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-2-dark);
+
+        span {
+            margin-left: 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 500;
+        }
+
+        &:last-of-type {
+            font-size: 2rem;
+        }
+    }
+}
+
+.occurrence {
+    display: flex;
+    margin-bottom: 2rem;
+
+    > div {
+        margin-right: 5rem;
+    }
+
+    .date {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--color-1);
+    }
+
+    .label {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--color-2-dark);
+    }
+
+    .comparison {
+        margin-right: 2rem;
+        font-size: 3rem;
+        font-weight: bold;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .neutral {
+        color: var(--color-2-dark);
+    }
+
+    .increase {
+        color: var(--color-4);
+    }
+
+    .decrease {
+        color: var(--color-5);
+    }
+}
+
+.resolve {
+    width: 100%;
+    max-width: 42rem;
+    display: flex;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s, color 0.2s;
+
+    p {
+        font-size: 1.4rem;
+    }
+
+    .badge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        margin-right: 1rem;
+        font-size: 4rem;
+    }
+}
+
+.resolved {
+    @extend .resolve;
+    background-color: var(--color-5-lighter);
+
+    .badge {
+        color: var(--color-5);
+    }
+}
+
+.unresolved {
+    @extend .resolve;
+    background-color: var(--color-2-darker);
+
+    .badge {
+        color: var(--color-2-dark);
+    }
+}

@@ -10,7 +10,10 @@
 
     --color-4: #ff0353;
 
-    --max-width: 140rem;
+    --color-5-lighter: #E5FFF8;
+    --color-5: #1dd1a1;
+
+    --max-width: 135rem;
     --border-radius: 7px;
     --shadow: var(--color-2-darker) 0 5px 20px 0;
 }
