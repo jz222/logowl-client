@@ -47,7 +47,7 @@ const Header = ({ type, message, evolution, fingerprint, count, createdAt, updat
                 
                 <div className={styling.label}>
                     <FiClock />
-                    <span>Last seen: {new Date(updatedAt).toLocaleDateString()}</span>
+                    <span>Last seen: {new Date(updatedAt).toLocaleString()}</span>
                 </div>
                 
                 <div className={styling.label}>

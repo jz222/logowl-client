@@ -5,7 +5,7 @@ import Header from './header/Header';
 
 import styling from './ErrorDetails.module.scss';
 
-const ErrorDetails = ({ history, match }) => {
+const ErrorDetails = ({ history }) => {
     const [state, setState] = useState({
         id: '',
         message: '',
