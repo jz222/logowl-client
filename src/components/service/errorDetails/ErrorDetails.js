@@ -31,8 +31,6 @@ const ErrorDetails = ({ history, match }) => {
         errorListPath: ''
     });
     
-    console.log(match)
-    
     const {
         id,
         message,
@@ -58,7 +56,6 @@ const ErrorDetails = ({ history, match }) => {
     
     
     const fetchErrorDetails = useCallback(async () => {
-        console.log(history.location)
         if (history.location.state && history.location.state.id) {
             setState(prevState => ({ ...prevState, ...history.location.state }));
         }
