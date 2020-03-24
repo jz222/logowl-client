@@ -104,7 +104,10 @@ const Errors = ({ serviceId, history }) => {
     }, [serviceId]);
     
     const openErrorDetails = (error) => {
-        history.push('/services/' + serviceId + '/error/' + (error.id || '0'));
+        history.push({
+            pathname: '/services/' + serviceId + '/error/' + (error.id || '0'),
+            state: error
+        });
     };
     
     

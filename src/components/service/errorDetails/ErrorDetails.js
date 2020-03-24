@@ -58,6 +58,7 @@ const ErrorDetails = ({ history, match }) => {
     
     
     const fetchErrorDetails = useCallback(async () => {
+        console.log(history.location)
         if (history.location.state && history.location.state.id) {
             setState(prevState => ({ ...prevState, ...history.location.state }));
         }
