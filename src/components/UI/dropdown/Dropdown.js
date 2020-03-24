@@ -44,12 +44,12 @@ const Dropdown = ({ items, selected, changeHandler, label}) => {
     
     return (
         <div className={styling.dropdown + ' ' + style}>
-            <div onClick={toggle} ref={selection}>{selectedItem.key || label}</div>
+            <div className={styling.selection} onClick={toggle} ref={selection}>{selectedItem.key || label}</div>
             
             <ul>
                 {items.map(item => (
                     <li
-                        key={item.key}
+                        key={item.id}
                         className={item.value === selected ? styling.active : styling.inactive}
                         onClick={() => changeHandler(item.value)}
                     >

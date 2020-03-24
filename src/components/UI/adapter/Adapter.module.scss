@@ -1,0 +1,24 @@
+.adapter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-2-darker);
+
+    img {
+        width: 70%;
+    }
+}
+
+.small {
+    @extend .adapter;
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.medium {
+    @extend .adapter;
+    width: 3rem;
+    height: 3rem;
+}

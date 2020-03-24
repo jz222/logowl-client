@@ -9,6 +9,7 @@ import styling from './ErrorDetails.module.scss';
 const ErrorDetails = ({ history, match }) => {
     const [state, setState] = useState({
         id: '',
+        adapter: {},
         message: '',
         stacktrace: '',
         evolution: {},
@@ -33,6 +34,7 @@ const ErrorDetails = ({ history, match }) => {
     
     const {
         id,
+        adapter,
         message,
         stacktrace,
         evolution,
@@ -83,6 +85,7 @@ const ErrorDetails = ({ history, match }) => {
             
             <Header
                 type={type}
+                adapter={adapter}
                 message={message}
                 evolution={evolution}
                 fingerprint={fingerprint}

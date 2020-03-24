@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Avatar from 'components/UI/avatar/Avatar';
 import Dropdown from 'components/UI/dropdown/Dropdown';
+import Adapter from 'components/UI/adapter/Adapter';
+import Avatar from 'components/UI/avatar/Avatar';
 
 import { useStore } from 'context';
 
@@ -13,7 +14,17 @@ const Nav = ({ history }) => {
     
     const changeHandler = (value) => history.push('/services/' + value);
     
-    const allServices = (store.services || []).map(service => ({ key: service.name, value: service.id }));
+    const allServices = (store.services || []).map(service => {
+        
+        const item = (
+            <>
+                <Adapter type={service.type} size='small' />
+                {service.name}
+            </>
+        );
+        
+        return { key: item, value: service.id, id: service.id };
+    });
     
     let selectedService = history.location.pathname.split('/services/')[1];
     

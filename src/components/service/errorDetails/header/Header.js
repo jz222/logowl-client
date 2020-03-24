@@ -2,6 +2,7 @@ import React from 'react';
 import { FiActivity, FiCheckCircle, FiChevronDown, FiChevronRight, FiChevronUp, FiClock, FiXCircle } from 'react-icons/fi';
 import { IoIosFingerPrint } from 'react-icons/io';
 
+import Adapter from 'components/UI/adapter/Adapter';
 import Toggle from 'components/UI/toggle/Toggle';
 import Badge from 'components/UI/badge/Badge';
 
@@ -9,7 +10,7 @@ import utils from 'utils';
 
 import styling from './Header.module.scss';
 
-const Header = ({ type, message, evolution, fingerprint, count, createdAt, updatedAt, resolved, resolveHandler }) => {
+const Header = ({ type, adapter, message, evolution, fingerprint, count, createdAt, updatedAt, resolved, resolveHandler }) => {
     
     /**
      * Calculates if the error count increased, decreased or
@@ -40,19 +41,32 @@ const Header = ({ type, message, evolution, fingerprint, count, createdAt, updat
                 
                 <h2>{message}</h2>
                 
-                <div className={styling.label}>
-                    <IoIosFingerPrint />
-                    <span>{fingerprint}</span>
-                </div>
-                
-                <div className={styling.label}>
-                    <FiClock />
-                    <span>Last seen: {new Date(updatedAt).toLocaleString()}</span>
-                </div>
-                
-                <div className={styling.label}>
-                    <FiActivity />
-                    <span>Total occurrences: {count}</span>
+                <div className={styling.wrapper}>
+                    <div className={styling.box}>
+                        <div className={styling.label}>
+                            <IoIosFingerPrint />
+                            <span>{fingerprint}</span>
+                        </div>
+                        
+                        <div className={styling.label}>
+                            <FiClock />
+                            <span>Last seen: {new Date(updatedAt).toLocaleString()}</span>
+                        </div>
+                        
+                        <div className={styling.label}>
+                            <FiActivity />
+                            <span>Total occurrences: {count}</span>
+                        </div>
+                    </div>
+                    
+                    <div className={styling.centered}>
+                        <div className={styling.box}>
+                            <div className={styling.adapter}>
+                                <Adapter type={adapter.name} size='medium' />
+                                <span>{adapter.name} {adapter.version}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             

@@ -5,11 +5,35 @@
 }
 
 .identity {
-    padding-right: 4rem;
+    width: 100%;
+    padding-right: 1rem;
 
     h2 {
-        margin: 0.5rem 0 1.5rem 0;
+        margin: 0.5rem 0 1.2rem 0;
         font-family: monospace;
+    }
+
+    .wrapper {
+        width: 100%;
+        display: block;
+        flex-wrap: wrap;
+    }
+
+    .centered {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .box {
+        width: 33rem;
+    }
+
+    .adapter {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        color: var(--color-2-dark);
     }
 
     .label {
@@ -113,5 +137,17 @@
 
     .badge {
         color: var(--color-2-dark);
+    }
+}
+
+@media screen and (min-width: 1180px) {
+    .identity {
+        .wrapper {
+            display: flex;
+        }
+
+        .centered {
+            justify-content: center;
+        }
     }
 }
