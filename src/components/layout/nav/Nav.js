@@ -15,7 +15,11 @@ const Nav = ({ history }) => {
     
     const allServices = (store.services || []).map(service => ({ key: service.name, value: service.id }));
     
-    const selectedService = history.location.pathname.split('/services/')[1];
+    let selectedService = history.location.pathname.split('/services/')[1];
+    
+    if (selectedService) {
+        selectedService = selectedService.split('/error')[0];
+    }
     
     return (
         <nav className={styling.nav}>

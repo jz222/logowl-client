@@ -14,8 +14,8 @@ const App = () => {
             <Route path='/auth/setup' component={Setup} />
             
             <Blueprint>
-                <Route exact path='/services/:id' component={Service} />
-                <Route exact path='/services/error/:id' component={ErrorDetails} />
+                <Route exact path='/services/:serviceId' component={Service} />
+                <Route exact path='/services/:serviceId/error/:errorId' component={ErrorDetails} />
             </Blueprint>
         </Switch>
     );

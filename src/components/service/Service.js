@@ -18,7 +18,7 @@ const Service = ({ history, match }) => {
                 <Tab active={activeTab === 'errors'} click={() => tabHandler('errors')}>Errors</Tab>
             </Menu>
             
-            {activeTab === 'errors' && <Errors id={match.params.id} history={history} />}
+            {activeTab === 'errors' && <Errors serviceId={match.params.serviceId} history={history} />}
         </>
     );
 };

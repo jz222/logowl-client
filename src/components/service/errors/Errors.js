@@ -13,7 +13,7 @@ import utils from 'utils';
 
 import styling from './Errors.module.scss';
 
-const Errors = ({ id, history }) => {
+const Errors = ({ serviceId, history }) => {
     const [state, setState] = useState({
         errors: [],
         loading: true,
@@ -34,7 +34,7 @@ const Errors = ({ id, history }) => {
         try {
             setState(prevState => ({ ...prevState, pageLoading: true }));
             
-            const pointer = '/event/' + id + '/error/all/' + (currentPage + 1);
+            const pointer = '/event/' + serviceId + '/error/all/' + (currentPage + 1);
             
             const res = await fetchClient('getAllErrors', null, pointer);
             
@@ -83,7 +83,7 @@ const Errors = ({ id, history }) => {
             
             const fetchingStart = new Date().getTime();
             
-            const res = await fetchClient('getAllErrors', null, '/event/' + id + '/error/all');
+            const res = await fetchClient('getAllErrors', null, '/event/' + serviceId + '/error/all');
             
             if (!Array.isArray(res)) {
                 throw new Error((res && res.message) || 'failed to fetch list of errors');
@@ -101,13 +101,10 @@ const Errors = ({ id, history }) => {
             console.error(error);
             setState(prevState => ({ ...prevState, loading: false, fetchError: error.message }));
         }
-    }, [id]);
+    }, [serviceId]);
     
     const openErrorDetails = (error) => {
-        history.push({
-            pathname: '/services/error/' + (error.id || '0'),
-            state: { ...error, errorListPath: history.location }
-        });
+        history.push('/services/' + serviceId + '/error/' + (error.id || '0'));
     };
     
     

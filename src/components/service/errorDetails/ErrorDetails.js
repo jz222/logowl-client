@@ -6,7 +6,7 @@ import Graph from './graph/Graph';
 
 import styling from './ErrorDetails.module.scss';
 
-const ErrorDetails = ({ history }) => {
+const ErrorDetails = ({ history, match }) => {
     const [state, setState] = useState({
         id: '',
         message: '',
@@ -31,6 +31,8 @@ const ErrorDetails = ({ history }) => {
         errorListPath: ''
     });
     
+    console.log(match)
+    
     const {
         id,
         message,
@@ -51,8 +53,7 @@ const ErrorDetails = ({ history }) => {
         timestamp,
         resolved,
         createdAt,
-        updatedAt,
-        errorListPath
+        updatedAt
     } = state;
     
     
@@ -68,7 +69,7 @@ const ErrorDetails = ({ history }) => {
     };
     
     
-    const backHandler = () => history.push(errorListPath);
+    const backHandler = () => history.push('/services/' + match.params.serviceId);
     
     
     useEffect(() => {
@@ -78,7 +79,7 @@ const ErrorDetails = ({ history }) => {
     
     return (
         <>
-            <button className={styling.back} onClick={backHandler} disabled={!errorListPath}>
+            <button className={styling.back} onClick={backHandler}>
                 <FiChevronLeft /> All errors
             </button>
             
