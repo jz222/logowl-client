@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import Header from './header/Header';
+import Graph from './graph/Graph';
 
 import styling from './ErrorDetails.module.scss';
 
@@ -94,6 +95,8 @@ const ErrorDetails = ({ history }) => {
             />
             
             <hr />
+            
+            <Graph data={evolution} />
         </>
     );
 };

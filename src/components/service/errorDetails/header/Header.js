@@ -36,7 +36,7 @@ const Header = ({ type, message, evolution, fingerprint, count, createdAt, updat
         <section className={styling.header}>
             
             <div className={styling.identity}>
-                <Badge size='small' type='info'>{type}</Badge>
+                <Badge size='small' type='neutral'>{type}</Badge>
                 
                 <h2>{message}</h2>
                 

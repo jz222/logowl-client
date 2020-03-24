@@ -11,6 +11,11 @@
     font-weight: bold;
 }
 
+.neutral {
+    background-color: var(--color-2-darker);
+    color: var(--color-2-dark);
+}
+
 .info {
     background-color: var(--color-3-lighter);
     color: var(--color-3);

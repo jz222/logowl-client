@@ -6,6 +6,7 @@ import App from './App';
 import { StoreProvider } from './context';
 
 import './index.css';
+import 'frappe-charts/dist/frappe-charts.min.css';
 import * as serviceWorker from './serviceWorker';
 
 const app = (

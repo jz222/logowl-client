@@ -1,6 +1,8 @@
+import utils from 'utils';
+
 const computeEvolution = (data) => {
-    const format = (key) => ({ day: key, count: data[key] });
-    const ascending = (a, b) => a.day - b.day;
+    const format = (key) => ({ timestamp: key, count: data[key], day: utils.getDate(key) });
+    const ascending = (a, b) => a.timestamp - b.timestamp;
     
     const evolution = Object.keys(data).map(format).sort(ascending);
     const reducedEvolution = evolution.slice(Math.max(evolution.length - 15, 0));

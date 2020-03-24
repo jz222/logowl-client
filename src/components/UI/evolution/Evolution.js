@@ -8,19 +8,21 @@ const Evolution = ({ data = {} }) => {
     
     const { evolution, largest } = useMemo(() => utils.computeEvolution(data), [data]);
     
-    const calculateHeight = (count, largest) => Math.max(count * 100 / largest, 35) + '%';
+    const calculateHeight = (count, largest) => Math.max(count * 100 / largest, 30) + '%';
     
     return (
         <div className={styling.evolution}>
+            
             {evolution.map(day => (
-                <div key={day.day} className={styling.bar} style={{ height: calculateHeight(day.count, largest) }}>
+                <div key={day.timestamp} className={styling.bar} style={{ height: calculateHeight(day.count, largest) }}>
                     <div className={styling.bullet} />
                     
                     <div className={styling.tooltip}>
-                        {day.count} times on {utils.getDate(day.day)}
+                        {day.count} times on {day.day}
                     </div>
                 </div>
             ))}
+            
         </div>
     );
 };

@@ -5,6 +5,7 @@ import Evolution from 'components/UI/evolution/Evolution';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
+import Badge from 'components/UI/badge/Badge';
 
 import fetchClient from 'fetchClient';
 import config from 'config';
@@ -166,7 +167,8 @@ const Errors = ({ id, history }) => {
                     <div className={styling.error} onClick={() => openErrorDetails(error)}>
                         <div className={styling.cell}>
                             <div>{error.message}</div>
-                            <div>{error.type}</div>
+                            <Badge size='small' type='neutral'>{error.type}</Badge>
+                            <Badge size='small' type='info' hidden={!error.resolved}>resolved</Badge>
                         </div>
                         
                         <div>
@@ -190,7 +192,7 @@ const Errors = ({ id, history }) => {
                         <div>
                             <div className={styling.count}>
                                 <div>{error.count}</div>
-                                <div>occurrences</div>
+                                <div>count</div>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@
     --color-2-darker: #E5ECF9;
     --color-2-dark: #5B6F8C;
 
-    --color-3-lighter: #c2d9ff;
+    --color-3-lighter: #DBE8FF;
     --color-3: #0368ff;
 
     --color-4: #ff0353;
@@ -119,6 +119,15 @@ ul {
 
 li {
     list-style-type: none;
+}
+
+.axis {
+    fill: var(--color-2-dark) !important;
+}
+
+.line-vertical,
+.line-horizontal {
+    stroke: var(--color-2-darker) !important;
 }
 
 @media screen and (min-width: 350px) {
