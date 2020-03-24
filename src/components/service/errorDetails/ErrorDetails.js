@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import Header from './header/Header';
+import Badges from './badges/Badges';
 import Graph from './graph/Graph';
 
 import styling from './ErrorDetails.module.scss';
@@ -97,6 +98,8 @@ const ErrorDetails = ({ history, match }) => {
             />
             
             <hr />
+            
+            <Badges badges={badges}/>
             
             <Graph data={evolution} />
         </>

@@ -1,0 +1,26 @@
+.badges {
+    width: 100%;
+
+    h4 {
+        margin: 4rem 0 2rem 0;
+        color: var(--color-1);
+    }
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 1rem 1rem 0;
+    border-radius: var(--border-radius);
+    border: 3px solid var(--color-2-darker);
+}
+
+.cell {
+    padding: 0.5rem;
+    color: var(--color-2-dark);
+
+    &:first-of-type {
+        border-right: 3px solid var(--color-2-darker);
+        font-weight: bold;
+    }
+}
