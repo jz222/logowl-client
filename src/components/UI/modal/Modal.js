@@ -31,6 +31,8 @@ const Modal = ({ children, open }) => {
      */
     useEffect(() => {
         if (open) {
+            backdrop.current.classList.remove(styling.fadeout);
+            modal.current.classList.remove(styling.disappear);
             modalRoot.appendChild(element.current);
         }
         

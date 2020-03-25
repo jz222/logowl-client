@@ -48,6 +48,7 @@
         border-bottom-left-radius: unset;
         border-bottom-right-radius: unset;
     }
+
     ul {
         animation: fadeDown 0.4s forwards;
     }
@@ -66,6 +67,21 @@
 .active {
     background-color: var(--color-2-darker);
     color: var(--color-1);
+}
+
+.thin {
+    height: 5rem;
+
+    .selection {
+        border: none;
+        box-shadow: 0 0 0 1px var(--color-2-darker);
+        font-weight: normal;
+    }
+
+    ul {
+        border: none;
+        box-shadow: 0 0 0 1px var(--color-2-darker), var(--shadow);
+    }
 }
 
 @keyframes fadeDown {

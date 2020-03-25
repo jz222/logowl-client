@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 import styling from './Dropdown.module.scss';
 
-const Dropdown = ({ items, selected, changeHandler, label}) => {
+const Dropdown = ({ items, selected, changeHandler, label, type }) => {
     const [visible, setVisible] = useState(false);
     
     const selection = useRef({});
@@ -43,7 +43,7 @@ const Dropdown = ({ items, selected, changeHandler, label}) => {
     const style = visible ? styling.open : styling.closed;
     
     return (
-        <div className={styling.dropdown + ' ' + style}>
+        <div className={styling.dropdown + ' ' + style + ' ' + (styling[type] || '')}>
             <div className={styling.selection} onClick={toggle} ref={selection}>{selectedItem.key || label}</div>
             
             <ul>

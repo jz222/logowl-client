@@ -48,3 +48,42 @@
         box-shadow: 0 0 0 2px var(--color-2-darker);
     }
 }
+
+.title {
+    margin-bottom: 3rem;
+}
+
+.label {
+    display: inline-block;
+    margin-bottom: 0.7rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-2-dark);
+}
+
+.split {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.cell {
+    width: 50%;
+
+    &:first-of-type {
+        margin-right: 2rem;
+    }
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 4rem;
+
+    button:first-of-type {
+        margin-right: 1rem;
+    }
+}

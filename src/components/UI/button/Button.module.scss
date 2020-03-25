@@ -20,8 +20,14 @@
     }
 }
 
-.light {
+.smaller {
     @extend .button;
+    min-width: 12rem;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.light {
     box-shadow: 0 0 0 1px var(--color-3);
     background-color: var(--color-2);
     color: var(--color-3);
