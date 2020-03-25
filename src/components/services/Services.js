@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { ErrorPlaceholder, Placeholder } from 'components/UI/placeholder/Placeholder';
 import InputField from 'components/UI/inputField/InputField';
 import Dropdown from 'components/UI/dropdown/Dropdown';
 import Stepper from 'components/UI/stepper/Stepper';
@@ -7,17 +8,24 @@ import Adapter from 'components/UI/adapter/Adapter';
 import Button from 'components/UI/button/Button';
 import Modal from 'components/UI/modal/Modal';
 
+import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 import config from 'config';
 
 import styling from './Services.module.scss';
 
 const Services = ({ history }) => {
-    const [store] = useStore();
+    const [store, dispatch] = useStore();
     
-    const initState = { modalVisible: false, name: '', type: 'nodejs', description: '' };
     
-    const [{ modalVisible, name, type, description }, setState] = useState(initState);
+    const [{ modalVisible, name, type, description, error }, setState] = useState({
+        isLoading: false,
+        modalVisible: false,
+        name: '',
+        type: '',
+        description: '',
+        error: ''
+    });
     
     
     /**
@@ -29,7 +37,13 @@ const Services = ({ history }) => {
     /**
      * Closes the modal.
      */
-    const closeModal = () => setState(initState);
+    const closeModal = () => setState(prevState => ({
+        ...prevState,
+        modalVisible: false,
+        name: '',
+        type: '',
+        description: ''
+    }));
     
     
     /**
@@ -49,6 +63,32 @@ const Services = ({ history }) => {
     const selectHandler = (value) => setState(prevState => ({ ...prevState, type: value }));
     
     
+    /**
+     * Creates a new service.
+     * @returns {Promise<void>}
+     */
+    const createService = async () => {
+        try {
+            setState(prevState => ({ ...prevState, isLoading: true, modalVisible: false }));
+            
+            const res = await fetchClient('createService', { name, type, description });
+            
+            if (res.message) {
+                throw new Error(res.message);
+            }
+            
+            const services = [...store.services, res];
+            
+            setState(prevState => ({ ...prevState, isLoading: false }));
+            dispatch({ type: 'update', payload: { services } });
+            
+        } catch (error) {
+            console.error(error);
+            setState(prevState => ({ ...prevState, isLoading: false, error: error.message }));
+        }
+    };
+    
+    
     // All available types with icon
     const types = config.availableTypes.map(type => {
         const item = (
@@ -61,6 +101,37 @@ const Services = ({ history }) => {
         
         return { key: item, value: type.name, id: type.name };
     });
+    
+    
+    const inputIsValid = name && type && config.regex.description.test(description);
+    
+    
+    const services = (
+        <section className={styling.services}>
+            {store.services.map(service => (
+                <div
+                    key={service.id}
+                    className={styling.service}
+                    onClick={() => history.push('/services/' + service.id)}
+                >
+                    <Adapter type={service.type} size='large' />
+                    
+                    <div>{service.name}</div>
+                    
+                    <p>{service.description}</p>
+                </div>
+            ))}
+        </section>
+    );
+    
+    
+    const placeholder = (
+        <Placeholder title='No services available'>
+            <h4>Create your first service and get started</h4>
+            
+            <Button onClick={openModal}>New Service</Button>
+        </Placeholder>
+    );
     
     
     return (
@@ -76,28 +147,16 @@ const Services = ({ history }) => {
                 <Button onClick={openModal}>New Service</Button>
             </section>
             
-            <section className={styling.services}>
-                {store.services.map(service => (
-                    <div
-                        key={service.id}
-                        className={styling.service}
-                        onClick={() => history.push('/services/' + service.id)}
-                    >
-                        <Adapter type={service.type} size='large' />
-                        
-                        <div>{service.name}</div>
-                        
-                        <p>{service.description}</p>
-                    </div>
-                ))}
-            </section>
+            {(store.services.length && !error) && services}
+            {(!store.services.length && !error) && placeholder}
+            {error && <ErrorPlaceholder title={error} />}
             
             <Modal open={modalVisible}>
                 <h3 className={styling.title}>Create a new Service</h3>
                 
                 <div className={styling.split}>
                     <div className={styling.cell}>
-                        <span className={styling.label}>Service Name</span>
+                        <span className={styling.label}>Name</span>
                         
                         <InputField
                             name='name'
@@ -109,7 +168,7 @@ const Services = ({ history }) => {
                     </div>
                     
                     <div className={styling.cell}>
-                        <span className={styling.label}>Service Type</span>
+                        <span className={styling.label}>Type</span>
                         
                         <Dropdown
                             items={types}
@@ -132,7 +191,7 @@ const Services = ({ history }) => {
                 
                 <div className={styling.controls}>
                     <Button size='smaller' color='light' onClick={closeModal}>Cancel</Button>
-                    <Button size='smaller' onClick={closeModal}>Create</Button>
+                    <Button size='smaller' onClick={createService} disabled={!inputIsValid}>Create</Button>
                 </div>
             </Modal>
         </>

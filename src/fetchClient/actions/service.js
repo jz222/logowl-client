@@ -1,0 +1,1 @@
+export const createService = { url: '/service/', method: 'POST' };

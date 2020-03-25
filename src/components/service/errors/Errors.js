@@ -140,9 +140,7 @@ const Errors = ({ serviceId, history }) => {
             
             <p>Install the NodeJS adapter to register errors</p>
             
-            <Button
-                onClick={() => window.open(config.links.loggyAdapterNodeJS, '_blank').focus()}
-            >
+            <Button onClick={() => window.open(config.links.loggyAdapterNodeJS, '_blank').focus()}>
                 Get the Adapter
             </Button>
         </Placeholder>
