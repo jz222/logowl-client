@@ -1,0 +1,46 @@
+.input:checked + .slider {
+    background-color: var(--color-5);
+
+    &:before {
+        transform: translateX(22px);
+    }
+}
+
+.label {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    display: inline-block;
+    flex-shrink: 0;
+    margin-left: 10px;
+
+    input {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 35px;
+    background-color: var(--color-2-dark);
+    transition: background-color 0.4s;
+    cursor: pointer;
+
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 3px;
+        left: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: var(--color-2);
+        transition: background-color 0.4s, transform 0.4s;
+    }
+}

@@ -1,0 +1,49 @@
+.nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4rem;
+    border-bottom: 1px solid var(--color-2-darker);
+    background-color: var(--color-2);
+    box-shadow: var(--shadow);
+    transform: translateY(-100%);
+    animation: appear 0.4s forwards;
+    z-index: 9;
+
+    > div:first-child {
+        width: 25rem;
+    }
+}
+
+.user {
+    display: flex;
+    align-items: center;
+
+    > div:first-child {
+        margin-right: 1rem;
+    }
+}
+
+.name {
+    max-width: 20rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.email {
+    @extend .name;
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+@keyframes appear {
+    to {
+        transform: translateY(0);
+    }
+}

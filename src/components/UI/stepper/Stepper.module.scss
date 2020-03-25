@@ -1,0 +1,22 @@
+.stepper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-2-dark);
+
+    span {
+        margin-right: 1.5rem;
+    }
+}
+
+.bullet {
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-right: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-3);
+}

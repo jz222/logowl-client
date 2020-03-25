@@ -1,0 +1,32 @@
+.inputField {
+    position: relative;
+    width: 100%;
+    padding: 0 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 0 1px var(--color-2-darker);
+    transition: box-shadow 0.2s;
+    font-size: 1.6rem;
+    color: var(--color-1);
+    outline: none;
+
+    &::placeholder {
+        color: var(--color-2-dark);
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 1px var(--color-3-lighter), 0 0 0 5px var(--color-2-darker);
+    }
+}
+
+.invalid {
+    box-shadow: 0 0 0 1px var(--color-4);
+
+    &:focus {
+        box-shadow: 0 0 0 1px var(--color-4);
+    }
+}
+
+.large {
+    @extend .inputField;
+    height: 5rem;
+}

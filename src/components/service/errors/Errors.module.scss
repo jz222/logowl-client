@@ -1,0 +1,65 @@
+.spinner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem;
+
+    > div {
+        margin-bottom: 1rem;
+    }
+}
+
+.error {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 35% 25% 15% 15% 10%;
+
+    > div:nth-child(n+2) {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.cell {
+    min-width: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-1);
+
+    div {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    div:first-child {
+        margin-bottom: 0.4rem;
+    }
+
+    div:last-child {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--color-2-dark);
+    }
+
+    span:first-of-type {
+        margin-right: 1rem;
+    }
+}
+
+.count {
+    @extend .cell;
+    text-align: center;
+}
+
+.page {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

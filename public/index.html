@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Loggy Dashboard" />
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            line-height: 1.15;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        #root {
+            position: relative;
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+        }
+
+        .loadingSpinner {
+            position: relative;
+            width: 3.5rem;
+            height: 3.5rem;
+            margin: auto;
+        }
+
+        .loadingSpinner div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #0368ff;
+            opacity: 0.5;
+            animation: bounce 2.4s ease-in-out infinite;
+        }
+
+        .loadingSpinner div:last-child {
+            animation-delay: -1.2s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    <title>Loggy Dashboard</title>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root">
+    <div class="loadingSpinner">
+        <div></div>
+        <div></div>
+    </div>
+</div>
+</body>
+</html>

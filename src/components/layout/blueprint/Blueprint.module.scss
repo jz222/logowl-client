@@ -1,0 +1,24 @@
+.content {
+    width: 100%;
+
+    main {
+        animation: appear 2s;
+    }
+}
+
+.spinner {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

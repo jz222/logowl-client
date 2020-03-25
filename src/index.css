@@ -1,0 +1,144 @@
+:root {
+    --color-1: #182f55;
+
+    --color-2: white;
+    --color-2-darker: #E5ECF9;
+    --color-2-dark: #5B6F8C;
+
+    --color-3-lighter: #DBE8FF;
+    --color-3: #0368ff;
+
+    --color-4: #ff0353;
+
+    --color-5-light: #E5FFF8;
+    --color-5-lighter: #ddfdcd;
+    --color-5: #1dd1a1;
+
+    --max-width: 135rem;
+    --border-radius: 7px;
+    --shadow: var(--color-2-darker) 0 5px 20px 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 50%;
+}
+
+body {
+    position: relative;
+    display: block;
+    background-color: white;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.6rem;
+    color: var(--color-1);
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-family: 'Montserrat', sans-serif;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+main {
+    width: 100%;
+    max-width: var(--max-width);
+    display: block;
+    margin: 0 auto;
+    padding: 2.5rem 4rem 4rem 4rem;
+    overflow: hidden;
+}
+
+button,
+input {
+    border: none;
+    background: none;
+    font-size: unset;
+}
+
+button {
+    cursor: pointer;
+}
+
+h1 {
+    margin: 0;
+    font-size: 3.5rem;
+}
+
+h2 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+h3 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+h4 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-2-dark);
+}
+
+h5 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-2-dark);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--color-2-darker);
+}
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+}
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+img {
+    border-style: none;
+}
+
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.axis {
+    fill: var(--color-2-dark) !important;
+}
+
+.line-vertical,
+.line-horizontal {
+    stroke: var(--color-2-darker) !important;
+}
+
+@media screen and (min-width: 350px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    html {
+        font-size: 62.5%;
+    }
+}
