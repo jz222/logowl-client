@@ -3,6 +3,7 @@ import React from 'react';
 import Stepper from 'components/UI/stepper/Stepper';
 import Adapter from 'components/UI/adapter/Adapter';
 import Button from 'components/UI/button/Button';
+import Modal from 'components/UI/modal/Modal';
 
 import { useStore } from 'context';
 
@@ -39,6 +40,8 @@ const Services = ({ history }) => {
                     </div>
                 ))}
             </section>
+            
+            <Modal></Modal>
         </>
     );
 };

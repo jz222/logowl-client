@@ -1,0 +1,67 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.4s;
+    animation: fadein 2s forwards;
+    overflow: scroll;
+    z-index: 99;
+}
+
+.modal {
+    width: 100%;
+    height: 20rem;
+    max-width: 80rem;
+    margin: 5rem auto;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-2-darker);
+    background-color: var(--color-2);
+    animation: enter 1s;
+}
+
+.disappear {
+    animation: exit 1s forwards;
+}
+
+.fadeout {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+@keyframes fadein {
+    to {
+        backdrop-filter: blur(1px);
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+}
+
+@keyframes enter {
+    from {
+        transform: translateY(60rem) rotateX(30deg) scale(0);
+        transform-origin: 50% 100%;
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) rotateX(0) scale(1);
+        transform-origin: 50% -140rem;
+        opacity: 1;
+    }
+}
+
+@keyframes exit {
+    from {
+        transform: translateY(0) rotateX(0) scale(1);
+        transform-origin: 50% -140rem;
+        opacity: 1;
+    }
+    to {
+        transform: translateY(60rem) rotateX(30deg) scale(0);
+        transform-origin: 50% 100%;
+        opacity: 1;
+    }
+}
