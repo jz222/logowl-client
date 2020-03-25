@@ -28,8 +28,8 @@
 }
 
 .light {
-    box-shadow: 0 0 0 1px var(--color-3);
     background-color: var(--color-2);
+    font-weight: 500;
     color: var(--color-3);
 
     &:hover {

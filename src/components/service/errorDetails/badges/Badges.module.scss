@@ -21,6 +21,8 @@
 
     &:first-of-type {
         border-right: 2px solid var(--color-2-darker);
+        font-family: monospace;
+        font-size: 1.8rem;
         font-weight: bold;
     }
 }
