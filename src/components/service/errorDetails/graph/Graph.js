@@ -19,7 +19,7 @@ const Graph = ({ data = {} }) => {
         const labels = evolution.map(day => day.day);
         const values = evolution.map(day => day.count);
         
-        new Chart(chart.current, {
+        const chartInstance = new Chart(chart.current, {
             data: {
                 labels,
                 datasets: [{ values }]
@@ -31,6 +31,9 @@ const Graph = ({ data = {} }) => {
             },
             colors: ['#ff0353']
         });
+        
+        return () => chartInstance.destroy();
+        
     }, [data]);
     
     return (
