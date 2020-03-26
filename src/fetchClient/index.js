@@ -6,7 +6,7 @@ const request = async (type, payload = {}, url) => {
     const action = actions[type];
     
     if (!action) {
-        throw new Error('The provided action ' + action + ' does not exist.');
+        throw new Error('The provided action ' + type + ' does not exist.');
     }
     
     const jwt = localStorage.getItem('access-pass');

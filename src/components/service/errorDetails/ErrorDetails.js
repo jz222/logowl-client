@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronLeft, FiTrash2 } from 'react-icons/fi';
 
+import { Action } from 'components/UI/button/Button';
 import Stepper from 'components/UI/stepper/Stepper';
 import Header from './header/Header';
 import Badges from './badges/Badges';
 import Graph from './graph/Graph';
 
+import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 
 import styling from './ErrorDetails.module.scss';
@@ -70,11 +72,38 @@ const ErrorDetails = ({ history, match }) => {
     }, [history.location.state]);
     
     
+    /**
+     * Deletes an error with the given ID.
+     * @returns {Promise<void>}
+     */
+    const deleteError = async () => {
+        try {
+            const url = '/event/' + match.params.serviceId + '/error/' + match.params.errorId;
+            
+            const res = await fetchClient('deleteError', null, url);
+            
+            if (res.ok) {
+                history.push('/services/' + match.params.serviceId);
+            }
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    
+    /**
+     * Toggles the status of an error with the given ID.
+     */
     const resolveHandler = () => {
         setState(prevState => ({ ...prevState, resolved: !prevState.resolved }))
     };
     
     
+    /**
+     * Navigates to the service overview.
+     * @returns {void|boolean|*|number}
+     */
     const backHandler = () => history.push('/services/' + match.params.serviceId);
     
     
@@ -90,9 +119,15 @@ const ErrorDetails = ({ history, match }) => {
         <>
             <Stepper steps={['services', currentService.name, 'error']} />
             
-            <button className={styling.back} onClick={backHandler}>
-                <FiChevronLeft /> All errors
-            </button>
+            <div className={styling.bar}>
+                <button className={styling.back} onClick={backHandler}>
+                    <FiChevronLeft /> All errors
+                </button>
+                
+                <div className={styling.actions}>
+                    <Action icon={<FiTrash2 />} onClick={deleteError}>Delete</Action>
+                </div>
+            </div>
             
             <Header
                 type={type}
