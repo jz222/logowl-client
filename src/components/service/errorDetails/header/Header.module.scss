@@ -57,10 +57,11 @@
 
 .occurrence {
     display: flex;
+    justify-content: space-between;
     margin-bottom: 2rem;
 
     > div {
-        margin-right: 5rem;
+        margin-right: 4rem;
     }
 
     .date {
@@ -109,6 +110,7 @@
     transition: background-color 0.2s, color 0.2s;
 
     p {
+        line-height: 1.4;
         font-size: 1.4rem;
     }
 
