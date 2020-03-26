@@ -5,7 +5,7 @@ import styling from './Modal.module.scss';
 
 const modalRoot = document.getElementById('modal');
 
-const Modal = ({ children, open }) => {
+const Modal = ({ children, open, size }) => {
     const element = useRef(document.createElement('div'));
     const backdrop = useRef({});
     const modal = useRef({});
@@ -22,7 +22,9 @@ const Modal = ({ children, open }) => {
         backdrop.current.classList.add(styling.fadeout);
         modal.current.classList.add(styling.disappear);
         
-        setTimeout(() => modalRoot.removeChild(element.current), 1000);
+        setTimeout(() => {
+            element.current.parentElement === modalRoot && modalRoot.removeChild(element.current);
+        }, 1000);
     };
     
     
@@ -42,7 +44,7 @@ const Modal = ({ children, open }) => {
     
     const content = (
         <div className={styling.backdrop} ref={backdrop}>
-            <div className={styling.modal} ref={modal}>
+            <div className={styling[size] || styling.modal} ref={modal}>
                 {children}
             </div>
         </div>

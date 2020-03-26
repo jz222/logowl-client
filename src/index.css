@@ -93,6 +93,12 @@ h5 {
     color: var(--color-2-dark);
 }
 
+h6 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
 hr {
     border: none;
     border-top: 1px solid var(--color-2-darker);
@@ -110,6 +116,10 @@ strong {
 
 img {
     border-style: none;
+}
+
+p {
+    color: var(--color-2-dark);
 }
 
 p,

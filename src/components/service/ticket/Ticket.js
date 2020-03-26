@@ -1,15 +1,15 @@
 import React from 'react';
-import {FiRadio} from 'react-icons/fi';
+import { FiRadio } from 'react-icons/fi';
 
 import Card from 'components/UI/card/Card';
 
 import styling from './Ticket.module.scss';
 
-const Ticket = ({ticket, serviceName}) => {
+const Ticket = ({ ticket, serviceName }) => {
     return (
         <Card>
             <div className={styling.icon}>
-                <FiRadio/>
+                <FiRadio />
             </div>
             
             <h3>Service Ticket</h3>

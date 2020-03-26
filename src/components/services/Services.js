@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 import { ErrorPlaceholder, Placeholder } from 'components/UI/placeholder/Placeholder';
 import InputField from 'components/UI/inputField/InputField';
@@ -14,9 +15,14 @@ import config from 'config';
 
 import styling from './Services.module.scss';
 
+const transition = {
+    type: 'spring',
+    damping: 20,
+    stiffness: 400
+};
+
 const Services = ({ history }) => {
     const [store, dispatch] = useStore();
-    
     
     const [{ modalVisible, name, type, description, error }, setState] = useState({
         isLoading: false,
@@ -93,6 +99,27 @@ const Services = ({ history }) => {
     };
     
     
+    /**
+     * Fetches all user data and updates global store.
+     * @type {(...args: any[]) => any}
+     */
+    const fetchAllServices = useCallback(async () => {
+        try {
+            const res = await fetchClient('getUser');
+            
+            dispatch({ type: 'update', payload: res });
+            
+        } catch (error) {
+            console.error(error);
+        }
+    }, [dispatch]);
+    
+    
+    useEffect(() => {
+        fetchAllServices();
+    }, [fetchAllServices]);
+    
+    
     // All available types with icon
     const types = config.availableTypes.map(type => {
         const item = (
@@ -110,20 +137,24 @@ const Services = ({ history }) => {
     const inputIsValid = name && type && config.regex.description.test(description);
     
     
+    // Reverse the order so that the latest services come first.
+    const sortedServices = [...store.services].reverse();
+    
     const services = (
         <section className={styling.services}>
-            {store.services.map(service => (
-                <div
+            {sortedServices.map(service => (
+                <motion.div
                     key={service.id}
                     className={styling.service}
                     onClick={() => history.push('/services/' + service.id)}
+                    layoutTransition={transition}
                 >
                     <Adapter type={service.type} size='large' />
                     
                     <div>{service.name}</div>
                     
                     <p>{service.description}</p>
-                </div>
+                </motion.div>
             ))}
         </section>
     );

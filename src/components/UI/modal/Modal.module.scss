@@ -1,9 +1,9 @@
 .backdrop {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 9rem;
     right: 0;
-    width: 100%;
+    width: calc(100% - 9rem);
     height: 100vh;
     padding: 2rem;
     transition: background-color 0.4s;
@@ -21,6 +21,11 @@
     border: 1px solid var(--color-2-darker);
     background-color: var(--color-2);
     animation: enter 1s;
+}
+
+.small {
+    @extend .modal;
+    max-width: 50rem;
 }
 
 .disappear {
