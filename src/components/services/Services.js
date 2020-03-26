@@ -77,6 +77,10 @@ const Services = ({ history }) => {
                 throw new Error(res.message);
             }
             
+            if (!res.id) {
+                throw new Error('failed to create new service');
+            }
+            
             const services = [...store.services, res];
             
             setState(prevState => ({ ...prevState, isLoading: false }));

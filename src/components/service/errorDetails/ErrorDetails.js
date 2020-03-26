@@ -32,7 +32,7 @@ const ErrorDetails = ({ history, match }) => {
         clientIp: '',
         count: 0,
         timestamp: 0,
-        resolved: false,
+        resolved: history.location.state.resolved || false,
         createdAt: '',
         updatedAt: '',
         errorListPath: ''
