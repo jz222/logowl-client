@@ -8,7 +8,7 @@ const Badges = ({ badges = {} }) => {
     }
     
     return (
-        <div className={styling.badges}>
+        <section className={styling.badges}>
             <h4>Badges</h4>
             
             {Object.keys(badges).map(key => (
@@ -17,7 +17,7 @@ const Badges = ({ badges = {} }) => {
                     <div className={styling.cell}>{badges[key]}</div>
                 </div>
             ))}
-        </div>
+        </section>
     );
 };
 

@@ -37,11 +37,11 @@ const Graph = ({ data = {} }) => {
     }, [data]);
     
     return (
-        <div className={styling.evolution}>
+        <section className={styling.evolution}>
             <h4>Evolution</h4>
             
             <div className={styling.chart} ref={chart} />
-        </div>
+        </section>
     );
 };
 

@@ -3,6 +3,7 @@ import { FiChevronLeft, FiTrash2 } from 'react-icons/fi';
 
 import { Action } from 'components/UI/button/Button';
 import Stepper from 'components/UI/stepper/Stepper';
+import Stacktrace from './stacktrace/Stacktrace';
 import Header from './header/Header';
 import Badges from './badges/Badges';
 import Graph from './graph/Graph';
@@ -147,6 +148,8 @@ const ErrorDetails = ({ history, match }) => {
             <Badges badges={badges} />
             
             <Graph data={evolution} />
+            
+            <Stacktrace snippet={snippet} stacktrace={stacktrace} path={path} line={line} />
         </>
     );
 };
