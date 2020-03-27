@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Button from 'components/UI/button/Button';
 import Modal from 'components/UI/modal/Modal';
@@ -8,16 +8,31 @@ import fetchClient from 'fetchClient';
 
 import styling from './Delete.module.scss';
 
-const Delete = ({ id, name }) => {
+const Delete = ({ name, history }) => {
     const [confirmVisibility, setConfirmVisibility] = useState(false);
     
+    /**
+     * Toggles the modal visibility.
+     */
     const toggleConfirmVisibility = () => {
         setConfirmVisibility(prevState => !prevState);
     };
     
+    /**
+     * Deletes an organization and all its data.
+     * @returns {Promise<void>}
+     */
     const deleteOrganization = async () => {
         try {
-        } catch(error) {}
+            const res = await fetchClient('deleteOrganization');
+            
+            if (res.ok) {
+                localStorage.clear();
+                history.push('/auth/signin');
+            }
+        } catch (error) {
+            console.error(error)
+        }
     };
     
     return (
@@ -28,7 +43,7 @@ const Delete = ({ id, name }) => {
                         <h6>Delete Organization</h6>
                         <p>Delete this organization and all its data</p>
                     </div>
-            
+                    
                     <Button size='smaller' onClick={toggleConfirmVisibility}>Delete</Button>
                 </div>
             </Card>
@@ -43,7 +58,7 @@ const Delete = ({ id, name }) => {
                 
                 <div className={styling.controls}>
                     <Button size='smaller' color='light' onClick={toggleConfirmVisibility}>Cancel</Button>
-                    <Button size='smaller'>Confirm</Button>
+                    <Button size='smaller' onClick={deleteOrganization}>Confirm</Button>
                 </div>
             </Modal>
         </>

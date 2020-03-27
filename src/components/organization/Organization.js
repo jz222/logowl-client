@@ -7,7 +7,7 @@ import Info from './info/Info';
 
 import { useStore } from 'context';
 
-const Organization = () => {
+const Organization = ({ history }) => {
     const [store] = useStore();
     
     const [{ activeTab }, setState] = useState({
@@ -31,7 +31,7 @@ const Organization = () => {
             </Menu>
             
             {(activeTab === 'info') && <Info organization={store.organization} />}
-            {(activeTab === 'delete' && store.role === 'admin') && <Delete id={store.organization.id} name={store.organization.name} />}
+            {(activeTab === 'delete' && store.role === 'admin') && <Delete name={store.organization.name} history={history} />}
         </>
     );
 };

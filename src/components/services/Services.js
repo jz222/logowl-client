@@ -182,7 +182,7 @@ const Services = ({ history }) => {
                 <Button onClick={openModal}>New Service</Button>
             </section>
             
-            {(store.services.length && !error) && services}
+            {(!!store.services.length && !error) && services}
             {(!store.services.length && !error) && placeholder}
             {error && <ErrorPlaceholder title={error} />}
             
