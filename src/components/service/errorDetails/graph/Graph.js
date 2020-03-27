@@ -36,7 +36,7 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
         
         return () => chartInstance.destroy();
         
-    }, [data]);
+    }, [data, evolution]);
     
     return (
         <section className={styling.evolution}>

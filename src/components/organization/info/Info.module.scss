@@ -1,0 +1,11 @@
+.row {
+    margin-bottom: 2.5rem;
+
+    input {
+        margin: 0.7rem 0;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
