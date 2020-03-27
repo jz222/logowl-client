@@ -95,7 +95,7 @@ const Header = ({ type, adapter, message, evolution, fingerprint, count, created
                     
                     <p hidden={!resolved}>This error has been marked as resolved. Uncheck on the right to re-open it.</p>
                     
-                    <p hidden={resolved}>This error hasn't been resolved or was re-opened again. Check to mark as resolved.</p>
+                    <p hidden={resolved}>This error hasn't been resolved or was re-opened again. Check to resolve.</p>
                     
                     <Toggle checked={resolved} onChange={resolveHandler} />
                 </div>

@@ -1,7 +1,19 @@
 .stacktrace {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4rem 0 2rem 0;
+
     h4 {
-        margin: 4rem 0 2rem 0;
         color: var(--color-1);
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--color-2-dark);
     }
 }
 
@@ -67,6 +79,15 @@
     background-color: var(--color-3-lighter);
     font-weight: bold;
     color: var(--color-1);
+}
+
+.trace {
+    width: 100%;
+    line-height: 1.5;
+    padding: 2rem 1.5rem 2rem 7rem;
+    white-space: pre;
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
 .info {
