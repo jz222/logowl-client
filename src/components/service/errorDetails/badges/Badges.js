@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Badge from '../badge/Badge';
+
 import styling from './Badges.module.scss';
 
 const Badges = ({ badges = {} }) => {
@@ -11,12 +13,7 @@ const Badges = ({ badges = {} }) => {
         <section className={styling.badges}>
             <h4>Badges</h4>
             
-            {Object.keys(badges).map(key => (
-                <div key={key} className={styling.badge}>
-                    <div className={styling.cell}>{key}</div>
-                    <div className={styling.cell}>{badges[key]}</div>
-                </div>
-            ))}
+            {Object.keys(badges).map(key => <Badge key={key} name={key} value={badges[key]} />)}
         </section>
     );
 };

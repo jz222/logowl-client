@@ -147,7 +147,7 @@ const ErrorDetails = ({ history, match }) => {
             
             <Badges badges={badges} />
             
-            <Graph data={evolution} />
+            <Graph data={evolution} firstSeen={createdAt} lastSeen={updatedAt} />
             
             <Stacktrace snippet={snippet} stacktrace={stacktrace} path={path} line={line} />
         </>

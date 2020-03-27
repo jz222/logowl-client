@@ -1,0 +1,20 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    margin: 1rem 1rem 0 0;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-2-darker);
+}
+
+.cell {
+    padding: 0.7rem;
+    font-size: 1.4rem;
+    color: var(--color-2-dark);
+
+    &:first-of-type {
+        border-right: 2px solid var(--color-2-darker);
+        font-family: monospace;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+}

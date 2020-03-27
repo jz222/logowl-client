@@ -1,20 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { Chart } from 'frappe-charts/dist/frappe-charts.esm';
 
-import styling from './Graph.module.scss';
+import Badge from '../badge/Badge';
 
 import utils from 'utils';
 
-const Graph = ({ data = {} }) => {
+import styling from './Graph.module.scss';
+
+const Graph = ({ data = {}, firstSeen, lastSeen }) => {
     
     const chart = useRef({});
+    
+    const { evolution, largest } = useMemo(() => utils.computeEvolution(data), [data]);
     
     useEffect(() => {
         if (!Object.keys(data).length) {
             return;
         }
-        
-        const { evolution } = utils.computeEvolution(data);
         
         const labels = evolution.map(day => day.day);
         const values = evolution.map(day => day.count);
@@ -39,6 +41,10 @@ const Graph = ({ data = {} }) => {
     return (
         <section className={styling.evolution}>
             <h4>Evolution</h4>
+            
+            <Badge name='first seen' value={new Date(firstSeen).toLocaleString()} />
+            <Badge name='last seen' value={new Date(lastSeen).toLocaleString()} />
+            <Badge name='peak' value={largest} />
             
             <div className={styling.chart} ref={chart} />
         </section>
