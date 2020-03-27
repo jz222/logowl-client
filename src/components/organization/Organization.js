@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Stepper from 'components/UI/stepper/Stepper';
 import { Menu, Tab } from 'components/UI/menu/Menu';
+import Delete from './delete/Delete';
 import Info from './info/Info';
 
 import { useStore } from 'context';
@@ -26,11 +27,11 @@ const Organization = () => {
             
             <Menu>
                 <Tab active={activeTab === 'info'} click={() => tabHandler('info')}>Info</Tab>
-                <Tab active={activeTab === 'integrations'} click={() => tabHandler('integrations')}>Integrations</Tab>
                 <Tab active={activeTab === 'delete'} click={() => tabHandler('delete')}>Delete</Tab>
             </Menu>
             
-            {activeTab === 'info' && <Info organization={store.organization} />}
+            {(activeTab === 'info') && <Info organization={store.organization} />}
+            {(activeTab === 'delete' && store.role === 'admin') && <Delete id={store.organization.id} name={store.organization.name} />}
         </>
     );
 };

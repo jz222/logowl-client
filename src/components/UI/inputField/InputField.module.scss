@@ -16,6 +16,11 @@
     &:focus {
         box-shadow: 0 0 0 1px var(--color-3-lighter), 0 0 0 5px var(--color-2-darker);
     }
+
+    &:disabled {
+        font-weight: 500;
+        color: var(--color-2-dark);
+    }
 }
 
 .invalid {

@@ -1,0 +1,32 @@
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.description {
+    h6 {
+        margin-bottom: 0.2rem;
+    }
+
+    p {
+        color: var(--color-2-dark);
+    }
+}
+
+.caption {
+    line-height: 1.5;
+    margin: 2rem 0 2.5rem 0;
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    button:first-of-type {
+        margin-right: 1rem;
+    }
+}

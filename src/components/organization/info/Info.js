@@ -5,7 +5,7 @@ import Card from 'components/UI/card/Card';
 
 import styling from './Info.module.scss';
 
-const Info = ({ organization = {}}) => {
+const Info = ({ organization = {} }) => {
     return (
         <Card>
             <div className={styling.row}>
