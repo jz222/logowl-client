@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { Menu, Tab } from 'components/UI/menu/Menu';
 import Stepper from 'components/UI/stepper/Stepper';
 import Personal from './personal/Personal';
+import Delete from './delete/Delete';
 
 import { useStore } from 'context';
 
 import styling from './Settings.module.scss';
 
-const Settings = () => {
+const Settings = ({ history }) => {
     const [store] = useStore();
     
     const [currentTab, setCurrentTab] = useState('personal');
@@ -37,6 +38,7 @@ const Settings = () => {
             </Menu>
             
             {currentTab === 'personal' && personalTab}
+            {currentTab === 'delete' && <Delete isOrganizationOwner={store.isOrganizationOwner} history={history} />}
         </>
     );
 };

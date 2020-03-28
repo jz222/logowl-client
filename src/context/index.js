@@ -17,7 +17,8 @@ const initialState = {
         updatedAt: ''
     },
     lastLogin: '',
-    services: '',
+    services: [],
+    isOrganizationOwner: false,
     createdAt: '',
     updatedAt: ''
 };
