@@ -1,0 +1,29 @@
+.row {
+    margin-bottom: 2.5rem;
+
+    input,
+    div {
+        margin: 0.7rem 0;
+    }
+
+    div {
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        border-radius: var(--border-radius);
+        background-color: var(--color-2-darker);
+        box-shadow: 0 0 0 1px var(--color-2-darker);
+        font-weight: 500;
+        color: var(--color-2-dark);
+    }
+
+    p {
+        font-size: 1.4rem;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}

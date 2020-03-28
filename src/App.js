@@ -5,9 +5,10 @@ import ErrorDetails from './components/service/errorDetails/ErrorDetails';
 import Organization from './components/organization/Organization';
 import Blueprint from './components/layout/blueprint/Blueprint';
 import Services from './components/services/Services';
+import Settings from './components/settings/Settings';
 import SignIn from './components/auth/signIn/SignIn';
-import Setup from './components/auth/setup/Setup';
 import Service from './components/service/Service';
+import Setup from './components/auth/setup/Setup';
 
 const App = () => (
     <Switch>
@@ -20,6 +21,8 @@ const App = () => (
             <Route exact path='/services/:serviceId/error/:errorId' component={ErrorDetails} />
             
             <Route exact path='/organization' component={Organization} />
+            
+            <Route exact path='/settings' component={Settings} />
         </Blueprint>
     </Switch>
 );
