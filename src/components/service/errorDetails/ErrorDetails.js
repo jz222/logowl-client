@@ -96,8 +96,20 @@ const ErrorDetails = ({ history, match }) => {
     /**
      * Toggles the status of an error with the given ID.
      */
-    const resolveHandler = () => {
-        setState(prevState => ({ ...prevState, resolved: !prevState.resolved }))
+    const resolveHandler = async () => {
+        try {
+            setState(prevState => ({ ...prevState, resolved: !prevState.resolved }));
+            
+            const url = '/event/' + match.params.serviceId + '/error/' + match.params.errorId;
+            
+            const res = await fetchClient('updateError', { resolved: !resolved }, url);
+            
+            if (!res.ok) {
+                console.error('Failed to update status');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
     
     

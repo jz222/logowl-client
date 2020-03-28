@@ -103,6 +103,11 @@ const Errors = ({ serviceId, history }) => {
         }
     }, [serviceId]);
     
+    
+    /**
+     * Navigates to the detail page of an error with the given ID.
+     * @param error {object} the error that should be opened
+     */
     const openErrorDetails = (error) => {
         history.push({
             pathname: '/services/' + serviceId + '/error/' + (error.id || '0'),
