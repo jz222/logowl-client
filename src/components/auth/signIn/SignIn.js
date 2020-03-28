@@ -54,6 +54,8 @@ const SignIn = ({ history }) => {
             nav.current.classList.add(styling.navExit);
             box.current.classList.add(styling.boxExit);
             
+            document.title = 'Loggy Dashboard | ' + res.organization.name;
+            
             setTimeout(() => history.push('/services'), 1500);
             
         } catch (error) {

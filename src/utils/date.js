@@ -1,8 +1,10 @@
-const getDate = (timestamp) => {
+const convertTimestamp = (timestamp) => {
+    return timestamp < 1000000000000 ? timestamp * 1000 : timestamp
+};
+
+export const getDate = (timestamp) => {
     try {
-        if (timestamp < 1000000000000) {
-            timestamp = timestamp * 1000;
-        }
+        timestamp = convertTimestamp(timestamp);
         
         const date = new Date(timestamp);
         
@@ -14,4 +16,16 @@ const getDate = (timestamp) => {
     }
 };
 
-export default getDate;
+export const getDateWithTime = (timestamp) => {
+    try {
+        timestamp = convertTimestamp(timestamp);
+        
+        const date = new Date(timestamp);
+        
+        return date.toLocaleString();
+        
+    } catch (error) {
+        console.error(error);
+        return '';
+    }
+};

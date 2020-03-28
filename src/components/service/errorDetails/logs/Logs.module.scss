@@ -1,0 +1,40 @@
+.title {
+    margin: 4rem 0 2rem 0;
+    color: var(--color-1);
+}
+
+.logs {
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-2-darker);
+    background-color: var(--color-2);
+
+    li {
+        width: 100%;
+        display: flex;
+        padding: 2rem;
+        border-bottom: 1px solid var(--color-2-darker);
+        font-family: monospace;
+
+        &:last-of-type {
+            border-bottom: unset;
+        }
+    }
+}
+
+.timestamp {
+    display: flex;
+    align-items: flex-end;
+    padding-right: 2rem;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: 1.4rem;
+    color: var(--color-2-dark);
+}
+
+.log {
+    padding-left: 2rem;
+    white-space: pre;
+    font-family: inherit;
+    font-size: 1.6rem;
+}

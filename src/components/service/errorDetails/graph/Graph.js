@@ -42,8 +42,8 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
         <section className={styling.evolution}>
             <h4>Evolution</h4>
             
-            <Badge name='first seen' value={new Date(firstSeen).toLocaleString()} />
-            <Badge name='last seen' value={new Date(lastSeen).toLocaleString()} />
+            <Badge name='first seen' value={utils.getDateWithTime(firstSeen)} />
+            <Badge name='last seen' value={utils.getDateWithTime(lastSeen)} />
             <Badge name='peak' value={largest} />
             
             <div className={styling.chart} ref={chart} />

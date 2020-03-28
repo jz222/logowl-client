@@ -7,6 +7,7 @@ import Stacktrace from './stacktrace/Stacktrace';
 import Header from './header/Header';
 import Badges from './badges/Badges';
 import Graph from './graph/Graph';
+import Logs from './logs/Logs';
 
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
@@ -37,12 +38,10 @@ const ErrorDetails = ({ history, match }) => {
         timestamp: 0,
         resolved: history.location.state.resolved || false,
         createdAt: '',
-        updatedAt: '',
-        errorListPath: ''
+        updatedAt: ''
     });
     
     const {
-        id,
         adapter,
         message,
         stacktrace,
@@ -54,9 +53,6 @@ const ErrorDetails = ({ history, match }) => {
         badges,
         snippet,
         logs,
-        ticket,
-        host,
-        userAgent,
         clientIp,
         count,
         timestamp,
@@ -159,9 +155,11 @@ const ErrorDetails = ({ history, match }) => {
             
             <Badges badges={badges} />
             
-            <Graph data={evolution} firstSeen={createdAt} lastSeen={updatedAt} />
+            <Graph data={evolution} firstSeen={timestamp} lastSeen={updatedAt} />
             
             <Stacktrace snippet={snippet} stacktrace={stacktrace} path={path} line={line} />
+            
+            <Logs logs={logs} />
         </>
     );
 };
