@@ -1,0 +1,32 @@
+.user {
+    display: flex;
+    align-items: center;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--color-2-darker);
+
+    &:first-of-type {
+        padding-top: 0;
+    }
+
+    &:last-of-type {
+        padding-bottom: 0;
+        border-bottom: unset;
+    }
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+
+    h6 {
+        margin-right: 1rem;
+    }
+}

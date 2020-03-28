@@ -19,6 +19,7 @@ const initialState = {
     lastLogin: '',
     services: [],
     isOrganizationOwner: false,
+    team: [],
     createdAt: '',
     updatedAt: ''
 };

@@ -4,6 +4,7 @@ import Stepper from 'components/UI/stepper/Stepper';
 import { Menu, Tab } from 'components/UI/menu/Menu';
 import Delete from './delete/Delete';
 import Info from './info/Info';
+import Team from './team/Team';
 
 import { useStore } from 'context';
 
@@ -31,10 +32,12 @@ const Organization = ({ history }) => {
             
             <Menu>
                 <Tab active={activeTab === 'info'} click={() => tabHandler('info')}>Info</Tab>
+                <Tab active={activeTab === 'team'} click={() => tabHandler('team')}>Team</Tab>
                 <Tab active={activeTab === 'delete'} click={() => tabHandler('delete')}>Delete</Tab>
             </Menu>
             
             {(activeTab === 'info') && <Info organization={store.organization} />}
+            {(activeTab === 'team') && <Team team={store.team} userId={store.id} />}
             {(activeTab === 'delete' && store.role === 'admin') && <Delete name={store.organization.name} history={history} />}
         </>
     );

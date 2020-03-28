@@ -13,5 +13,15 @@
 
 .one {
     @extend .avatar;
+    background-color: var(--color-5);
+}
+
+.two {
+    @extend .avatar;
+    background-color: var(--color-3);
+}
+
+.three {
+    @extend .avatar;
     background-color: var(--color-4);
 }
