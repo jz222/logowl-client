@@ -7,6 +7,8 @@ import Info from './info/Info';
 
 import { useStore } from 'context';
 
+import styling from './Organization.module.scss';
+
 const Organization = ({ history }) => {
     const [store] = useStore();
     
@@ -22,8 +24,10 @@ const Organization = ({ history }) => {
         <>
             <Stepper steps={['organization']} />
             
-            <h5>Settings</h5>
-            <h1>{store.organization.name}</h1>
+            <div className={styling.header}>
+                <h5>Settings</h5>
+                <h1>{store.organization.name}</h1>
+            </div>
             
             <Menu>
                 <Tab active={activeTab === 'info'} click={() => tabHandler('info')}>Info</Tab>

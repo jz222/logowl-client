@@ -207,7 +207,7 @@ const Errors = ({ serviceId, history }) => {
             {loading && spinner}
             {!loading && content}
             
-            <div className={styling.page} hidden={loading || !errors.length}>
+            <div className={styling.page} hidden={loading || !errors.length || errors.length < 5}>
                 {pageLoading ? pageSpinner : loadPage}
             </div>
         </>
