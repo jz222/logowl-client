@@ -2,7 +2,25 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 const Context = createContext({});
 
-const initialState = {};
+const initialState = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: '',
+    organizationId: '',
+    organization: {
+        id: '',
+        name: '',
+        identifier: '',
+        createdAt: '',
+        updatedAt: ''
+    },
+    lastLogin: '',
+    services: '',
+    createdAt: '',
+    updatedAt: ''
+};
 
 const reducer = (state, action) => {
     switch (action.type) {
