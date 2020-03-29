@@ -37,8 +37,7 @@ const ErrorDetails = ({ history, match }) => {
         count: 0,
         timestamp: 0,
         resolved: (history.location.state || {}).resolved || false,
-        createdAt: '',
-        updatedAt: ''
+        lastSeen: ''
     });
     
     const {
@@ -53,12 +52,10 @@ const ErrorDetails = ({ history, match }) => {
         badges,
         snippet,
         logs,
-        clientIp,
         count,
         timestamp,
         resolved,
-        createdAt,
-        updatedAt
+        lastSeen
     } = state;
     
     
@@ -163,8 +160,8 @@ const ErrorDetails = ({ history, match }) => {
                 evolution={evolution}
                 fingerprint={fingerprint}
                 count={count}
-                createdAt={createdAt}
-                updatedAt={updatedAt}
+                firstSeen={timestamp}
+                lastSeen={lastSeen}
                 resolved={resolved}
                 resolveHandler={resolveHandler}
             />
@@ -173,7 +170,7 @@ const ErrorDetails = ({ history, match }) => {
             
             <Badges badges={badges} />
             
-            <Graph data={evolution} firstSeen={timestamp} lastSeen={updatedAt} />
+            <Graph data={evolution} firstSeen={timestamp} lastSeen={lastSeen} />
             
             <Stacktrace snippet={snippet} stacktrace={stacktrace} path={path} line={line} />
             

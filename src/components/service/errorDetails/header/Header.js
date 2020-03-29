@@ -10,7 +10,7 @@ import utils from 'utils';
 
 import styling from './Header.module.scss';
 
-const Header = ({ type, adapter, message, evolution, fingerprint, count, createdAt, updatedAt, resolved, resolveHandler }) => {
+const Header = ({ type, adapter, message, evolution, fingerprint, count, firstSeen, lastSeen, resolved, resolveHandler }) => {
     
     /**
      * Calculates if the error count increased, decreased or
@@ -50,7 +50,7 @@ const Header = ({ type, adapter, message, evolution, fingerprint, count, created
                         
                         <div className={styling.label}>
                             <FiClock />
-                            <span>Last seen: {new Date(updatedAt).toLocaleString()}</span>
+                            <span>Last seen: {utils.getDateWithTime(lastSeen)}</span>
                         </div>
                         
                         <div className={styling.label}>
@@ -74,12 +74,12 @@ const Header = ({ type, adapter, message, evolution, fingerprint, count, created
             <div>
                 <div className={styling.occurrence}>
                     <div>
-                        <div className={styling.date}>{utils.getDate(createdAt)}</div>
+                        <div className={styling.date}>{utils.getDate(firstSeen)}</div>
                         <div className={styling.label}>first seen</div>
                     </div>
                     
                     <div>
-                        <div className={styling.date}>{utils.getDate(updatedAt)}</div>
+                        <div className={styling.date}>{utils.getDate(lastSeen)}</div>
                         <div className={styling.label}>last seen</div>
                     </div>
                     
@@ -93,7 +93,8 @@ const Header = ({ type, adapter, message, evolution, fingerprint, count, created
                         {resolved ? <FiCheckCircle /> : <FiXCircle />}
                     </div>
                     
-                    <p hidden={!resolved}>This error has been marked as resolved. Uncheck on the right to re-open it.</p>
+                    <p hidden={!resolved}>This error has been marked as resolved. Uncheck on the right to re-open
+                        it.</p>
                     
                     <p hidden={resolved}>This error hasn't been resolved or was re-opened again. Check to resolve.</p>
                     
