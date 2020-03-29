@@ -20,13 +20,18 @@
     justify-content: space-between;
     align-items: center;
     padding-left: 2rem;
+
+    p {
+        margin: 0.2rem 0;
+        font-size: 1.4rem;
+    }
 }
 
 .info {
     display: flex;
     align-items: center;
 
-    h6 {
-        margin-right: 1rem;
+    span {
+        margin-left: 0.8rem;
     }
 }
