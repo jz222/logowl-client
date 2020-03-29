@@ -36,7 +36,7 @@ const ErrorDetails = ({ history, match }) => {
         clientIp: '',
         count: 0,
         timestamp: 0,
-        resolved: history.location.state.resolved || false,
+        resolved: (history.location.state || {}).resolved || false,
         createdAt: '',
         updatedAt: ''
     });
@@ -62,11 +62,29 @@ const ErrorDetails = ({ history, match }) => {
     } = state;
     
     
+    /**
+     * Fetches the error with the given ID.
+     * @type {(...args: any[]) => any}
+     */
     const fetchErrorDetails = useCallback(async () => {
-        if (history.location.state && history.location.state.id) {
-            setState(prevState => ({ ...prevState, ...history.location.state }));
+        try {
+            if (history.location.state && history.location.state.id) {
+                setState(prevState => ({ ...prevState, ...history.location.state }));
+            }
+            
+            const url = '/event/' + match.params.serviceId + '/error/' + match.params.errorId;
+            
+            const res = await fetchClient('getErrorById', null, url);
+            
+            if (!res.id) {
+                throw new Error(res.message || 'failed to fetch error');
+            }
+            
+            setState(prevState => ({ ...prevState, ...res }));
+        } catch (error) {
+            console.error(error);
         }
-    }, [history.location.state]);
+    }, [history.location.state, match.params.errorId, match.params.serviceId]);
     
     
     /**

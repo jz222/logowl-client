@@ -1,6 +1,6 @@
 import { setup, signIn } from './auth';
 import { getUser, deleteUser } from './user';
-import { deleteError, getAllErrors, updateError } from './errors';
+import { deleteError, getErrorById, getAllErrors, updateError } from './errors';
 import { createService, deleteService } from './service';
 import { deleteOrganization } from './organization';
 
@@ -9,6 +9,7 @@ export default {
     setup,
     getUser,
     deleteUser,
+    getErrorById,
     getAllErrors,
     deleteError,
     updateError,

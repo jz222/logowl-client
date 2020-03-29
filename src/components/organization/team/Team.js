@@ -22,7 +22,7 @@ const Team = ({ team = [], userId }) => (
                                 <Badge type='neutral' size='small'>{user.role}</Badge>
                             </div>
                             
-                            <p>{user.role}</p>
+                            <p>{user.email}</p>
                         </div>
                         
                         <Action icon={<FiTrash2 />} hidden={user.id === userId}>Delete</Action>

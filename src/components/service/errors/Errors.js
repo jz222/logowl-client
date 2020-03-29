@@ -34,7 +34,7 @@ const Errors = ({ serviceId, history }) => {
         try {
             setState(prevState => ({ ...prevState, pageLoading: true }));
             
-            const pointer = '/event/' + serviceId + '/error/all/' + (currentPage + 1);
+            const pointer = '/event/' + serviceId + '/errors/' + (currentPage + 1);
             
             const res = await fetchClient('getAllErrors', null, pointer);
             
@@ -83,7 +83,7 @@ const Errors = ({ serviceId, history }) => {
             
             const fetchingStart = new Date().getTime();
             
-            const res = await fetchClient('getAllErrors', null, '/event/' + serviceId + '/error/all');
+            const res = await fetchClient('getAllErrors', null, '/event/' + serviceId + '/errors/');
             
             if (!Array.isArray(res)) {
                 throw new Error((res && res.message) || 'failed to fetch list of errors');
