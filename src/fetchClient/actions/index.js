@@ -1,12 +1,13 @@
-import { setup, signIn } from './auth';
-import { getUser, deleteUserAccount, deleteUserById, inviteUser } from './user';
-import { deleteError, getErrorById, getAllErrors, updateError } from './errors';
+import { setup, signIn, signUp } from './auth';
+import { deleteUserAccount, deleteUserById, getUser, inviteUser } from './user';
+import { deleteError, getAllErrors, getErrorById, updateError } from './errors';
 import { createService, deleteService } from './service';
 import { deleteOrganization } from './organization';
 
 export default {
-    signIn,
     setup,
+    signUp,
+    signIn,
     getUser,
     deleteUserAccount,
     deleteUserById,

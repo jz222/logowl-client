@@ -174,7 +174,7 @@ const Setup = ({ history }) => {
                         return (
                             <div className={styling.step} key={step}>
                                 <div className={styling.bubble + ' ' + highlighted}>{i + 1}</div>
-                                <div>step</div>
+                                <div>{step}</div>
                             </div>
                         );
                     })}

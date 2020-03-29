@@ -14,13 +14,9 @@ import styling from './Organization.module.scss';
 const Organization = ({ history }) => {
     const [store] = useStore();
     
-    const [{ activeTab }, setState] = useState({
-        activeTab: 'info'
-    });
+    const [activeTab, setActiveTab] = useState('info');
     
-    const tabHandler = (tab) => {
-        setState(prevState => ({ ...prevState, activeTab: tab }));
-    };
+    const isAdmin = store.role === 'admin';
     
     return (
         <>
@@ -32,16 +28,16 @@ const Organization = ({ history }) => {
             </div>
             
             <Menu>
-                <Tab active={activeTab === 'info'} click={() => tabHandler('info')}>Info</Tab>
-                <Tab active={activeTab === 'team'} click={() => tabHandler('team')}>Team</Tab>
-                <Tab active={activeTab === 'invite'} click={() => tabHandler('invite')}>Invite</Tab>
-                <Tab active={activeTab === 'delete'} click={() => tabHandler('delete')}>Delete</Tab>
+                <Tab active={activeTab === 'info'} click={() => setActiveTab('info')}>Info</Tab>
+                <Tab active={activeTab === 'team'} click={() => setActiveTab('team')}>Team</Tab>
+                <Tab active={activeTab === 'invite'} click={() => setActiveTab('invite')} hidden={!isAdmin}>Invite</Tab>
+                <Tab active={activeTab === 'delete'} click={() => setActiveTab('delete')} hidden={!isAdmin}>Delete</Tab>
             </Menu>
             
-            {(activeTab === 'info') && <Info organization={store.organization} />}
-            {(activeTab === 'team') && <Team team={store.team} userId={store.id} />}
-            {(activeTab === 'invite' && store.role === 'admin') && <Invite tabHandler={tabHandler} />}
-            {(activeTab === 'delete' && store.role === 'admin') && <Delete name={store.organization.name} history={history} />}
+            {activeTab === 'info' && <Info organization={store.organization} />}
+            {activeTab === 'team' && <Team team={store.team} userId={store.id} />}
+            {activeTab === 'invite' && <Invite tabHandler={setActiveTab} />}
+            {activeTab === 'delete' && <Delete name={store.organization.name} history={history} />}
         </>
     );
 };

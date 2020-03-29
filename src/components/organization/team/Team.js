@@ -85,7 +85,7 @@ const Team = ({ team = [], userId }) => {
                                 <Badge
                                     type='neutral'
                                     size='small'
-                                    hidden={!user.inviteCode}
+                                    hidden={user.isVerified}
                                     click={() => sendEmail(user.firstName, user.lastName, user.email, user.inviteCode)}
                                 >
                                     Invite Code: {user.inviteCode}
@@ -95,7 +95,7 @@ const Team = ({ team = [], userId }) => {
                             <Action
                                 icon={<FiTrash2 />}
                                 onClick={() => deleteUser(user.id)}
-                                hidden={user.id === userId}
+                                hidden={user.id === userId || store.role !== 'admin'}
                             >
                                 Delete
                             </Action>
