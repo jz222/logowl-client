@@ -1,18 +1,19 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import Authentication from './components/auth/authentication/Authentication';
 import ErrorDetails from './components/service/errorDetails/ErrorDetails';
 import Organization from './components/organization/Organization';
 import Blueprint from './components/layout/blueprint/Blueprint';
 import Services from './components/services/Services';
 import Settings from './components/settings/Settings';
-import SignIn from './components/auth/signIn/SignIn';
 import Service from './components/service/Service';
 import Setup from './components/auth/setup/Setup';
 
 const App = () => (
     <Switch>
-        <Route path='/auth/signin' component={SignIn} />
+        <Route path='/auth/signin' component={Authentication} />
+        <Route path='/auth/signup' component={Authentication} />
         <Route path='/auth/setup' component={Setup} />
         
         <Blueprint>

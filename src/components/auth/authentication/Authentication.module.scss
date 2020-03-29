@@ -41,10 +41,10 @@
     }
 
     input {
-        margin: 2.5rem 0 2rem 0;
+        margin: 0 0 2rem 0;
 
-        &:last-of-type {
-            margin: 0 0 3rem 0;
+        &:first-of-type {
+            margin: 2rem 0;
         }
     }
 
