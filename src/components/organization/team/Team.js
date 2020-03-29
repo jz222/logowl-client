@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiTrash2 } from 'react-icons/fi';
 
-import { Action } from 'components/UI/button/Button';
+import Button, { Action } from 'components/UI/button/Button';
 import Avatar from 'components/UI/avatar/Avatar';
 import Badge from 'components/UI/badge/Badge';
+import Modal from 'components/UI/modal/Modal';
 import Card from 'components/UI/card/Card';
 
 import fetchClient from 'fetchClient';
@@ -21,20 +22,23 @@ const transition = {
 const Team = ({ team = [], userId }) => {
     const [store, dispatch] = useStore();
     
+    const [userToDelete, setUserToDelete] = useState('');
+    
     /**
      * Deletes an user with a given ID.
-     * @param id {string} the ID of the user who should be deleted
      * @returns {Promise<void>}
      */
-    const deleteUser = async (id) => {
+    const deleteUser = async () => {
         const currentTeam = [...store.team];
         
         try {
-            const updatedTeam = currentTeam.filter(user => user.id !== id);
+            const updatedTeam = currentTeam.filter(user => user.id !== userToDelete);
             
             dispatch({ type: 'update', payload: { team: updatedTeam } });
             
-            const res = await fetchClient('deleteUserById', null, '/user/' + id);
+            setUserToDelete('');
+            
+            const res = await fetchClient('deleteUserById', null, '/user/' + userToDelete);
             
             if (!res.ok) {
                 throw new Error(res.message || 'failed to delete user');
@@ -66,44 +70,60 @@ const Team = ({ team = [], userId }) => {
     const reversedTeam = [...team].reverse();
     
     return (
-        <Card>
-            <ul>
-                {reversedTeam.map(user => (
-                    <motion.li key={user.email} className={styling.user} layoutTransition={transition}>
-                        <Avatar firstName={user.firstName} lastName={user.lastName} />
-                        
-                        <div className={styling.wrapper}>
-                            <div>
-                                <div className={styling.info}>
-                                    <h6>{user.firstName} {user.lastName}</h6>
-                                    <Badge type='neutral' size='small'>{user.role}</Badge>
-                                    <Badge type='info' size='small' hidden={user.isVerified}>pending</Badge>
+        <>
+            <Card>
+                <ul>
+                    {reversedTeam.map(user => (
+                        <motion.li key={user.email} className={styling.user} layoutTransition={transition}>
+                            <Avatar firstName={user.firstName} lastName={user.lastName} />
+                            
+                            <div className={styling.wrapper}>
+                                <div>
+                                    <div className={styling.info}>
+                                        <h6>{user.firstName} {user.lastName}</h6>
+                                        <Badge type='neutral' size='small'>{user.role}</Badge>
+                                        <Badge type='info' size='small' hidden={user.isVerified}>pending</Badge>
+                                    </div>
+                                    
+                                    <p>{user.email}</p>
+                                    
+                                    <Badge
+                                        type='neutral'
+                                        size='small'
+                                        hidden={user.isVerified}
+                                        click={() => sendEmail(user.firstName, user.lastName, user.email, user.inviteCode)}
+                                    >
+                                        Invite Code: {user.inviteCode}
+                                    </Badge>
                                 </div>
                                 
-                                <p>{user.email}</p>
-                                
-                                <Badge
-                                    type='neutral'
-                                    size='small'
-                                    hidden={user.isVerified}
-                                    click={() => sendEmail(user.firstName, user.lastName, user.email, user.inviteCode)}
+                                <Action
+                                    icon={<FiTrash2 />}
+                                    onClick={() => setUserToDelete(user.id)}
+                                    hidden={user.id === userId || store.role !== 'admin'}
                                 >
-                                    Invite Code: {user.inviteCode}
-                                </Badge>
+                                    Delete
+                                </Action>
                             </div>
-                            
-                            <Action
-                                icon={<FiTrash2 />}
-                                onClick={() => deleteUser(user.id)}
-                                hidden={user.id === userId || store.role !== 'admin'}
-                            >
-                                Delete
-                            </Action>
-                        </div>
-                    </motion.li>
-                ))}
-            </ul>
-        </Card>
+                        </motion.li>
+                    ))}
+                </ul>
+            </Card>
+            
+            <Modal open={userToDelete} size='small'>
+                <h3>Delete user</h3>
+                
+                <p className={styling.caption}>
+                    Please confirm that you want to delete this user.
+                    Deleting a user is permanent and can not be undone.
+                </p>
+                
+                <div className={styling.controls}>
+                    <Button size='smaller' color='light' onClick={() => setUserToDelete('')}>Cancel</Button>
+                    <Button size='smaller' onClick={deleteUser}>Confirm</Button>
+                </div>
+            </Modal>
+        </>
     );
 };
 
