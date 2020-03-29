@@ -7,6 +7,9 @@ import Avatar from 'components/UI/avatar/Avatar';
 import Badge from 'components/UI/badge/Badge';
 import Card from 'components/UI/card/Card';
 
+import fetchClient from 'fetchClient';
+import { useStore } from 'context';
+
 import styling from './Team.module.scss';
 
 const transition = {
@@ -16,6 +19,33 @@ const transition = {
 };
 
 const Team = ({ team = [], userId }) => {
+    const [store, dispatch] = useStore();
+    
+    /**
+     * Deletes an user with a given ID.
+     * @param id {string} the ID of the user who should be deleted
+     * @returns {Promise<void>}
+     */
+    const deleteUser = async (id) => {
+        const currentTeam = [...store.team];
+        
+        try {
+            const updatedTeam = currentTeam.filter(user => user.id !== id);
+            
+            dispatch({ type: 'update', payload: { team: updatedTeam } });
+            
+            const res = await fetchClient('deleteUserById', null, '/user/' + id);
+            
+            if (!res.ok) {
+                throw new Error(res.message || 'failed to delete user');
+            }
+            
+        } catch (error) {
+            console.error(error);
+            dispatch({ type: 'update', payload: { team: currentTeam } });
+        }
+    };
+    
     const reversedTeam = [...team].reverse();
     
     return (
@@ -35,7 +65,13 @@ const Team = ({ team = [], userId }) => {
                                 <p>{user.email}</p>
                             </div>
                             
-                            <Action icon={<FiTrash2 />} hidden={user.id === userId}>Delete</Action>
+                            <Action
+                                icon={<FiTrash2 />}
+                                onClick={() => deleteUser(user.id)}
+                                hidden={user.id === userId}
+                            >
+                                Delete
+                            </Action>
                         </div>
                     </motion.li>
                 ))}

@@ -24,7 +24,7 @@ const Delete = ({ isOrganizationOwner, history }) => {
      */
     const deleteUser = async () => {
         try {
-            const res = await fetchClient('deleteUser');
+            const res = await fetchClient('deleteUserAccount');
             
             if (res.ok) {
                 localStorage.clear();
