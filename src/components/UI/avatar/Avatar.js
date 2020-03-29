@@ -15,7 +15,7 @@ const Avatar = ({ firstName = '', lastName = '' }) => {
         style = styling.three;
     }
     
-    return <div className={style}>{firstName[0]}{lastName[0]}</div>;
+    return <div className={style}>{firstName[0].toUpperCase()}{lastName[0].toUpperCase()}</div>;
 };
 
 export default Avatar;

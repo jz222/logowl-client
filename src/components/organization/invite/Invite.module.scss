@@ -1,0 +1,37 @@
+.row {
+    width: 100%;
+    display: flex;
+    margin-bottom: 2rem;
+
+    h6 {
+        margin-bottom: 0.7rem;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+.cell {
+    width: 50%;
+
+    &:first-of-type {
+        margin-right: 2rem;
+    }
+}
+
+.error {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-4);
+    text-align: center;
+    color: var(--color-2);
+}
+
+.button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

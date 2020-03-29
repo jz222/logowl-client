@@ -191,7 +191,7 @@ const Services = ({ history }) => {
                 
                 <div className={styling.split}>
                     <div className={styling.cell}>
-                        <span className={styling.label}>Name</span>
+                        <h6 className={styling.label}>Name</h6>
                         
                         <InputField
                             name='name'
@@ -203,7 +203,7 @@ const Services = ({ history }) => {
                     </div>
                     
                     <div className={styling.cell}>
-                        <span className={styling.label}>Type</span>
+                        <h6 className={styling.label}>Type</h6>
                         
                         <Dropdown
                             items={types}
@@ -215,7 +215,7 @@ const Services = ({ history }) => {
                     </div>
                 </div>
                 
-                <span className={styling.label}>Description</span>
+                <h6 className={styling.label}>Description</h6>
                 <InputField
                     name='description'
                     value={description}

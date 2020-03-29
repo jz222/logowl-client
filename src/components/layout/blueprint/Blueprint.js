@@ -26,6 +26,8 @@ const Blueprint = ({ children, history }) => {
             
             const user = await fetchClient('getUser');
             
+            document.title = 'Loggy Dashboard | ' + user.organization.name;
+            
             dispatch({ type: 'update', payload: user });
             setLoading(false);
             
