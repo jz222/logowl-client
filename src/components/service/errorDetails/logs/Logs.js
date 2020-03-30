@@ -5,7 +5,7 @@ import utils from 'utils';
 import styling from './Logs.module.scss';
 
 const Logs = ({ logs }) => (
-    <>
+    <section>
         <h4 className={styling.title}>Logs</h4>
         
         <ul className={styling.logs}>
@@ -21,7 +21,7 @@ const Logs = ({ logs }) => (
                 </li>
             ))}
         </ul>
-    </>
+    </section>
 );
 
 export default Logs;
