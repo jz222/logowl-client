@@ -12,8 +12,14 @@ import styling from './Blueprint.module.scss';
 
 const Blueprint = ({ children, history }) => {
     const [store, dispatch] = useStore();
+    
     const [loading, setLoading] = useState(true);
     
+    
+    /**
+     * Fetches the user's data.
+     * @type {(...args: any[]) => any}
+     */
     const fetchUserData = useCallback(async () => {
         try {
             const accessPass = localStorage.getItem('access-pass');
@@ -38,18 +44,26 @@ const Blueprint = ({ children, history }) => {
         }
     }, [dispatch, history]);
     
+    
+    /**
+     * Fetches the users's data if it's not available.
+     */
     useEffect(() => {
         if (!store.id) {
             fetchUserData();
         }
     }, [fetchUserData, store.id]);
     
+    
+    // Spinner
     const spinner = (
         <div className={styling.spinner}>
             <Spinner invert />
         </div>
     );
     
+    
+    // Layout
     const blueprint = (
         <>
             <Sidebar />
@@ -63,6 +77,7 @@ const Blueprint = ({ children, history }) => {
             </div>
         </>
     );
+    
     
     return (loading && !store.id) ? spinner : blueprint;
 };

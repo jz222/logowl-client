@@ -13,6 +13,10 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
     
     const { evolution, largest } = useMemo(() => utils.computeEvolution(data), [data]);
     
+    /**
+     * Loads the chart if the component is mounted.
+     * It removes its event listeners on unmount.
+     */
     useEffect(() => {
         if (!Object.keys(data).length) {
             return;

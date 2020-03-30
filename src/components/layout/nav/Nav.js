@@ -12,10 +12,14 @@ import styling from './Nav.module.scss';
 const Nav = ({ history }) => {
     const [store] = useStore();
     
+    /**
+     * Navigates to a given page.
+     * @param value
+     * @returns {void | boolean | * | number}
+     */
     const changeHandler = (value) => history.push('/services/' + value);
     
     const allServices = (store.services || []).map(service => {
-        
         const item = (
             <>
                 <Adapter type={service.type} size='small' />

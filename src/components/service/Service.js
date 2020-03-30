@@ -11,13 +11,7 @@ import { useStore } from 'context';
 const Service = ({ history, match }) => {
     const [store] = useStore();
     
-    const [{ activeTab }, setState] = useState({
-        activeTab: 'errors'
-    });
-    
-    const tabHandler = (tab) => {
-        setState(prevState => ({ ...prevState, activeTab: tab }));
-    };
+    const [activeTab, setActiveTab] = useState('errors');
     
     const selectedService = store.services.find(x => x.id === match.params.serviceId) || {};
     
@@ -25,9 +19,9 @@ const Service = ({ history, match }) => {
         <>
             <Stepper steps={['services', selectedService.name]} />
             <Menu>
-                <Tab active={activeTab === 'errors'} click={() => tabHandler('errors')}>Errors</Tab>
-                <Tab active={activeTab === 'ticket'} click={() => tabHandler('ticket')}>Ticket</Tab>
-                <Tab active={activeTab === 'settings'} click={() => tabHandler('settings')}>Settings</Tab>
+                <Tab active={activeTab === 'errors'} click={() => setActiveTab('errors')}>Errors</Tab>
+                <Tab active={activeTab === 'ticket'} click={() => setActiveTab('ticket')}>Ticket</Tab>
+                <Tab active={activeTab === 'settings'} click={() => setActiveTab('settings')}>Settings</Tab>
             </Menu>
             
             {activeTab === 'errors' && <Errors serviceId={selectedService.id} history={history} />}

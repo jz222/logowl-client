@@ -14,6 +14,11 @@ const Sidebar = ({ history }) => {
     
     const currentPath = history.location.pathname.split('/')[1];
     
+    /**
+     * Determines the styling for a given menu item.
+     * @param path {string} the path represented by the menu item
+     * @returns {*}
+     */
     const getStyling = (path) => (currentPath === path) ? styling.active : '';
     
     return (

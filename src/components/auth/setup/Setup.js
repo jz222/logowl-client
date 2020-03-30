@@ -23,10 +23,21 @@ const Setup = ({ history }) => {
     
     const { currentStep, organizationName, firstName, lastName, email, password, isLoading, error } = state;
     
+    
+    /**
+     * Handles input field changes.
+     * @param name {string} name of the input field
+     * @param value {string} text that was typed in into the input field
+     */
     const changeHandler = ({ target: { name, value } }) => {
         setState(prevState => ({ ...prevState, [name]: value }));
     };
     
+    
+    /**
+     * Creates a new organization.
+     * @returns {Promise<void>}
+     */
     const setupHandler = async () => {
         try {
             const payload = {
@@ -55,6 +66,11 @@ const Setup = ({ history }) => {
         }
     };
     
+    
+    /**
+     * Handles step changes.
+     * @param step
+     */
     const stepHandler = (step) => {
         if (currentStep + step === 2) {
             setupHandler();
@@ -63,6 +79,8 @@ const Setup = ({ history }) => {
         setState(prevState => ({ ...prevState, currentStep: prevState.currentStep + step }));
     };
     
+    
+    // Determines if the current step is valid.
     const stepIsValid = (
         (currentStep === 0 && config.regex.notEmpty.test(organizationName)) ||
         (currentStep === 1 &&
@@ -73,8 +91,12 @@ const Setup = ({ history }) => {
         )
     );
     
+    
+    // Available steps
     const steps = ['Organization', 'User', 'Get Started'];
     
+    
+    // Organization step
     const organization = (
         <div className={styling.organization}>
             <h2>Organization</h2>
@@ -91,6 +113,8 @@ const Setup = ({ history }) => {
         </div>
     );
     
+    
+    // User step
     const user = (
         <div className={styling.user}>
             <h2>User Account</h2>
@@ -139,6 +163,8 @@ const Setup = ({ history }) => {
         </div>
     );
     
+    
+    // Spinner
     const loading = (
         <div className={styling.loading}>
             <Spinner invert />
@@ -146,6 +172,8 @@ const Setup = ({ history }) => {
         </div>
     );
     
+    
+    // Success message
     const success = (
         <div className={styling.success}>
             <h2>Ready to go!</h2>
@@ -155,6 +183,8 @@ const Setup = ({ history }) => {
         </div>
     );
     
+    
+    // Error message
     const failure = (
         <div className={styling.failure}>
             <h2>Something went wrong</h2>
@@ -163,6 +193,7 @@ const Setup = ({ history }) => {
             <span>{error}</span>
         </div>
     );
+    
     
     return (
         <div className={styling.wrapper}>
