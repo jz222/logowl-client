@@ -116,6 +116,7 @@ const Errors = ({ serviceId, history }) => {
             
         } catch (error) {
             console.error(error);
+            stopPolling();
             setState(prevState => ({ ...prevState, loading: false, fetchError: error.message }));
         }
     }, [serviceId]);
