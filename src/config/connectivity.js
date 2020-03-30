@@ -1,3 +1,3 @@
 export default {
-    backendURL: 'http://localhost:2800'
+    backendURL: process.env.REACT_APP_SERVICE_ENDPOINT
 }
