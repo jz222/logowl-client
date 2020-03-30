@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { ErrorPlaceholder, Placeholder } from 'components/UI/placeholder/Placeholder';
 import Evolution from 'components/UI/evolution/Evolution';
@@ -26,12 +26,29 @@ const Errors = ({ serviceId, history }) => {
     const { errors, loading, pageLoading, currentPage, fetchError, fetchedAll } = state;
     
     
+    const intervalId = useRef(0);
+    const timeoutId = useRef(0);
+    
+    
+    /**
+     * Stops polling.
+     */
+    const stopPolling = () => {
+        clearInterval(intervalId.current);
+        clearTimeout(timeoutId.current);
+    };
+    
+    
     /**
      * Fetches the next page of errors.
      * @returns {Promise<void>}
      */
     const fetchErrorsWithPointer = async () => {
         try {
+            if (currentPage === 0) {
+                stopPolling();
+            }
+            
             setState(prevState => ({ ...prevState, pageLoading: true }));
             
             const pointer = '/event/' + serviceId + '/errors/' + (currentPage + 1);
@@ -42,7 +59,7 @@ const Errors = ({ serviceId, history }) => {
                 throw new Error((res && res.message) || 'failed to fetch errors');
             }
             
-            if (res.length < 5) {
+            if (res.length < 10) {
                 setState(prevState => ({
                     ...prevState,
                     errors: [...prevState.errors, ...res],
@@ -70,11 +87,11 @@ const Errors = ({ serviceId, history }) => {
      * Fetches all the latest logs for a given service.
      * @type {(...args: any[]) => any}
      */
-    const fetchErrors = useCallback(async () => {
+    const fetchErrors = useCallback(async (showSpinner) => {
         try {
             setState(prevState => ({
                 ...prevState,
-                loading: true,
+                loading: showSpinner,
                 pageLoading: false,
                 currentPage: 0,
                 fetchError: '',
@@ -117,7 +134,12 @@ const Errors = ({ serviceId, history }) => {
     
     
     useEffect(() => {
-        fetchErrors();
+        fetchErrors(true);
+        
+        intervalId.current = setInterval(fetchErrors, 2500);
+        timeoutId.current = setTimeout(stopPolling, 300000);
+        
+        return stopPolling;
     }, [fetchErrors]);
     
     
@@ -212,7 +234,7 @@ const Errors = ({ serviceId, history }) => {
             {loading && spinner}
             {!loading && content}
             
-            <div className={styling.page} hidden={loading || !errors.length || errors.length < 5}>
+            <div className={styling.page} hidden={loading || !errors.length || errors.length < 10}>
                 {pageLoading ? pageSpinner : loadPage}
             </div>
         </>
