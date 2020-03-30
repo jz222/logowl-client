@@ -23,6 +23,8 @@
             position: relative;
             width: 100%;
             min-height: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
         }
 
@@ -42,18 +44,33 @@
             border-radius: 50%;
             background-color: #0368ff;
             opacity: 0.5;
+            -webkit-animation: bounce 2.4s ease-in-out infinite;
             animation: bounce 2.4s ease-in-out infinite;
         }
 
         .loadingSpinner div:last-child {
+            -webkit-animation-delay: -1.2s;
             animation-delay: -1.2s;
+        }
+
+        @-webkit-keyframes bounce {
+            0%, 100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            50% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
         }
 
         @keyframes bounce {
             0%, 100% {
+                -webkit-transform: scale(0);
                 transform: scale(0);
             }
             50% {
+                -webkit-transform: scale(1);
                 transform: scale(1);
             }
         }
