@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { FiHelpCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 import Spinner from 'components/UI/spinner/Spinner';
@@ -89,6 +90,16 @@ const Authentication = ({ history }) => {
         } catch (error) {
             setState(prevState => ({ ...prevState, loading: false, error: error.message }));
         }
+    };
+    
+    
+    /**
+     * Toggles the mode between sign in and sign up.
+     */
+    const toggleMode = () => {
+        const newMode = (mode === 'signUp') ? 'signIn' : 'signUp';
+        setState(prevState => ({...prevState, mode: newMode}));
+        history.push('/auth/' + newMode);
     };
     
     
@@ -206,6 +217,11 @@ const Authentication = ({ history }) => {
                             <Spinner hidden={!loading} />
                             <span>{loading ? 'Please wait' : 'Sign Up'}</span>
                         </button>
+                        
+                        <div key='label' className={styling.label} onClick={toggleMode}>
+                            <FiHelpCircle />
+                            <span>{mode === 'signUp' ? 'Sign in with an existing account' : 'Sign up a new account'}</span>
+                        </div>
                     </motion.form>
                 </div>
             </main>
