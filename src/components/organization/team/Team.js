@@ -10,14 +10,9 @@ import Card from 'components/UI/card/Card';
 
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
+import etalon from 'etalon';
 
 import styling from './Team.module.scss';
-
-const transition = {
-    type: 'spring',
-    damping: 20,
-    stiffness: 400
-};
 
 const Team = ({ team = [], userId }) => {
     const [store, dispatch] = useStore();
@@ -74,7 +69,7 @@ const Team = ({ team = [], userId }) => {
             <Card>
                 <ul>
                     {reversedTeam.map(user => (
-                        <motion.li key={user.email} className={styling.user} layoutTransition={transition}>
+                        <motion.li key={user.email} className={styling.user} layoutTransition={etalon.transition}>
                             <Avatar firstName={user.firstName} lastName={user.lastName} />
                             
                             <div className={styling.wrapper}>

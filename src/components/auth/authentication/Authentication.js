@@ -7,6 +7,7 @@ import InputField from 'components/UI/inputField/InputField';
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 import config from 'config';
+import etalon from 'etalon';
 
 import styling from './Authentication.module.scss';
 
@@ -137,7 +138,7 @@ const Authentication = ({ history }) => {
                     
                     <p hidden={!error}>{error}</p>
                     
-                    <motion.form layoutTransition={{ type: 'spring', damping: 25, stiffness: 500 }} onSubmit={submit}>
+                    <motion.form layoutTransition={etalon.transition} onSubmit={submit}>
                         <InputField
                             key='email'
                             name='email'

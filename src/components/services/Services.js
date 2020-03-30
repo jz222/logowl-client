@@ -12,14 +12,9 @@ import Modal from 'components/UI/modal/Modal';
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 import config from 'config';
+import etalon from 'etalon';
 
 import styling from './Services.module.scss';
-
-const transition = {
-    type: 'spring',
-    damping: 20,
-    stiffness: 400
-};
 
 const Services = ({ history }) => {
     const [store, dispatch] = useStore();
@@ -147,7 +142,7 @@ const Services = ({ history }) => {
                     key={service.id}
                     className={styling.service}
                     onClick={() => history.push('/services/' + service.id)}
-                    layoutTransition={transition}
+                    layoutTransition={etalon.transition}
                 >
                     <Adapter type={service.type} size='large' />
                     
