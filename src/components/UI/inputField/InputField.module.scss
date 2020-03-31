@@ -27,7 +27,7 @@
     box-shadow: 0 0 0 1px var(--color-4);
 
     &:focus {
-        box-shadow: 0 0 0 1px var(--color-4);
+        box-shadow: 0 0 0 1px var(--color-4), 0 0 0 5px var(--color-4-light);
     }
 }
 

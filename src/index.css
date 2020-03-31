@@ -8,11 +8,12 @@
     --color-3-lighter: #DBE8FF;
     --color-3: #0368ff;
 
-    --color-4: #ff0353;
+    --color-4-light: #FFE5EE;
+    --color-4: #FF0055;
 
     --color-5-light: #E5FFF8;
-    --color-5-lighter: #ddfdcd;
-    --color-5: #1dd1a1;
+    --color-5-lighter: #DAFCC9;
+    --color-5: #1ECCA0;
 
     --max-width: 135rem;
     --border-radius: 7px;
