@@ -98,8 +98,17 @@ const Authentication = ({ history }) => {
      */
     const toggleMode = () => {
         const newMode = (mode === 'signUp') ? 'signIn' : 'signUp';
-        setState(prevState => ({ ...prevState, mode: newMode }));
-        history.push('/auth/' + newMode);
+        
+        setState(prevState => ({
+            ...prevState,
+            mode: newMode,
+            email: '',
+            password: '',
+            passwordRepeat: '',
+            error: ''
+        }));
+        
+        history.push('/auth/' + newMode.toLowerCase());
     };
     
     
@@ -133,6 +142,15 @@ const Authentication = ({ history }) => {
     };
     
     
+    /**
+     * Validates is a password notice should be shown during sign up.
+     * @returns {boolean} determines if the notice should be shown
+     */
+    const showPasswordNotice = () => {
+        return mode === 'signUp' && email.length > 4 && !config.regex.password.test(password);
+    };
+    
+    
     const accessPass = localStorage.getItem('access-pass');
     const expirationTime = localStorage.getItem('expiration-time');
     
@@ -162,11 +180,12 @@ const Authentication = ({ history }) => {
                             key='email'
                             name='email'
                             autoComplete='off'
-                            autoFocus
                             value={email}
                             onChange={changeHandler}
                             onKeyPress={enterHandler}
                             placeholder='Email'
+                            test={mode === 'signUp' ? config.regex.email : ''}
+                            autoFocus
                         />
                         
                         <InputField
@@ -225,6 +244,10 @@ const Authentication = ({ history }) => {
                             <Spinner hidden={!loading} />
                             <span>{loading ? 'Please wait' : 'Sign Up'}</span>
                         </button>
+                        
+                        <span className={styling.passwordNotice} hidden={!showPasswordNotice()}>
+                            12-20 lower case, upper case and special characters and numbers
+                        </span>
                         
                         <div key='switchMode' className={styling.label} onClick={toggleMode}>
                             <FiHelpCircle />

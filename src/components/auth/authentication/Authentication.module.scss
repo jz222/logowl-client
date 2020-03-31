@@ -94,6 +94,15 @@
     }
 }
 
+.passwordNotice {
+    width: 100%;
+    display: block;
+    margin-top: -1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--color-4);
+}
+
 @keyframes navExit {
     to {
         height: 100vh;
