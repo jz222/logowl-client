@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { FiHelpCircle } from 'react-icons/fi';
+import { FiHelpCircle, FiPlusCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 import Spinner from 'components/UI/spinner/Spinner';
@@ -98,8 +98,16 @@ const Authentication = ({ history }) => {
      */
     const toggleMode = () => {
         const newMode = (mode === 'signUp') ? 'signIn' : 'signUp';
-        setState(prevState => ({...prevState, mode: newMode}));
+        setState(prevState => ({ ...prevState, mode: newMode }));
         history.push('/auth/' + newMode);
+    };
+    
+    
+    /**
+     * Starts the setup process.
+     */
+    const navigateToSetup = () => {
+        history.push('/auth/setup');
     };
     
     
@@ -218,9 +226,14 @@ const Authentication = ({ history }) => {
                             <span>{loading ? 'Please wait' : 'Sign Up'}</span>
                         </button>
                         
-                        <div key='label' className={styling.label} onClick={toggleMode}>
+                        <div key='switchMode' className={styling.label} onClick={toggleMode}>
                             <FiHelpCircle />
                             <span>{mode === 'signUp' ? 'Sign in with an existing account' : 'Sign up a new account'}</span>
+                        </div>
+                        
+                        <div key='createOrganization' className={styling.label} onClick={navigateToSetup}>
+                            <FiPlusCircle />
+                            <span>Create an organization</span>
                         </div>
                     </motion.form>
                 </div>
