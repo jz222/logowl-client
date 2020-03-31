@@ -25,11 +25,9 @@ const Settings = ({ history, serviceName, serviceId }) => {
         try {
             setState(prevState => ({ ...prevState, isLoading: true }));
             
-            const res = await fetchClient('deleteService', null, '/service/' + serviceId);
-            
-            if (res.ok) {
-                setTimeout(() => history.push('/services'), 1020);
-            }
+            await fetchClient('deleteService', null, '/service/' + serviceId);
+    
+            setTimeout(() => history.push('/services'), 1020);
             
         } catch (error) {
             console.error(error);

@@ -24,12 +24,10 @@ const Delete = ({ name, history }) => {
      */
     const deleteOrganization = async () => {
         try {
-            const res = await fetchClient('deleteOrganization');
+            await fetchClient('deleteOrganization');
+            localStorage.clear();
+            history.push('/auth/signin');
             
-            if (res.ok) {
-                localStorage.clear();
-                history.push('/auth/signin');
-            }
         } catch (error) {
             console.error(error)
         }

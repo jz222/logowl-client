@@ -70,11 +70,6 @@ const Authentication = ({ history }) => {
             
             const res = await fetchClient(mode, payload);
             
-            if (!res.jwt) {
-                setState(prevState => ({ ...prevState, loading: false, error: res.message }));
-                return;
-            }
-            
             dispatch({ type: 'update', payload: res });
             
             localStorage.setItem('access-pass', res.jwt);

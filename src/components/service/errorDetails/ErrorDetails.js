@@ -74,10 +74,6 @@ const ErrorDetails = ({ history, match }) => {
             
             const res = await fetchClient('getErrorById', null, url);
             
-            if (!res.id) {
-                throw new Error(res.message || 'failed to fetch error');
-            }
-            
             setState(prevState => ({ ...prevState, ...res }));
         } catch (error) {
             console.error(error);
@@ -93,11 +89,9 @@ const ErrorDetails = ({ history, match }) => {
         try {
             const url = '/event/' + match.params.serviceId + '/error/' + match.params.errorId;
             
-            const res = await fetchClient('deleteError', null, url);
-            
-            if (res.ok) {
-                history.push('/services/' + match.params.serviceId);
-            }
+            await fetchClient('deleteError', null, url);
+    
+            history.push('/services/' + match.params.serviceId);
             
         } catch (error) {
             console.error(error);
@@ -114,11 +108,8 @@ const ErrorDetails = ({ history, match }) => {
             
             const url = '/event/' + match.params.serviceId + '/error/' + match.params.errorId;
             
-            const res = await fetchClient('updateError', { resolved: !resolved }, url);
+            await fetchClient('updateError', { resolved: !resolved }, url);
             
-            if (!res.ok) {
-                console.error('Failed to update status');
-            }
         } catch (error) {
             console.error(error);
         }

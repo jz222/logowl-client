@@ -74,14 +74,6 @@ const Services = ({ history }) => {
             
             const res = await fetchClient('createService', { name, type, description });
             
-            if (res.message) {
-                throw new Error(res.message);
-            }
-            
-            if (!res.id) {
-                throw new Error('failed to create new service');
-            }
-            
             const services = [...store.services, res];
             
             setState(prevState => ({ ...prevState, isLoading: false }));

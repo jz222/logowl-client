@@ -34,10 +34,6 @@ const Invite = ({ tabHandler }) => {
             
             const res = await fetchClient('inviteUser', { firstName, lastName, email, role });
             
-            if (!res.id) {
-                throw new Error(res.message || 'failed to invite user');
-            }
-            
             const updatedTeam = [...store.team, res];
             
             setTimeout(() => dispatch({ type: 'update', payload: { team: updatedTeam } }), 800);

@@ -24,12 +24,12 @@ const Delete = ({ isOrganizationOwner, history }) => {
      */
     const deleteUser = async () => {
         try {
-            const res = await fetchClient('deleteUserAccount');
+            await fetchClient('deleteUserAccount');
+    
+            localStorage.clear();
             
-            if (res.ok) {
-                localStorage.clear();
-                history.push('/auth/signin');
-            }
+            history.push('/auth/signin');
+            
         } catch (error) {
             console.error(error);
         }

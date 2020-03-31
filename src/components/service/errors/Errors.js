@@ -55,10 +55,6 @@ const Errors = ({ serviceId, history }) => {
             
             const res = await fetchClient('getAllErrors', null, pointer);
             
-            if (!Array.isArray(res)) {
-                throw new Error((res && res.message) || 'failed to fetch errors');
-            }
-            
             if (res.length < 10) {
                 setState(prevState => ({
                     ...prevState,
@@ -101,10 +97,6 @@ const Errors = ({ serviceId, history }) => {
             const fetchingStart = new Date().getTime();
             
             const res = await fetchClient('getAllErrors', null, '/event/' + serviceId + '/errors/');
-            
-            if (!Array.isArray(res)) {
-                throw new Error((res && res.message) || 'failed to fetch list of errors');
-            }
             
             const fetchingTime = new Date().getTime() - fetchingStart;
             

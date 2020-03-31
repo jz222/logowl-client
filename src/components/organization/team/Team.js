@@ -33,11 +33,7 @@ const Team = ({ team = [], userId }) => {
             
             setUserToDelete('');
             
-            const res = await fetchClient('deleteUserById', null, '/user/' + userToDelete);
-            
-            if (!res.ok) {
-                throw new Error(res.message || 'failed to delete user');
-            }
+            await fetchClient('deleteUserById', null, '/user/' + userToDelete);
             
         } catch (error) {
             console.error(error);

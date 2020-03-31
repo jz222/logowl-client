@@ -1,4 +1,5 @@
 import config from 'config';
+import utils from 'utils';
 
 import actions from './actions/';
 
@@ -20,7 +21,25 @@ const request = async (type, payload = {}, url) => {
         ...(action.method === 'POST' || action.method === 'PUT') && { body: JSON.stringify(payload) }
     };
     
-    const res = await fetch(config.connectivity.backendURL + (url || action.url), opts);
+    let res = await fetch(config.connectivity.backendURL + (url || action.url), opts);
+    
+    // Cloud Run sometimes responds with a 429
+    // if a new container is spinning up or
+    // cold start takes too long. In that case
+    // the request is send again after around 700ms.
+    if (res.status === 429) {
+        await utils.sleep(700);
+        res = await fetch(config.connectivity.backendURL + (url || action.url), opts);
+    }
+    
+    if (!res.ok) {
+        const body = await res.json();
+        const error = new Error(body.message || 'failed to fetch with unknown reason');
+        
+        error.code = res.status;
+        
+        throw error;
+    }
     
     return await res.json();
 };

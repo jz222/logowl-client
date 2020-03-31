@@ -52,13 +52,9 @@ const Setup = ({ history }) => {
                 }
             };
             
-            const res = await fetchClient('setup', payload);
-            
-            if (res.code !== 200) {
-                setState(prevState => ({ ...prevState, isLoading: false, error: res.message }));
-            } else {
-                setState(prevState => ({ ...prevState, isLoading: false }));
-            }
+            await fetchClient('setup', payload);
+    
+            setState(prevState => ({ ...prevState, isLoading: false }));
             
         } catch (error) {
             console.log(error);
