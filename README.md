@@ -21,19 +21,40 @@ This repository contains the client. Please find the backend and the NodeJS adap
 
 ### Features
 
-🔥 Separate events by services
+🔥 **Flexible**
 
-🔥 Precise evolution
+- Group events by services
+- Easy-to-use adapter
+- Custom adapters for any platform and language
+- Customizable
+- Can be self-hosted
 
-🔥 Extensive details with snippets and logs
+🔥 **Extensive Event Details**
 
-🔥 Aggregated events with counts
+- Platform information
+- Detailed evolution
+- Stacktrace
+- Code Snippets
+- Logs
+- Metrics
+- Individual badges
+- Adapter information
 
-🔥 User management
+🔥 **Aggregated events**
 
-🔥 Highly scalable infrastructure
+- Live updates
+- Same events are aggregated
+- Event count
+- Evolution preview
 
-🔥 Easy to host yourself
+🔥 **User management**
+
+- Invite and remove users from your organization
+
+🔥 **Highly scalable infrastructure**
+
+- Containerized backend
+- Simple to deploy and scale
 
 ### Insights
 
