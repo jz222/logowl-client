@@ -10,15 +10,12 @@
 </div>
 
 ---
-<br />
 
 **Related:**
 
 🚀 [**LOGGY Service**](https://github.com/jz222/loggy)
 
 📡 [**LOGGY NodeJS Adapter**](https://github.com/jz222/loggy-adapter-nodejs)
-
-<br />
 
 ### Features
 
