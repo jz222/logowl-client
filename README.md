@@ -1,14 +1,21 @@
 ![loggy header](https://github.com/jz222/loggy-client/blob/master/assets/header.png?raw=true)
 
-# LOGGY Client
-
-LOGGY allows you to monitor your services and track errors in production.
+<div align="center">
+  <p>
+    <b>LOGGY Client</b>
+  </p>
+  <p>
+    <i>Monitor your services and track your errors in production.</i>
+  </p>
+</div>
 
 This repository contains the client of the service. Please find the backend and the NodeJS adapter in the respective repo.
 
-🚀 [LOGGY Service](https://github.com/jz222/loggy)
+🚀 [**LOGGY Service**](https://github.com/jz222/loggy)
 
-📡 [LOGGY NodeJS Adapter](https://github.com/jz222/loggy-adapter-nodejs)
+📡 [**LOGGY NodeJS Adapter**](https://github.com/jz222/loggy-adapter-nodejs)
+
+---
 
 ### Features
 
