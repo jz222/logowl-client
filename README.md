@@ -35,8 +35,6 @@ This repository contains the client. Please find the backend and the NodeJS adap
 
 🔥 Easy to host yourself
 
-<br />
-
 ### Insights
 
 ![services](https://github.com/jz222/loggy-client/blob/master/assets/services.png?raw=true)
