@@ -2,7 +2,7 @@
 
 <div align="center">
   <p>
-    <h2>LOGGY Client</h2>
+    <h3>LOGGY Client</h2>
   </p>
   <p>
     <i>Monitor your services and track your errors in production.</i>
@@ -10,13 +10,13 @@
   <br />
 </div>
 
+---
+
 **Related:**
 
 🚀 [**LOGGY Service**](https://github.com/jz222/loggy)
 
 📡 [**LOGGY NodeJS Adapter**](https://github.com/jz222/loggy-adapter-nodejs)
-
----
 
 ### Features
 
