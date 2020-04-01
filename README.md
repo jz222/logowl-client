@@ -2,7 +2,7 @@
 
 <div align="center">
   <p>
-    <b>LOGGY Client</b>
+    <h2>LOGGY Client</h2>
   </p>
   <p>
     <i>Monitor your services and track your errors in production.</i>
