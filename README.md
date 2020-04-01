@@ -11,7 +11,7 @@
   <br />
 </div>
 
-This repository contains the client. Please find the backend and the NodeJS adapter in the respective repo.
+**Related:**
 
 🚀 [**LOGGY Service**](https://github.com/jz222/loggy)
 
