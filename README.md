@@ -8,7 +8,6 @@
     <i>Monitor your services and track your errors in production.</i>
   </p>
   <br />
-  <br />
 </div>
 
 **Related:**
