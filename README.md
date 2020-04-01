@@ -7,9 +7,11 @@
   <p>
     <i>Monitor your services and track your errors in production.</i>
   </p>
+  <br />
+  <br />
 </div>
 
-This repository contains the client of the service. Please find the backend and the NodeJS adapter in the respective repo.
+This repository contains the client. Please find the backend and the NodeJS adapter in the respective repo.
 
 🚀 [**LOGGY Service**](https://github.com/jz222/loggy)
 
