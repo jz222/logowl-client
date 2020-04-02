@@ -87,12 +87,24 @@
     input:first-of-type {
         margin-right: 2rem;
     }
+}
 
-    span {
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--color-4);
-    }
+.passwordNotice {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-4);
+}
+
+.passwordNoticeValid {
+    @extend .passwordNotice;
+    color: var(--color-5);
+}
+
+.demoNotice {
+    line-height: 1.4;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: var(--color-3);
 }
 
 .organization {

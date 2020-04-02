@@ -53,7 +53,7 @@ const Setup = ({ history }) => {
             };
             
             await fetchClient('setup', payload);
-    
+            
             setState(prevState => ({ ...prevState, isLoading: false }));
             
         } catch (error) {
@@ -153,8 +153,17 @@ const Setup = ({ history }) => {
                         test={config.regex.password}
                     />
                     
-                    <span>At least 12 upper and lower case characters and one of #?!@$%^&*-</span>
+                    <span className={config.regex.password.test(password) ? styling.passwordNoticeValid : styling.passwordNotice}>
+                        At least 12 upper and lower case characters and one of #?!@$%^&*-
+                    </span>
                 </div>
+            </div>
+            
+            <div className={styling.demoNotice} hidden={!config.connectivity.isDemoInstance}>
+                Your data will not be shared with any third party.
+                In fact, you can provide a pseudo email address.
+                Please notice that this is a demo instance and your data
+                can be deleted at any time without notice.
             </div>
         </div>
     );
