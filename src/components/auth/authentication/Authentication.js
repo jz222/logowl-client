@@ -155,6 +155,11 @@ const Authentication = ({ history }) => {
     }
     
     
+    // Escape invalid characters in password
+    // eslint-disable-next-line
+    const passwordMatchRegex = password.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    
+    
     return (
         <>
             <nav className={styling.nav} ref={nav}>
@@ -205,7 +210,7 @@ const Authentication = ({ history }) => {
                             onKeyPress={enterHandler}
                             autoComplete='current-password'
                             placeholder='Repeat Password'
-                            test={new RegExp(password)}
+                            test={new RegExp(passwordMatchRegex)}
                             hidden={mode !== 'signUp' || !config.regex.password.test(password)}
                         />
                         
