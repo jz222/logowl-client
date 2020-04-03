@@ -9,10 +9,11 @@ import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 import config from 'config';
 import etalon from 'etalon';
+import utils from 'utils';
 
 import styling from './Authentication.module.scss';
 
-const Authentication = ({ history }) => {
+const Authentication = ({ history, location }) => {
     const { 1: dispatch } = useStore();
     
     const [{ mode, loading, email, password, passwordRepeat, inviteCode, error }, setState] = useState({
@@ -74,6 +75,8 @@ const Authentication = ({ history }) => {
             
             localStorage.setItem('access-pass', res.jwt);
             localStorage.setItem('expiration-time', res.expirationTime);
+            
+            utils.expirationHandler(history, res.expirationTime);
             
             nav.current.classList.add(styling.navExit);
             box.current.classList.add(styling.boxExit);
@@ -173,7 +176,11 @@ const Authentication = ({ history }) => {
                     <h1>{mode === 'signIn' ? 'Sign In' : 'Sign Up'}</h1>
                     <h4>{mode === 'signIn' ? 'Sign in with your credentials below' : 'Sign up a new account'}</h4>
                     
-                    <p hidden={!error}>{error}</p>
+                    <p className={styling.error} hidden={!error}>{error}</p>
+                    
+                    <p className={styling.sessionExpired} hidden={!location.expired}>
+                        Your session has been expired. Sign in to continue.
+                    </p>
                     
                     <motion.form layoutTransition={etalon.transition} onSubmit={submit}>
                         <InputField

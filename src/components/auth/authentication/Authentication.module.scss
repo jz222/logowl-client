@@ -57,15 +57,27 @@
             margin-left: 1rem;
         }
     }
+}
 
-    p {
-        margin-top: 2rem;
-        padding: 0.5rem 0;
-        border-radius: var(--border-radius);
-        background-color: var(--color-4);
-        text-align: center;
-        color: var(--color-2);
-    }
+.message {
+    margin-top: 2rem;
+    padding: 0.5rem 0;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.error {
+    @extend .message;
+    background-color: var(--color-4);
+    color: var(--color-2);
+}
+
+.sessionExpired {
+    @extend .message;
+    background-color: var(--color-5-light);
+    color: var(--color-5);
 }
 
 .boxExit {
