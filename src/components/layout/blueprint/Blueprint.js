@@ -7,6 +7,7 @@ import Spinner from 'components/UI/spinner/Spinner';
 
 import { useStore } from 'context';
 import fetchClient from 'fetchClient';
+import utils from 'utils';
 
 import styling from './Blueprint.module.scss';
 
@@ -31,6 +32,8 @@ const Blueprint = ({ children, history }) => {
             }
             
             const user = await fetchClient('getUser');
+            
+            utils.expirationHandler(history, expirationTime);
             
             document.title = 'Loggy Dashboard | ' + user.organization.name;
             
