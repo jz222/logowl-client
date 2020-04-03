@@ -29,8 +29,6 @@ const Authentication = ({ history, location }) => {
     const nav = useRef({});
     const box = useRef({});
     
-    console.log(location)
-    
     
     /**
      * Handles input field changes.

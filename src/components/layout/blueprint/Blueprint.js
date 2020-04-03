@@ -33,7 +33,7 @@ const Blueprint = ({ children, history }) => {
             
             const user = await fetchClient('getUser');
             
-            utils.expirationHandler(history, expirationTime);
+            utils.expirationHandler(history, +expirationTime);
             
             document.title = 'Loggy Dashboard | ' + user.organization.name;
             
