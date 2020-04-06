@@ -7,7 +7,7 @@ import styling from './Stacktrace.module.scss';
 const Stacktrace = ({ snippet, stacktrace, path, line }) => {
     const [showTrace, setShowTrace] = useState(false);
     
-    const preparedSnippet = Object.keys(snippet).sort((a, b) => a - b);
+    const preparedSnippet = Object.keys(snippet || {}).sort((a, b) => a - b);
     
     return (
         <section>
