@@ -17,7 +17,7 @@ import etalon from 'etalon';
 import styling from './Services.module.scss';
 
 const Services = ({ history }) => {
-    const [store, dispatch] = useStore();
+    const [store, dispatch, setError] = useStore();
     
     const [{ modalVisible, name, type, description, error }, setState] = useState({
         isLoading: false,
@@ -82,6 +82,7 @@ const Services = ({ history }) => {
         } catch (error) {
             console.error(error);
             setState(prevState => ({ ...prevState, isLoading: false, error: error.message }));
+            setError(error);
         }
     };
     
