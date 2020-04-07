@@ -7,25 +7,30 @@ import Organization from './components/organization/Organization';
 import Blueprint from './components/layout/blueprint/Blueprint';
 import Services from './components/services/Services';
 import Settings from './components/settings/Settings';
+import Toast from './components/layout/toast/Toast';
 import Service from './components/service/Service';
 import Setup from './components/auth/setup/Setup';
 
 const App = () => (
-    <Switch>
-        <Route path='/auth/signin' component={Authentication} />
-        <Route path='/auth/signup' component={Authentication} />
-        <Route path='/auth/setup' component={Setup} />
+    <>
+        <Switch>
+            <Route path='/auth/signin' component={Authentication} />
+            <Route path='/auth/signup' component={Authentication} />
+            <Route path='/auth/setup' component={Setup} />
+            
+            <Blueprint>
+                <Route exact path='/services' component={Services} />
+                <Route exact path='/services/:serviceId' component={Service} />
+                <Route exact path='/services/:serviceId/error/:errorId' component={ErrorDetails} />
+                
+                <Route exact path='/organization' component={Organization} />
+                
+                <Route exact path='/settings' component={Settings} />
+            </Blueprint>
+        </Switch>
         
-        <Blueprint>
-            <Route exact path='/services' component={Services} />
-            <Route exact path='/services/:serviceId' component={Service} />
-            <Route exact path='/services/:serviceId/error/:errorId' component={ErrorDetails} />
-            
-            <Route exact path='/organization' component={Organization} />
-            
-            <Route exact path='/settings' component={Settings} />
-        </Blueprint>
-    </Switch>
+        <Toast />
+    </>
 );
 
 export default App;

@@ -21,7 +21,8 @@ const initialState = {
     isOrganizationOwner: false,
     team: [],
     createdAt: '',
-    updatedAt: ''
+    updatedAt: '',
+    error: ''
 };
 
 const reducer = (state, action) => {
@@ -34,10 +35,18 @@ const reducer = (state, action) => {
 };
 
 export const StoreProvider = ({ children }) => {
-    const store = useReducer(reducer, initialState);
+    const [store, dispatch] = useReducer(reducer, initialState);
+    
+    const setError = (error) => {
+        dispatch({ type: 'update', payload: { error: error.message } });
+        
+        setTimeout(() => {
+            dispatch({ type: 'update', payload: { error: '' } });
+        }, 5000);
+    };
     
     return (
-        <Context.Provider value={store}>
+        <Context.Provider value={[store, dispatch, setError]}>
             {children}
         </Context.Provider>
     );
