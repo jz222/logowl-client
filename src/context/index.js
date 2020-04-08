@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useCallback } from 'react';
 
 const Context = createContext({});
 
@@ -37,13 +37,13 @@ const reducer = (state, action) => {
 export const StoreProvider = ({ children }) => {
     const [store, dispatch] = useReducer(reducer, initialState);
     
-    const setError = (error) => {
+    const setError = useCallback((error) => {
         dispatch({ type: 'update', payload: { error: error.message } });
-        
+    
         setTimeout(() => {
             dispatch({ type: 'update', payload: { error: '' } });
         }, 5000);
-    };
+    }, []);
     
     return (
         <Context.Provider value={[store, dispatch, setError]}>

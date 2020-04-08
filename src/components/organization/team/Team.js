@@ -15,7 +15,7 @@ import etalon from 'etalon';
 import styling from './Team.module.scss';
 
 const Team = ({ team = [], userId }) => {
-    const [store, dispatch] = useStore();
+    const [store, dispatch, setError] = useStore();
     
     const [userToDelete, setUserToDelete] = useState('');
     
@@ -38,6 +38,7 @@ const Team = ({ team = [], userId }) => {
         } catch (error) {
             console.error(error);
             dispatch({ type: 'update', payload: { team: currentTeam } });
+            setError(error);
         }
     };
     

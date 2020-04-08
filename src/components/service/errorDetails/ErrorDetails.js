@@ -15,7 +15,7 @@ import { useStore } from 'context';
 import styling from './ErrorDetails.module.scss';
 
 const ErrorDetails = ({ history, match }) => {
-    const [store] = useStore();
+    const [store, ,setError] = useStore();
     
     const [state, setState] = useState({
         id: '',
@@ -79,8 +79,9 @@ const ErrorDetails = ({ history, match }) => {
             setState(prevState => ({ ...prevState, ...res }));
         } catch (error) {
             console.error(error);
+            setError(error);
         }
-    }, [history.location.state, match.params.errorId, match.params.serviceId]);
+    }, [history.location.state, match.params.errorId, match.params.serviceId, setError]);
     
     
     /**
@@ -97,6 +98,7 @@ const ErrorDetails = ({ history, match }) => {
             
         } catch (error) {
             console.error(error);
+            setError(error);
         }
     };
     
@@ -114,6 +116,7 @@ const ErrorDetails = ({ history, match }) => {
             
         } catch (error) {
             console.error(error);
+            setError(error);
         }
     };
     

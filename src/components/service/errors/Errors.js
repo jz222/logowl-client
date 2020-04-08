@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ErrorPlaceholder, Placeholder } from 'components/UI/placeholder/Placeholder';
+import { Placeholder } from 'components/UI/placeholder/Placeholder';
 import Evolution from 'components/UI/evolution/Evolution';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
 import Badge from 'components/UI/badge/Badge';
 
+import { useStore } from 'context';
 import fetchClient from 'fetchClient';
 import config from 'config';
 import utils from 'utils';
@@ -14,16 +15,17 @@ import utils from 'utils';
 import styling from './Errors.module.scss';
 
 const Errors = ({ serviceId, history }) => {
+    const [, , setError] = useStore();
+    
     const [state, setState] = useState({
         errors: [],
         loading: true,
         pageLoading: false,
         currentPage: 0,
-        fetchError: '',
         fetchedAll: false
     });
     
-    const { errors, loading, pageLoading, currentPage, fetchError, fetchedAll } = state;
+    const { errors, loading, pageLoading, currentPage, fetchedAll } = state;
     
     
     const intervalId = useRef(0);
@@ -74,7 +76,8 @@ const Errors = ({ serviceId, history }) => {
             
         } catch (error) {
             console.error(error);
-            setState(prevState => ({ ...prevState, pageLoading: false, fetchError: error.message }));
+            setState(prevState => ({ ...prevState, pageLoading: false }));
+            setError(error);
         }
     };
     
@@ -90,7 +93,6 @@ const Errors = ({ serviceId, history }) => {
                 loading: showSpinner,
                 pageLoading: false,
                 currentPage: 0,
-                fetchError: '',
                 fetchedAll: false
             }));
             
@@ -109,9 +111,10 @@ const Errors = ({ serviceId, history }) => {
         } catch (error) {
             console.error(error);
             stopPolling();
-            setState(prevState => ({ ...prevState, loading: false, fetchError: error.message }));
+            setState(prevState => ({ ...prevState, loading: false }));
+            setError(error);
         }
-    }, [serviceId]);
+    }, [serviceId, setError, setState]);
     
     
     /**
@@ -167,9 +170,6 @@ const Errors = ({ serviceId, history }) => {
     );
     
     
-    const fetchFailedPlaceholder = <ErrorPlaceholder title='Failed to fetch errors' message={fetchError} />;
-    
-    
     // List of errors
     const errorList = (
         <ul>
@@ -213,11 +213,6 @@ const Errors = ({ serviceId, history }) => {
             ))}
         </ul>
     );
-    
-    
-    if (fetchError) {
-        return fetchFailedPlaceholder;
-    }
     
     
     const content = errors.length ? errorList : placeholder;

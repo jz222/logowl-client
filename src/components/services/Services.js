@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { ErrorPlaceholder, Placeholder } from 'components/UI/placeholder/Placeholder';
+import { Placeholder } from 'components/UI/placeholder/Placeholder';
 import InputField from 'components/UI/inputField/InputField';
 import Dropdown from 'components/UI/dropdown/Dropdown';
 import Stepper from 'components/UI/stepper/Stepper';
@@ -19,13 +19,12 @@ import styling from './Services.module.scss';
 const Services = ({ history }) => {
     const [store, dispatch, setError] = useStore();
     
-    const [{ modalVisible, name, type, description, error }, setState] = useState({
+    const [{ modalVisible, name, type, description }, setState] = useState({
         isLoading: false,
         modalVisible: false,
         name: '',
         type: '',
-        description: '',
-        error: ''
+        description: ''
     });
     
     
@@ -81,7 +80,7 @@ const Services = ({ history }) => {
             
         } catch (error) {
             console.error(error);
-            setState(prevState => ({ ...prevState, isLoading: false, error: error.message }));
+            setState(prevState => ({ ...prevState, isLoading: false }));
             setError(error);
         }
     };
@@ -99,8 +98,9 @@ const Services = ({ history }) => {
             
         } catch (error) {
             console.error(error);
+            setError(error);
         }
-    }, [dispatch]);
+    }, [dispatch, setError]);
     
     
     useEffect(() => {
@@ -170,9 +170,8 @@ const Services = ({ history }) => {
                 <Button onClick={openModal}>New Service</Button>
             </section>
             
-            {(!!store.services.length && !error) && services}
-            {(!store.services.length && !error) && placeholder}
-            {error && <ErrorPlaceholder title={error} />}
+            {!!store.services.length && services}
+            {!store.services.length && placeholder}
             
             <Modal open={modalVisible}>
                 <h3 className={styling.title}>Create a new Service</h3>
