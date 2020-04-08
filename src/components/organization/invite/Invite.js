@@ -12,15 +12,14 @@ import config from 'config';
 import styling from './Invite.module.scss';
 
 const Invite = ({ tabHandler }) => {
-    const [store, dispatch] = useStore();
+    const [store, dispatch, setError] = useStore();
     
-    const [{ firstName, lastName, email, role, isLoading, errorMessage }, setState] = useState({
+    const [{ firstName, lastName, email, role, isLoading }, setState] = useState({
         firstName: '',
         lastName: '',
         email: '',
         role: '',
-        isLoading: false,
-        errorMessage: ''
+        isLoading: false
     });
     
     
@@ -30,7 +29,7 @@ const Invite = ({ tabHandler }) => {
      */
     const inviteUser = async () => {
         try {
-            setState(prevState => ({ ...prevState, isLoading: true, errorMessage: '' }));
+            setState(prevState => ({ ...prevState, isLoading: true }));
             
             const res = await fetchClient('inviteUser', { firstName, lastName, email, role });
             
@@ -42,7 +41,8 @@ const Invite = ({ tabHandler }) => {
             
         } catch (error) {
             console.error(error);
-            setState(prevState => ({ ...prevState, isLoading: false, errorMessage: error.message }));
+            setState(prevState => ({ ...prevState, isLoading: false }));
+            setError(error);
         }
     };
     
@@ -73,8 +73,6 @@ const Invite = ({ tabHandler }) => {
     
     return (
         <Card>
-            <div className={styling.error} hidden={!errorMessage}>{errorMessage}</div>
-            
             <div className={styling.row}>
                 <div className={styling.cell}>
                     <h6>First Name</h6>

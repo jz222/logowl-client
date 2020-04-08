@@ -4,11 +4,13 @@ import Button from 'components/UI/button/Button';
 import Modal from 'components/UI/modal/Modal';
 import Card from 'components/UI/card/Card';
 
+import { useStore } from 'context';
 import fetchClient from 'fetchClient';
 
 import styling from './Delete.module.scss';
 
 const Delete = ({ name, history }) => {
+    const [, , setError] = useStore();
     const [confirmVisibility, setConfirmVisibility] = useState(false);
     
     /**
@@ -29,7 +31,8 @@ const Delete = ({ name, history }) => {
             history.push('/auth/signin');
             
         } catch (error) {
-            console.error(error)
+            console.error(error);
+            setError(error);
         }
     };
     

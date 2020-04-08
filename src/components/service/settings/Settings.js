@@ -6,11 +6,14 @@ import Button from 'components/UI/button/Button';
 import Modal from 'components/UI/modal/Modal';
 import Card from 'components/UI/card/Card';
 
+import { useStore } from 'context';
 import fetchClient from 'fetchClient';
 
 import styling from './Settings.module.scss';
 
 const Settings = ({ history, serviceName, serviceId }) => {
+    const [, , setError] = useStore();
+    
     const [{ confirmVisibility, isLoading }, setState] = useState({
         confirmVisibility: false,
         isLoading: false
@@ -26,11 +29,12 @@ const Settings = ({ history, serviceName, serviceId }) => {
             setState(prevState => ({ ...prevState, isLoading: true }));
             
             await fetchClient('deleteService', null, '/service/' + serviceId);
-    
+            
             setTimeout(() => history.push('/services'), 1020);
             
         } catch (error) {
             console.error(error);
+            setError(error);
         }
     };
     
@@ -43,7 +47,8 @@ const Settings = ({ history, serviceName, serviceId }) => {
     };
     
     
-    const buttonContent = isLoading ? <div className={styling.deleteButton}><Spinner invert /> Deleting</div> : 'Delete';
+    const buttonContent = isLoading ?
+        <div className={styling.deleteButton}><Spinner invert /> Deleting</div> : 'Delete';
     
     
     return (

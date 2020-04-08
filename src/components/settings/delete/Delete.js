@@ -4,11 +4,13 @@ import Button from 'components/UI/button/Button';
 import Modal from 'components/UI/modal/Modal';
 import Card from 'components/UI/card/Card';
 
+import { useStore } from 'context';
 import fetchClient from 'fetchClient';
 
 import styling from './Delete.module.scss';
 
 const Delete = ({ isOrganizationOwner, history }) => {
+    const [, , setError] = useStore();
     const [confirmVisibility, setConfirmVisibility] = useState(false);
     
     /**
@@ -25,13 +27,14 @@ const Delete = ({ isOrganizationOwner, history }) => {
     const deleteUser = async () => {
         try {
             await fetchClient('deleteUserAccount');
-    
+            
             localStorage.clear();
             
             history.push('/auth/signin');
             
         } catch (error) {
             console.error(error);
+            setError(error);
         }
     };
     
@@ -46,7 +49,8 @@ const Delete = ({ isOrganizationOwner, history }) => {
                         <p>{caption}</p>
                     </div>
                     
-                    <Button size='smaller' onClick={toggleConfirmVisibility} disabled={isOrganizationOwner}>Delete</Button>
+                    <Button size='smaller' onClick={toggleConfirmVisibility}
+                            disabled={isOrganizationOwner}>Delete</Button>
                 </div>
             </Card>
             
