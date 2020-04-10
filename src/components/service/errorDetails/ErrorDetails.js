@@ -38,6 +38,7 @@ const ErrorDetails = ({ history, match }) => {
         count: 0,
         timestamp: 0,
         resolved: (history.location.state || {}).resolved || false,
+        seenBy: [],
         lastSeen: ''
     });
     
@@ -58,6 +59,7 @@ const ErrorDetails = ({ history, match }) => {
         count,
         timestamp,
         resolved,
+        seenBy,
         lastSeen
     } = state;
     
@@ -157,6 +159,7 @@ const ErrorDetails = ({ history, match }) => {
                 evolution={evolution}
                 fingerprint={fingerprint}
                 count={count}
+                seenBy={seenBy}
                 firstSeen={timestamp}
                 lastSeen={lastSeen}
                 resolved={resolved}

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styling from './Avatar.module.scss';
 
-const Avatar = ({ firstName = '', lastName = '' }) => {
+const Avatar = ({ firstName = '', lastName = '', size = 'standard', stacked }) => {
     let style = styling.one;
     
     const charCode = firstName.toUpperCase().charCodeAt(0) || 0;
@@ -15,7 +15,13 @@ const Avatar = ({ firstName = '', lastName = '' }) => {
         style = styling.three;
     }
     
+    style = style + ' ' + styling[size] + ' ' + (stacked && styling.stacked);
+    
     return <div className={style}>{firstName[0].toUpperCase()}{lastName[0].toUpperCase()}</div>;
 };
+
+export const AvatarPlaceholder = ({ number, size = 'standard' }) => (
+    <div className={styling.placeholder + ' ' + styling[size]}>+{number}</div>
+);
 
 export default Avatar;
