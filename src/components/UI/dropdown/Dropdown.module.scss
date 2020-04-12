@@ -29,6 +29,7 @@
         background-color: var(--color-2);
         box-shadow: var(--shadow);
         overflow: hidden;
+        z-index: 9;
     }
 
     li {
