@@ -63,7 +63,6 @@ const ErrorDetails = ({ history, match }) => {
         lastSeen
     } = state;
     
-    
     /**
      * Fetches the error with the given ID.
      * @type {(...args: any[]) => any}
