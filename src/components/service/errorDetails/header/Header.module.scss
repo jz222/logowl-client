@@ -55,6 +55,10 @@
         margin-bottom: 0.5rem;
         color: var(--color-2-dark);
 
+        svg {
+            flex-shrink: 0;
+        }
+
         span {
             margin-left: 0.5rem;
             font-size: 1.6rem;
