@@ -23,7 +23,7 @@ const UserInteractions = ({ userInteractions }) => {
                             <div><b>Element:</b> <Badge size='tiny' type='info'>{interaction.element}</Badge></div>
                             <div><b>Element ID:</b> {interaction.id || 'n/a'}</div>
                             <div><b>Outer HTML:</b> {interaction.outerHtml}</div>
-                            <div><b>Element Path:</b> {interaction.path}</div>
+                            <div><b>Element Path:</b> {interaction.path.reverse().join(' > ')}</div>
                             <div><b>Location:</b> {interaction.location}</div>
                             <div><b>Timestamp:</b> {utils.getDateWithTime(interaction.timestamp)}</div>
                         </div>
