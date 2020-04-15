@@ -24,7 +24,7 @@ const Service = ({ history, match }) => {
                 <Tab active={activeTab === 'settings'} click={() => setActiveTab('settings')}>Settings</Tab>
             </Menu>
             
-            {activeTab === 'errors' && <Errors serviceId={selectedService.id} history={history} />}
+            {activeTab === 'errors' && <Errors serviceId={selectedService.id} type={selectedService.type} history={history} />}
             {activeTab === 'ticket' && <Ticket serviceName={selectedService.name} ticket={selectedService.ticket} />}
             {activeTab === 'settings' && <Settings history={history} serviceName={selectedService.name} serviceId={selectedService.id} />}
         </>

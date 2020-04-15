@@ -14,7 +14,7 @@ import utils from 'utils';
 
 import styling from './Errors.module.scss';
 
-const Errors = ({ serviceId, history }) => {
+const Errors = ({ serviceId, history, type = '' }) => {
     const [, , setError] = useStore();
     
     const [state, setState] = useState({
@@ -161,9 +161,9 @@ const Errors = ({ serviceId, history }) => {
         <Placeholder title='No errors available'>
             <h4>Connect your Service</h4>
             
-            <p>Install the NodeJS adapter to register errors</p>
+            <p>Install the adapter to register errors</p>
             
-            <Button onClick={() => window.open(config.links.loggyAdapterNodeJS, '_blank').focus()}>
+            <Button onClick={() => window.open(config.links.adapters[type], '_blank').focus()}>
                 Get the Adapter
             </Button>
         </Placeholder>
