@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiTrash2 } from 'react-icons/fi';
 
+import UserInteractions from './userInteractions/UserInteractions';
 import { Action } from 'components/UI/button/Button';
 import Stepper from 'components/UI/stepper/Stepper';
 import Stacktrace from './stacktrace/Stacktrace';
@@ -34,10 +35,12 @@ const ErrorDetails = ({ history, match }) => {
         host: '',
         userAgent: '',
         metrics: {},
+        userInteractions: [],
         clientIp: '',
         count: 0,
         timestamp: 0,
         resolved: (history.location.state || {}).resolved || false,
+        seenBy: [],
         lastSeen: ''
     });
     
@@ -54,13 +57,14 @@ const ErrorDetails = ({ history, match }) => {
         snippet,
         logs,
         metrics,
+        userInteractions,
         clientIp,
         count,
         timestamp,
         resolved,
+        seenBy,
         lastSeen
     } = state;
-    
     
     /**
      * Fetches the error with the given ID.
@@ -157,6 +161,7 @@ const ErrorDetails = ({ history, match }) => {
                 evolution={evolution}
                 fingerprint={fingerprint}
                 count={count}
+                seenBy={seenBy}
                 firstSeen={timestamp}
                 lastSeen={lastSeen}
                 resolved={resolved}
@@ -170,6 +175,8 @@ const ErrorDetails = ({ history, match }) => {
             <Graph data={evolution} firstSeen={timestamp} lastSeen={lastSeen} />
             
             <Stacktrace snippet={snippet} stacktrace={stacktrace} path={path} line={line} />
+            
+            <UserInteractions userInteractions={userInteractions} />
             
             <Logs logs={logs} />
         </>

@@ -42,7 +42,7 @@ export const StoreProvider = ({ children }) => {
     
         setTimeout(() => {
             dispatch({ type: 'update', payload: { error: '' } });
-        }, 5000);
+        }, 10000);
     }, []);
     
     return (

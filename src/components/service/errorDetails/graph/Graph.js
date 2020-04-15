@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Chart } from 'frappe-charts/dist/frappe-charts.esm';
 
 import Badge from '../badge/Badge';
@@ -27,8 +27,8 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
         
         const chartInstance = new Chart(chart.current, {
             data: {
-                labels,
-                datasets: [{ values }]
+                labels: [labels[0], ...labels],
+                datasets: [{ values: [0, ...values] }]
             },
             type: 'line',
             height: 300,

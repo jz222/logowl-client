@@ -1,6 +1,7 @@
 .badge {
     display: inline-block;
     border-radius: 20px;
+    font-weight: bold;
 }
 
 .small {
@@ -9,6 +10,13 @@
     padding: 0.3rem 0.7rem;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.tiny {
+    @extend .badge;
+    line-height: 1rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
 }
 
 .neutral {

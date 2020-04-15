@@ -10,7 +10,7 @@ const Badges = ({ badges = {}, clientIp = '', metrics = {} }) => (
         
         <Badge name='IP address' value={clientIp} />
         
-        <Badge name='platform' value={metrics.platform || 'not available'} />
+        {Object.keys(metrics).map(key => <Badge key={key} name={key} value={metrics[key]} />)}
         
         {Object.keys(badges).map(key => <Badge key={key} name={key} value={badges[key]} />)}
     </section>

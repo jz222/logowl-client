@@ -40,3 +40,10 @@
 .nodejs {
     background-color: var(--color-5-lighter);
 }
+
+.browser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+}

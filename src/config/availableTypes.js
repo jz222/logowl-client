@@ -1,1 +1,10 @@
-export default [{ name: 'nodejs', label: 'NodeJS Server' }];
+export default [
+    {
+        name: 'nodejs',
+        label: 'NodeJS Server'
+    },
+    {
+        name: 'browser',
+        label: 'Frontend'
+    }
+];

@@ -1,13 +1,11 @@
 .avatar {
-    width: 4rem;
-    height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    font-size: 1.8rem;
     letter-spacing: 2px;
     color: var(--color-2);
+    cursor: default;
 }
 
 .one {
@@ -23,4 +21,32 @@
 .three {
     @extend .avatar;
     background-color: var(--color-4);
+}
+
+.small {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.4rem;
+}
+
+.standard {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.8rem;
+}
+
+.stacked {
+    margin-left: -1rem;
+    box-shadow: 0 0 0 1px var(--color-2);
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+}
+
+.placeholder {
+    @extend .avatar, .stacked;
+    background-color: var(--color-2-darker);
+    letter-spacing: 0;
+    color: var(--color-2-dark);
 }

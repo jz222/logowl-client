@@ -32,8 +32,20 @@
     .adapter {
         display: flex;
         align-items: center;
+        margin-bottom: 0.5rem;
         font-weight: 500;
         color: var(--color-2-dark);
+    }
+
+    .seenBy {
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-right: 1rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
     }
 
     .label {
@@ -42,6 +54,10 @@
         font-size: 2.2rem;
         margin-bottom: 0.5rem;
         color: var(--color-2-dark);
+
+        svg {
+            flex-shrink: 0;
+        }
 
         span {
             margin-left: 0.5rem;
