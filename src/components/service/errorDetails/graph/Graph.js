@@ -18,7 +18,7 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
      * It removes its event listeners on unmount.
      */
     useEffect(() => {
-        if (!Object.keys(data).length) {
+        if (!Object.keys(data || {}).length) {
             return;
         }
         
