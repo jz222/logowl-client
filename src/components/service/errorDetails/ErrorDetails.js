@@ -56,6 +56,7 @@ const ErrorDetails = ({ history, match }) => {
         badges,
         snippet,
         logs,
+        host,
         metrics,
         userInteractions,
         clientIp,
@@ -170,7 +171,7 @@ const ErrorDetails = ({ history, match }) => {
             
             <hr />
             
-            <Badges badges={badges} clientIp={clientIp} metrics={metrics} />
+            <Badges badges={badges} clientIp={clientIp} host={host} metrics={metrics} />
             
             <Graph data={evolution} firstSeen={timestamp} lastSeen={lastSeen} />
             
