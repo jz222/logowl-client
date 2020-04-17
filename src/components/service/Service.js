@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Menu, Tab } from 'components/UI/menu/Menu';
 import Stepper from 'components/UI/stepper/Stepper';
 import Settings from './settings/Settings';
+import Alerts from './alerts/Alerts';
 import Errors from './errors/Errors';
 import Ticket from './ticket/Ticket';
 
@@ -13,20 +14,23 @@ const Service = ({ history, match }) => {
     
     const [activeTab, setActiveTab] = useState('errors');
     
-    const selectedService = store.services.find(x => x.id === match.params.serviceId) || {};
+    const service = store.services.find(x => x.id === match.params.serviceId) || {};
     
     return (
         <>
-            <Stepper steps={['services', selectedService.name]} />
+            <Stepper steps={['services', service.name]} />
+            
             <Menu>
                 <Tab active={activeTab === 'errors'} click={() => setActiveTab('errors')}>Errors</Tab>
                 <Tab active={activeTab === 'ticket'} click={() => setActiveTab('ticket')}>Ticket</Tab>
+                <Tab active={activeTab === 'alerts'} click={() => setActiveTab('alerts')}>Alerts</Tab>
                 <Tab active={activeTab === 'settings'} click={() => setActiveTab('settings')}>Settings</Tab>
             </Menu>
             
-            {activeTab === 'errors' && <Errors serviceId={selectedService.id} type={selectedService.type} history={history} />}
-            {activeTab === 'ticket' && <Ticket serviceName={selectedService.name} ticket={selectedService.ticket} />}
-            {activeTab === 'settings' && <Settings history={history} serviceName={selectedService.name} serviceId={selectedService.id} />}
+            {activeTab === 'errors' && <Errors serviceId={service.id} type={service.type} history={history} />}
+            {activeTab === 'ticket' && <Ticket serviceName={service.name} ticket={service.ticket} />}
+            {activeTab === 'alerts' && <Alerts serviceId={service.id} slackWebhookURL={service.slackWebhookURL} />}
+            {activeTab === 'settings' && <Settings history={history} serviceName={service.name} serviceId={service.id} />}
         </>
     );
 };

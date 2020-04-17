@@ -1,0 +1,17 @@
+.caption {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    font-size: 1.4rem;
+
+    a,
+    a:active {
+        color: var(--color-3);
+    }
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}

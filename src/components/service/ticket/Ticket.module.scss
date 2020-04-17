@@ -1,21 +1,3 @@
-.icon {
-    width: 8rem;
-    height: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 1.5rem auto;
-    border-radius: 50%;
-    background-color: var(--color-2-darker);
-    font-size: 4rem;
-    color: var(--color-3);
-}
-
-.icon + h3 {
-    margin-bottom: 3.5rem;
-    text-align: center;
-}
-
 .ticket {
     display: flex;
     justify-content: center;
@@ -35,6 +17,5 @@
     max-width: 50rem;
     margin: 0 auto;
     text-align: center;
-    font-weight: 500;
     color: var(--color-2-dark);
 }
