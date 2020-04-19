@@ -7,3 +7,34 @@
     border: 1px solid var(--color-2-darker);
     box-shadow: var(--shadow);
 }
+
+.icon {
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 50%;
+    background-color: var(--color-2-darker);
+    font-size: 4rem;
+    color: var(--color-3);
+
+    + h3 {
+        margin-bottom: 3.5rem;
+        text-align: center;
+    }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--color-2-dark);
+
+    span {
+        margin-left: 1rem;
+    }
+}

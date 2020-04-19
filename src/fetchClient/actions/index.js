@@ -1,7 +1,7 @@
 import { setup, signIn, signUp } from './auth';
 import { deleteUserAccount, deleteUserById, getUser, inviteUser } from './user';
 import { deleteError, getAllErrors, getErrorById, updateError } from './errors';
-import { createService, deleteService } from './service';
+import { createService, updateService, deleteService } from './service';
 import { deleteOrganization } from './organization';
 
 export default {
@@ -17,6 +17,7 @@ export default {
     deleteError,
     updateError,
     createService,
+    updateService,
     deleteService,
     deleteOrganization
 };

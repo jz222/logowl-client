@@ -4,10 +4,10 @@ import { FiSettings } from 'react-icons/fi';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Modal from 'components/UI/modal/Modal';
-import Card from 'components/UI/card/Card';
+import Card, { Header } from 'components/UI/card/Card';
 
-import { useStore } from 'context';
 import fetchClient from 'fetchClient';
+import { useStore } from 'context';
 
 import styling from './Settings.module.scss';
 
@@ -54,11 +54,7 @@ const Settings = ({ history, serviceName, serviceId }) => {
     return (
         <>
             <Card>
-                <div className={styling.icon}>
-                    <FiSettings />
-                </div>
-                
-                <h3>Service Settings</h3>
+                <Header icon={<FiSettings />}>Service Settings</Header>
                 
                 <div className={styling.row}>
                     <div className={styling.description}>

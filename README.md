@@ -17,6 +17,8 @@
 
 📡 [**LOGGY NodeJS Adapter**](https://github.com/jz222/loggy-adapter-nodejs)
 
+🌐 [**LOGGY Browser Adapter**](https://github.com/jz222/loggy-adapter-browser)
+
 <br />
 
 ### Features

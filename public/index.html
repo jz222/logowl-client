@@ -9,7 +9,15 @@
     <link rel="icon" href="data:,">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap" rel="stylesheet">
 
+    <script src="https://unpkg.com/@loggy/adapter-browser@0.1.7/dist/loggy-client-browser.js" crossorigin></script>
     <script src="%PUBLIC_URL%/config.js" type="text/javascript"></script>
+
+    <script>
+        window.loggy && window.loggy.init({
+            ticket: '0363A2B9CFEB30779AF67A7BA07F13934D2C5CA6E676F9551E',
+            instance: 'demo'
+        });
+    </script>
 
     <style>
         html, body {

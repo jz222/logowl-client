@@ -4,7 +4,7 @@ const computeEvolution = (data) => {
     const format = (key) => ({ timestamp: key, count: data[key], day: utils.getDate(key) });
     const ascending = (a, b) => a.timestamp - b.timestamp;
     
-    const evolution = Object.keys(data).map(format).sort(ascending);
+    const evolution = Object.keys(data || {}).map(format).sort(ascending);
     const reducedEvolution = evolution.slice(Math.max(evolution.length - 15, 0));
     const largest = reducedEvolution.reduce((a, c) => c.count > a ? c.count : a, 0);
     

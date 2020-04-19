@@ -16,7 +16,7 @@ import { useStore } from 'context';
 import styling from './ErrorDetails.module.scss';
 
 const ErrorDetails = ({ history, match }) => {
-    const [store, ,setError] = useStore();
+    const [store, , setError] = useStore();
     
     const [state, setState] = useState({
         id: '',
@@ -56,6 +56,7 @@ const ErrorDetails = ({ history, match }) => {
         badges,
         snippet,
         logs,
+        host,
         metrics,
         userInteractions,
         clientIp,
@@ -97,7 +98,7 @@ const ErrorDetails = ({ history, match }) => {
             const url = '/event/' + match.params.serviceId + '/error/' + match.params.errorId;
             
             await fetchClient('deleteError', null, url);
-    
+            
             history.push('/services/' + match.params.serviceId);
             
         } catch (error) {
@@ -170,13 +171,13 @@ const ErrorDetails = ({ history, match }) => {
             
             <hr />
             
-            <Badges badges={badges} clientIp={clientIp} metrics={metrics} />
+            <Badges badges={badges} clientIp={clientIp} host={host} metrics={metrics} />
             
             <Graph data={evolution} firstSeen={timestamp} lastSeen={lastSeen} />
             
             <Stacktrace snippet={snippet} stacktrace={stacktrace} path={path} line={line} />
             
-            <UserInteractions userInteractions={userInteractions} />
+            <UserInteractions userInteractions={userInteractions} errorMessage={message} />
             
             <Logs logs={logs} />
         </>

@@ -4,11 +4,13 @@ import Badge from '../badge/Badge';
 
 import styling from './Badges.module.scss';
 
-const Badges = ({ badges = {}, clientIp = '', metrics = {} }) => (
+const Badges = ({ badges = {}, clientIp = '', host = '', metrics = {} }) => (
     <section className={styling.badges} hidden={!Object.keys(badges).length && !clientIp}>
         <h4>Badges</h4>
         
         <Badge name='IP address' value={clientIp} />
+        
+        <Badge name='host' value={host} hidden={!host} />
         
         {Object.keys(metrics).map(key => <Badge key={key} name={key} value={metrics[key]} />)}
         

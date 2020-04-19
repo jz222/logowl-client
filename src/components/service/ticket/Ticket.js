@@ -1,17 +1,13 @@
 import React from 'react';
 import { FiRadio } from 'react-icons/fi';
 
-import Card from 'components/UI/card/Card';
+import Card, { Header } from 'components/UI/card/Card';
 
 import styling from './Ticket.module.scss';
 
 const Ticket = ({ ticket, serviceName }) => (
     <Card>
-        <div className={styling.icon}>
-            <FiRadio />
-        </div>
-        
-        <h3>Service Ticket</h3>
+        <Header icon={<FiRadio />}>Service Ticket</Header>
         
         <div className={styling.ticket}>
             <span>{ticket}</span>
