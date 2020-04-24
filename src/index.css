@@ -133,7 +133,8 @@ li {
     list-style-type: none;
 }
 
-.axis {
+.axis,
+.legend-dataset-text {
     fill: var(--color-2-dark) !important;
 }
 
