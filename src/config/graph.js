@@ -1,4 +1,4 @@
-const getGraphOptions = (hideGrid, hideLegend, addPadding) => ({
+const getGraphOptions = (hideLegend) => ({
     responsive: true,
     maintainAspectRatio: false,
     legend: {
@@ -10,8 +10,9 @@ const getGraphOptions = (hideGrid, hideLegend, addPadding) => ({
     },
     scales: {
         xAxes: [{
+            offset: true,
             gridLines: {
-                display: !hideGrid,
+                display: false,
                 color: '#E5ECF9',
             },
             ticks: {
@@ -20,9 +21,9 @@ const getGraphOptions = (hideGrid, hideLegend, addPadding) => ({
             }
         }],
         yAxes: [{
+            offset: true,
             gridLines: {
-                display: !hideGrid,
-                zeroLineWidth: 0,
+                display: false,
                 color: '#E5ECF9',
             },
             ticks: {
@@ -34,10 +35,10 @@ const getGraphOptions = (hideGrid, hideLegend, addPadding) => ({
     },
     layout: {
         padding: {
-            top: addPadding ? 25 : 0,
-            right: addPadding ? 25 : 0,
-            bottom: addPadding ? 25 : 0,
-            left: addPadding ? 25 : 0
+            top: 25,
+            right: 25,
+            bottom: 25,
+            left: 25
         }
     }
 });

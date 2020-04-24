@@ -42,7 +42,7 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
                 ],
                 labels: ['', ...labels]
             },
-            options: config.graph.getGraphOptions(false, true, false)
+            options: config.graph.getGraphOptions(true)
         });
         
         return () => chartInstance.destroy();

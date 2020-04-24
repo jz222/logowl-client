@@ -48,11 +48,11 @@ const PageViewsChart = ({ pageViews = [], mode = '' }) => {
                 ],
                 labels
             },
-            options: config.graph.getGraphOptions(true, false, true)
+            options: config.graph.getGraphOptions()
         });
         
         return () => chartInstance.destroy();
-    }, [mode, pageViews]);
+    }, [pageViews]);
     
     return (
         <div className={styling.chart}>
