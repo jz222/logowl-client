@@ -5,6 +5,7 @@ import TotalNumbers from './totalNumbers/TotalNumbers';
 import Header from './header/Header';
 
 import fetchClient from 'fetchClient';
+import utils from 'utils';
 
 const Analytics = ({ serviceId = '' }) => {
     const [state, setState] = useState({
@@ -27,10 +28,18 @@ const Analytics = ({ serviceId = '' }) => {
         pageViews
     } = state;
     
+    /**
+     * Handles dropdown changes.
+     * @param selection {string} the selected dropdown option
+     */
     const dropdownHandler = (selection) => {
         setState(prevState => ({ ...prevState, mode: selection }));
     };
     
+    /**
+     * Fetches analytic data for the selected mode.
+     * @type {(...args: any[]) => any}
+     */
     const fetchAnalyticData = useCallback(async () => {
         try {
             const url = '/event/' + serviceId + '/analytics';
@@ -38,12 +47,26 @@ const Analytics = ({ serviceId = '' }) => {
             
             const res = await fetchClient('getAnalytics', null, url + queryParam);
             
+            if (!res.pageViews || !Array.isArray(res.pageViews)) {
+                console.error('failed to fetch data');
+                return;
+            }
+            
+            res.pageViews = res.pageViews.map(pageView => {
+                pageView.unit = (mode === 'today') ? utils.getTime(pageView.unit, true) : utils.getDate(pageView.unit);
+                
+                return pageView;
+            });
+            
             setState(prevState => ({ ...prevState, ...(res || {}) }));
         } catch (error) {
             console.error(error);
         }
     }, [mode, serviceId]);
     
+    /**
+     * Fetch analytic data when fetchAnalyticData updates.
+     */
     useEffect(() => {
         fetchAnalyticData();
     }, [fetchAnalyticData]);

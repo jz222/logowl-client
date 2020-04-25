@@ -2,21 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 
 import config from 'config';
-import utils from 'utils';
 
 import styling from './PageViewsChart.module.scss';
 
 const PageViewsChart = ({ pageViews = [], mode = '' }) => {
-    const prevData = useRef([]);
     const chart = useRef({});
     
     useEffect(() => {
-        if (JSON.stringify(prevData.current) === JSON.stringify(pageViews)) {
-            return;
-        }
-        
-        prevData.current = pageViews;
-        
         const ctx = chart.current.getContext('2d');
         
         const visits = [];
@@ -25,8 +17,6 @@ const PageViewsChart = ({ pageViews = [], mode = '' }) => {
         const newVisitors = [];
         
         for (let pageView of pageViews || []) {
-            pageView.unit = (mode === 'today') ? utils.getTime(pageView.unit, true) : utils.getDate(pageView.unit);
-            
             labels.push(pageView.unit || '');
             visits.push(pageView.visits || 0);
             sessions.push(pageView.sessions || 0);
@@ -59,7 +49,7 @@ const PageViewsChart = ({ pageViews = [], mode = '' }) => {
         });
         
         return () => chartInstance.destroy();
-    }, [mode, pageViews]);
+    }, [pageViews]);
     
     return (
         <div className={styling.chart}>
