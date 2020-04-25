@@ -7,9 +7,16 @@ import utils from 'utils';
 import styling from './PageViewsChart.module.scss';
 
 const PageViewsChart = ({ pageViews = [], mode = '' }) => {
+    const prevData = useRef([]);
     const chart = useRef({});
     
     useEffect(() => {
+        if (JSON.stringify(prevData.current) === JSON.stringify(pageViews)) {
+            return;
+        }
+        
+        prevData.current = pageViews;
+        
         const ctx = chart.current.getContext('2d');
         
         const visits = [];
@@ -52,7 +59,7 @@ const PageViewsChart = ({ pageViews = [], mode = '' }) => {
         });
         
         return () => chartInstance.destroy();
-    }, [pageViews]);
+    }, [mode, pageViews]);
     
     return (
         <div className={styling.chart}>
