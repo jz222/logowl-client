@@ -1,8 +1,9 @@
 .content {
     width: 100%;
+    background-color: var(--color-2);
 
     main {
-        animation: appear 2s;
+        animation: appear 0.5s forwards;
     }
 }
 

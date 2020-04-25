@@ -78,12 +78,11 @@ const Authentication = ({ history, location }) => {
             
             utils.expirationHandler(history, res.expirationTime);
             
-            nav.current.classList.add(styling.navExit);
             box.current.classList.add(styling.boxExit);
             
             document.title = 'Loggy Dashboard | ' + res.organization.name;
             
-            setTimeout(() => history.push('/services'), 1500);
+            setTimeout(() => history.push('/services'), 1000);
             
         } catch (error) {
             setState(prevState => ({ ...prevState, loading: false, error: error.message }));

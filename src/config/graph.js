@@ -11,7 +11,7 @@ const getGraphOptions = (hideLegend, hideAxes) => ({
     ...(!hideAxes && {
         scales: {
             xAxes: [{
-                offset: true,
+                // offset: true,
                 gridLines: {
                     display: false,
                     color: '#E5ECF9',
@@ -22,7 +22,7 @@ const getGraphOptions = (hideLegend, hideAxes) => ({
                 }
             }],
             yAxes: [{
-                offset: true,
+                // offset: true,
                 gridLines: {
                     display: false,
                     color: '#E5ECF9',
@@ -50,8 +50,8 @@ const lineOptions = {
     fill: false,
     backgroundColor: '#7bd6fd',
     borderColor: '#7bd6fd',
-    borderWidth: 5,
-    pointRadius: 5
+    borderWidth: 4,
+    pointRadius: 4
 };
 
 const barOptions1 = {

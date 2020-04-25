@@ -35,9 +35,7 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
                     {
                         label: 'Occurrences',
                         data: [0, ...values],
-                        ...config.graph.lineOptions,
-                        backgroundColor: '#FF0055',
-                        borderColor: '#FF0055'
+                        ...config.graph.lineOptions
                     }
                 ],
                 labels: ['', ...labels]

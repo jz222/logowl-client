@@ -1,5 +1,5 @@
 :root {
-    --color-1: #0d143c;
+    --color-1: #272b40;
 
     --color-2: white;
     --color-2-darker: #E5ECF9;
@@ -13,7 +13,9 @@
 
     --color-5-light: #E5FFF8;
     --color-5-lighter: #DAFCC9;
-    --color-5: #1ECCA0;
+    --color-5: #36d9d8;
+
+    --color-6: #7bd6fd;
 
     --max-width: 135rem;
     --border-radius: 7px;

@@ -2,8 +2,8 @@
     width: 100%;
     height: 4rem;
     display: flex;
-    margin-bottom: 2rem;
-    box-shadow: 0 3px 0 0 var(--color-2-darker);
+    margin-bottom: 4rem;
+    box-shadow: 0 2px 0 0 var(--color-2-darker);
 }
 
 .tab {
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     padding: 0 2rem;
-    box-shadow: 0 3px 0 0 var(--color-2-darker);
+    box-shadow: 0 2px 0 0 var(--color-2-darker);
     transition: box-shadow 0.2s, color 0.2s;
     font-weight: 500;
     cursor: pointer;
@@ -21,13 +21,13 @@
     }
 
     &:hover {
-        box-shadow: 0 3px 0 0 var(--color-4);
-        color: var(--color-4);
+        box-shadow: 0 2px 0 0 var(--color-3);
+        color: var(--color-3);
     }
 }
 
 .active {
     @extend .tab;
-    box-shadow: 0 3px 0 0 var(--color-4);
-    color: var(--color-4);
+    box-shadow: 0 2px 0 0 var(--color-3);
+    color: var(--color-3);
 }
