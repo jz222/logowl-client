@@ -20,6 +20,7 @@ const Header = ({ mode, timeframeStart, timeframeEnd, dropdownHandler }) => {
     prevTimeframeStart.current = timeframeStart;
     prevTimeframeEnd.current = timeframeEnd;
     
+    // Available dropdown options
     const timeFrames = [
         { key: 'Today', value: 'today', id: 'today' },
         { key: 'Last 7 Days', value: 'lastSevenDays', id: 'lastSevenDays' },
@@ -27,6 +28,7 @@ const Header = ({ mode, timeframeStart, timeframeEnd, dropdownHandler }) => {
         { key: 'Last Month', value: 'lastMonth', id: 'lastMonth' }
     ];
     
+    // Title and subtitle
     let title;
     let timeframe;
     
@@ -52,6 +54,7 @@ const Header = ({ mode, timeframeStart, timeframeEnd, dropdownHandler }) => {
             timeframe = '';
     }
     
+    // JSX elements
     const content = (
         <div className={styling.header}>
             <div>

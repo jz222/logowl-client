@@ -1,0 +1,12 @@
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.narrowItem {
+    position: relative;
+    width: 30%;
+    height: 30rem;
+    margin-right: 3rem;
+}

@@ -1,4 +1,4 @@
-const getGraphOptions = (hideLegend) => ({
+const getGraphOptions = (hideLegend, hideAxes) => ({
     responsive: true,
     maintainAspectRatio: false,
     legend: {
@@ -8,31 +8,33 @@ const getGraphOptions = (hideLegend) => ({
             fontColor: '#5B6F8C'
         }
     },
-    scales: {
-        xAxes: [{
-            offset: true,
-            gridLines: {
-                display: false,
-                color: '#E5ECF9',
-            },
-            ticks: {
-                fontFamily: 'Montserrat',
-                fontColor: '#5B6F8C'
-            }
-        }],
-        yAxes: [{
-            offset: true,
-            gridLines: {
-                display: false,
-                color: '#E5ECF9',
-            },
-            ticks: {
-                stepSize: 1,
-                fontFamily: 'Montserrat',
-                fontColor: '#5B6F8C'
-            }
-        }]
-    },
+    ...(!hideAxes && {
+        scales: {
+            xAxes: [{
+                offset: true,
+                gridLines: {
+                    display: false,
+                    color: '#E5ECF9',
+                },
+                ticks: {
+                    fontFamily: 'Montserrat',
+                    fontColor: '#5B6F8C'
+                }
+            }],
+            yAxes: [{
+                offset: true,
+                gridLines: {
+                    display: false,
+                    color: '#E5ECF9',
+                },
+                ticks: {
+                    stepSize: 1,
+                    fontFamily: 'Montserrat',
+                    fontColor: '#5B6F8C'
+                }
+            }]
+        }
+    }),
     layout: {
         padding: {
             top: 25,

@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import PageViewsChart from './pageViewsChart/PageViewsChart';
+import BrowserChart from './browserChart/BrowserChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
 import Header from './header/Header';
 
 import fetchClient from 'fetchClient';
 import utils from 'utils';
+
+import styling from './Analytics.module.scss';
 
 const Analytics = ({ serviceId = '' }) => {
     const [state, setState] = useState({
@@ -28,6 +31,7 @@ const Analytics = ({ serviceId = '' }) => {
         pageViews
     } = state;
     
+    
     /**
      * Handles dropdown changes.
      * @param selection {string} the selected dropdown option
@@ -35,6 +39,7 @@ const Analytics = ({ serviceId = '' }) => {
     const dropdownHandler = (selection) => {
         setState(prevState => ({ ...prevState, mode: selection }));
     };
+    
     
     /**
      * Fetches analytic data for the selected mode.
@@ -48,12 +53,11 @@ const Analytics = ({ serviceId = '' }) => {
             const res = await fetchClient('getAnalytics', null, url + queryParam);
             
             if (!res.pageViews || !Array.isArray(res.pageViews)) {
-                console.error('failed to fetch data');
-                return;
+                res.pageViews = [];
             }
             
             res.pageViews = res.pageViews.map(pageView => {
-                pageView.unit = (mode === 'today') ? utils.getTime(pageView.unit, true) : utils.getDate(pageView.unit);
+                pageView.day = (mode === 'today') ? utils.getTime(pageView.day, true) : utils.getDate(pageView.day);
                 
                 return pageView;
             });
@@ -64,12 +68,14 @@ const Analytics = ({ serviceId = '' }) => {
         }
     }, [mode, serviceId]);
     
+    
     /**
      * Fetch analytic data when fetchAnalyticData updates.
      */
     useEffect(() => {
         fetchAnalyticData();
     }, [fetchAnalyticData]);
+    
     
     return (
         <>
@@ -90,6 +96,12 @@ const Analytics = ({ serviceId = '' }) => {
                 pageViews={pageViews}
                 mode={mode}
             />
+            
+            <div className={styling.row}>
+                <div className={styling.narrowItem}>
+                    <BrowserChart pageViews={pageViews} />
+                </div>
+            </div>
         </>
     );
 };

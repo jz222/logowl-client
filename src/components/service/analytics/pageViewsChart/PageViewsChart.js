@@ -5,9 +5,12 @@ import config from 'config';
 
 import styling from './PageViewsChart.module.scss';
 
-const PageViewsChart = ({ pageViews = [], mode = '' }) => {
+const PageViewsChart = ({ pageViews = [] }) => {
     const chart = useRef({});
     
+    /**
+     * Renders a mixed chart for the given page views.
+     */
     useEffect(() => {
         const ctx = chart.current.getContext('2d');
         
@@ -17,7 +20,7 @@ const PageViewsChart = ({ pageViews = [], mode = '' }) => {
         const newVisitors = [];
         
         for (let pageView of pageViews || []) {
-            labels.push(pageView.unit || '');
+            labels.push(pageView.day || '');
             visits.push(pageView.visits || 0);
             sessions.push(pageView.sessions || 0);
             newVisitors.push(pageView.newVisitors || 0);
