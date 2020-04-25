@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import PageViewsChart from './pageViewsChart/PageViewsChart';
+import TotalNumbers from './totalNumbers/TotalNumbers';
 import Dropdown from 'components/UI/dropdown/Dropdown';
 
 import fetchClient from 'fetchClient';
@@ -8,8 +9,11 @@ import fetchClient from 'fetchClient';
 import styling from './Analytics.module.scss';
 
 const Analytics = ({ serviceId = '' }) => {
-    const [{ mode, pageViews }, setState] = useState({
+    const [{ mode, totalVisits, totalNewVisitors, totalSessions, pageViews }, setState] = useState({
         mode: 'today',
+        totalVisits: 0,
+        totalNewVisitors: 0,
+        totalSessions: 0,
         pageViews: []
     });
     
@@ -69,6 +73,8 @@ const Analytics = ({ serviceId = '' }) => {
                     <Dropdown selected={mode} items={timeFrames} changeHandler={dropdownHandler} />
                 </div>
             </div>
+            
+            <TotalNumbers visits={totalVisits} newVisitors={totalNewVisitors} sessions={totalSessions} />
             
             <PageViewsChart pageViews={pageViews} mode={mode} />
         </>

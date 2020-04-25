@@ -1,0 +1,18 @@
+.totalNumbers {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5rem 0;
+}
+
+.card {
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+
+    div {
+        margin-left: 2rem;
+    }
+}
