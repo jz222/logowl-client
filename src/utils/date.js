@@ -16,6 +16,22 @@ export const getDate = (timestamp) => {
     }
 };
 
+export const getDateWithWeekday = (timestamp) => {
+    try {
+        timestamp = convertTimestamp(timestamp);
+        
+        const date = new Date(timestamp);
+        
+        const opts = { timeZone: 'UTC', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        
+        return date.toLocaleDateString(navigator.language, opts);
+        
+    } catch (error) {
+        console.error(error);
+        return '';
+    }
+};
+
 export const getDateWithTime = (timestamp) => {
     try {
         timestamp = convertTimestamp(timestamp);

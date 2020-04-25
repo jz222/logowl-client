@@ -1,0 +1,11 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3rem 0 0 0;
+
+    .dropdown {
+        width: 25rem;
+    }
+}
