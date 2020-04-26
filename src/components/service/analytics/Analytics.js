@@ -56,9 +56,12 @@ const Analytics = ({ serviceId = '' }) => {
                 res.pageViews = [];
             }
             
+            // If mode is today then format the hour timestamp.
+            // For all other modes format the day timestamp.
+            // This is necessary to have human readable labels
+            // on the graph.
             res.pageViews = res.pageViews.map(pageView => {
-                console.log(mode)
-                pageView.day = (mode === 'today') ? utils.getTime(pageView.day, true) : utils.getDate(pageView.day);
+                pageView.day = (mode === 'today') ? utils.getTime(pageView.hour, true) : utils.getDate(pageView.day);
                 return pageView;
             });
             
