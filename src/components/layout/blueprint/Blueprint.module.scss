@@ -3,7 +3,7 @@
     background-color: var(--color-2);
 
     main {
-        animation: appear 0.5s forwards;
+        animation: slideIn 1s forwards;
     }
 }
 
@@ -15,11 +15,13 @@
     align-items: center;
 }
 
-@keyframes appear {
+@keyframes slideIn {
     from {
         opacity: 0;
+        transform: translateY(4rem);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }

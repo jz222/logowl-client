@@ -63,13 +63,11 @@ const BrowserChart = ({ pageViews = [] }) => {
         }
         
         const chartInstance = new Chart(ctx, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 datasets: [{
                     data,
-                    borderColor: '#fff',
-                    backgroundColor: ['#5d77fe', '#7bd6fd', '#07BEB8', '#3dccc7', '#68D8D6', '#9CEAEF', '#c4fff9'],
-                    borderWidth: 0
+                    ...config.graph.getDoughnutOptions()
                 }],
                 labels
             },

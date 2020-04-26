@@ -35,12 +35,12 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
                     {
                         label: 'Occurrences',
                         data: [0, ...values],
-                        ...config.graph.lineOptions
+                        ...config.graph.getLineOptions(ctx, true)
                     }
                 ],
                 labels: ['', ...labels]
             },
-            options: config.graph.getGraphOptions(true)
+            options: config.graph.getGraphOptions(true, false, true)
         });
         
         return () => chartInstance.destroy();

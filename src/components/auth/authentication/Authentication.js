@@ -79,6 +79,7 @@ const Authentication = ({ history, location }) => {
             utils.expirationHandler(history, res.expirationTime);
             
             box.current.classList.add(styling.boxExit);
+            nav.current.classList.add(styling.navExit);
             
             document.title = 'Loggy Dashboard | ' + res.organization.name;
             

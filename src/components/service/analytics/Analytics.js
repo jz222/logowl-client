@@ -57,8 +57,8 @@ const Analytics = ({ serviceId = '' }) => {
             }
             
             res.pageViews = res.pageViews.map(pageView => {
+                console.log(mode)
                 pageView.day = (mode === 'today') ? utils.getTime(pageView.day, true) : utils.getDate(pageView.day);
-                
                 return pageView;
             });
             

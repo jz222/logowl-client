@@ -1,5 +1,5 @@
 :root {
-    --color-1: #272b40;
+    --color-1: #212a45;
 
     --color-2: white;
     --color-2-darker: #E5ECF9;
@@ -15,7 +15,17 @@
     --color-5-lighter: #DAFCC9;
     --color-5: #36d9d8;
 
-    --color-6: #7bd6fd;
+    --color-6: #7C4DFF;
+    --color-6-opacity: rgba(124, 77, 2500, 0.2);
+
+    --color-7: #448AFF;
+    --color-7-opacity: rgba(68, 138, 255,0.2);
+
+    --color-8: #00BCD4;
+    --color-8-opacity: rgba(0, 188, 212, 0.2);
+
+    --color-9: #1DE9B6;
+    --color-9-opacity: rgba(29, 233, 182, 0.2);
 
     --max-width: 135rem;
     --border-radius: 7px;

@@ -33,17 +33,17 @@ const PageViewsChart = ({ pageViews = [] }) => {
                     {
                         label: 'Visits',
                         data: visits,
-                        ...config.graph.lineOptions
+                        ...config.graph.getLineOptions(ctx, false)
                     },
                     {
                         label: 'Sessions',
                         data: sessions,
-                        ...config.graph.barOptions1
+                        ...config.graph.getBarOptions1()
                     },
                     {
                         label: 'New Visitors',
                         data: newVisitors,
-                        ...config.graph.barOptions2
+                        ...config.graph.getBarOptions2()
                     }
                 ],
                 labels

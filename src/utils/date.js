@@ -52,10 +52,12 @@ export const getTime = (timestamp, keepUTC) => {
         
         const date = new Date(timestamp);
         
+        console.log(date)
         if (keepUTC) {
             const opts = { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' };
             return date.toLocaleTimeString(navigator.language, opts);
         }
+        
         
         return date.toLocaleTimeString();
         

@@ -5,7 +5,7 @@
     flex-shrink: 0;
     padding: 0 2rem;
     background-color: var(--color-1);
-    animation: fadeIn 0.5s forwards;
+    animation: slideIn 0.7s forwards;
     z-index: 10;
 }
 
@@ -52,11 +52,13 @@
     color: var(--color-2);
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
     from {
         opacity: 0;
+        transform: translateY(4rem);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }

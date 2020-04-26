@@ -13,7 +13,7 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
-        animation: fadeIn 1.2s forwards;
+        animation: slideIn 0.7s forwards;
     }
 
     span {
@@ -21,6 +21,10 @@
         font-weight: 600;
         color: var(--color-3);
     }
+}
+
+.navExit {
+    animation: slideOut 0.5s forwards;
 }
 
 .box {
@@ -109,15 +113,6 @@
     text-align: center;
     font-size: 1.2rem;
     color: var(--color-4);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 @keyframes slideIn {
