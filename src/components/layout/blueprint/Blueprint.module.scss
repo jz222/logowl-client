@@ -1,6 +1,10 @@
 .content {
     width: 100%;
+    height: 100vh;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
     background-color: var(--color-2);
+    overflow: auto;
 
     main {
         animation: slideIn 1s forwards;

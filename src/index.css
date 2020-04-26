@@ -155,6 +155,10 @@ li {
     stroke: var(--color-2-darker) !important;
 }
 
+#root {
+    background-color: var(--color-1);
+}
+
 @media screen and (min-width: 350px) {
     html {
         font-size: 55%;
