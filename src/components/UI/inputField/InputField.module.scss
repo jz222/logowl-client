@@ -14,7 +14,7 @@
     }
 
     &:focus {
-        box-shadow: 0 0 0 1px var(--color-3-lighter), 0 0 0 5px var(--color-2-darker);
+        box-shadow: 0 0 0 1px var(--color-3-light), 0 0 0 5px var(--color-2-darker);
     }
 
     &:disabled {
