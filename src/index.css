@@ -62,7 +62,8 @@ main {
     max-width: var(--max-width);
     display: block;
     margin: 0 auto;
-    padding: 2.5rem 4rem 4rem 4rem;
+    padding: 2.5rem 2rem 2.5rem 2rem;
+    background-color: var(--color-2);
     overflow: hidden;
 }
 
@@ -127,6 +128,10 @@ strong {
     font-weight: bolder;
 }
 
+nav {
+    padding: 0 2rem;
+}
+
 img {
     border-style: none;
 }
@@ -155,10 +160,6 @@ li {
     stroke: var(--color-2-darker) !important;
 }
 
-#root {
-    background-color: var(--color-1);
-}
-
 @media screen and (min-width: 350px) {
     html {
         font-size: 55%;
@@ -168,5 +169,11 @@ li {
 @media screen and (min-width: 992px) {
     html {
         font-size: 62.5%;
+    }
+    main {
+        padding: 2.5rem 4rem 4rem 4rem;
+    }
+    nav {
+        padding: 0 4rem;
     }
 }
