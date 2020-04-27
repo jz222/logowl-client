@@ -5,12 +5,15 @@ import DoughnutChart from './doughnutChart/DoughnutChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
 import Header from './header/Header';
 
+import { useStore } from 'context';
 import fetchClient from 'fetchClient';
 import utils from 'utils';
 
 import styling from './Analytics.module.scss';
 
 const Analytics = ({ serviceId = '' }) => {
+    const [, , setError] = useStore();
+    
     const [state, setState] = useState({
         mode: 'today',
         timeframeStart: Date.now(),
@@ -68,8 +71,9 @@ const Analytics = ({ serviceId = '' }) => {
             setState(prevState => ({ ...prevState, ...(res || {}) }));
         } catch (error) {
             console.error(error);
+            setError(error);
         }
-    }, [mode, serviceId]);
+    }, [mode, serviceId, setError]);
     
     
     /**
