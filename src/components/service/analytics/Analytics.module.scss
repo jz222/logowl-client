@@ -1,12 +1,10 @@
 .row {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-gap: 3rem;
 }
 
-.narrowItem {
-    position: relative;
-    width: 30%;
+.item {
     height: 30rem;
-    margin-right: 3rem;
 }

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import PageViewsChart from './pageViewsChart/PageViewsChart';
-import BrowserChart from './browserChart/BrowserChart';
+import DoughnutChart from './doughnutChart/DoughnutChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
 import Header from './header/Header';
 
@@ -101,8 +101,12 @@ const Analytics = ({ serviceId = '' }) => {
             />
             
             <div className={styling.row}>
-                <div className={styling.narrowItem}>
-                    <BrowserChart pageViews={pageViews} />
+                <div className={styling.item}>
+                    <DoughnutChart pageViews={pageViews} title='Browsers' type='browsers' />
+                </div>
+                
+                <div className={styling.item}>
+                    <DoughnutChart pageViews={pageViews} title='Referrer' type='referrer' />
                 </div>
             </div>
         </>
