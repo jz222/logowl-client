@@ -51,6 +51,11 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
         }
         
         if (opera) {
+            data.push(opera);
+            labels.push('Opera');
+        }
+        
+        if (edge) {
             data.push(edge);
             labels.push('Edge');
         }
