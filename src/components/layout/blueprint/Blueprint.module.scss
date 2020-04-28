@@ -1,8 +1,13 @@
 .content {
     width: 100%;
+    height: 100vh;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    background-color: var(--color-2);
+    overflow: auto;
 
     main {
-        animation: appear 2s;
+        animation: slideIn 1s forwards;
     }
 }
 
@@ -14,11 +19,13 @@
     align-items: center;
 }
 
-@keyframes appear {
+@keyframes slideIn {
     from {
         opacity: 0;
+        transform: translateY(4rem);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }

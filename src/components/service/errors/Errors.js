@@ -172,7 +172,7 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     // List of errors
     const errorList = (
-        <ul>
+        <ul className={styling.wrapper}>
             {errors.map(error => (
                 
                 <Event key={error.fingerprint}>

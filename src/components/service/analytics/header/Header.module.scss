@@ -1,0 +1,13 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+
+    .dropdown {
+        width: 25rem;
+    }
+}

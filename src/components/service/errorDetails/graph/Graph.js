@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Chart } from 'frappe-charts/dist/frappe-charts.esm';
+import Chart from 'chart.js';
 
 import Badge from '../badge/Badge';
 
+import config from 'config';
 import utils from 'utils';
 
 import styling from './Graph.module.scss';
@@ -25,17 +26,21 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
         const labels = evolution.map(day => day.day);
         const values = evolution.map(day => day.count);
         
-        const chartInstance = new Chart(chart.current, {
-            data: {
-                labels: [labels[0], ...labels],
-                datasets: [{ values: [0, ...values] }]
-            },
+        const ctx = chart.current.getContext('2d');
+        
+        const chartInstance = new Chart(ctx, {
             type: 'line',
-            height: 300,
-            lineOptions: {
-                dotSize: 8
+            data: {
+                datasets: [
+                    {
+                        label: 'Occurrences',
+                        data: [0, ...values],
+                        ...config.graph.getLineOptions(ctx, true)
+                    }
+                ],
+                labels: ['', ...labels]
             },
-            colors: ['#ff0353']
+            options: config.graph.getGraphOptions(true, false, true)
         });
         
         return () => chartInstance.destroy();
@@ -50,7 +55,9 @@ const Graph = ({ data = {}, firstSeen, lastSeen }) => {
             <Badge name='last seen' value={utils.getDateWithTime(lastSeen)} />
             <Badge name='peak' value={largest} />
             
-            <div className={styling.chart} ref={chart} />
+            <div className={styling.chart}>
+                <canvas ref={chart} />
+            </div>
         </section>
     );
 };

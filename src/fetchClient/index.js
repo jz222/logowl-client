@@ -1,13 +1,21 @@
+import cache from './cache/cache';
+import actions from './actions/';
 import config from 'config';
 import utils from 'utils';
 
-import actions from './actions/';
+const isCached = ['getAnalytics'];
 
 const request = async (type, payload = {}, url) => {
     const action = actions[type];
     
     if (!action) {
         throw new Error('The provided action ' + type + ' does not exist.');
+    }
+    
+    const cacheKey = type + url;
+    
+    if (isCached.includes(type) && cache.isCached(cacheKey)) {
+        return JSON.parse(JSON.stringify(cache.get(cacheKey)));
     }
     
     const jwt = localStorage.getItem('access-pass');
@@ -41,7 +49,13 @@ const request = async (type, payload = {}, url) => {
         throw error;
     }
     
-    return await res.json();
+    const jsonData = await res.json();
+    
+    if (isCached.includes(type)) {
+        cache.set(cacheKey, JSON.parse(JSON.stringify(jsonData)));
+    }
+    
+    return jsonData;
 };
 
 export default request;
