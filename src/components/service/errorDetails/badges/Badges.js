@@ -5,10 +5,10 @@ import Badge from '../badge/Badge';
 import styling from './Badges.module.scss';
 
 const Badges = ({ badges = {}, clientIp = '', host = '', metrics = {} }) => (
-    <section className={styling.badges} hidden={!Object.keys(badges).length && !clientIp}>
+    <section className={styling.badges} hidden={!Object.keys(badges).length && !Object.keys(metrics)}>
         <h4>Badges</h4>
         
-        <Badge name='IP address' value={clientIp} />
+        <Badge name='IP address' value={clientIp} hidden={!clientIp} />
         
         <Badge name='host' value={host} hidden={!host} />
         
