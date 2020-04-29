@@ -10,17 +10,17 @@
 
 .one {
     @extend .avatar;
-    background-color: var(--color-5);
+    background-color: var(--color-3);
 }
 
 .two {
     @extend .avatar;
-    background-color: var(--color-3);
+    background-color: var(--color-9);
 }
 
 .three {
     @extend .avatar;
-    background-color: var(--color-4);
+    background-color: var(--color-5);
 }
 
 .small {

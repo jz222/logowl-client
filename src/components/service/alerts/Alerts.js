@@ -13,8 +13,9 @@ import styling from './Alerts.module.scss';
 const Alerts = ({ serviceId = '', slackWebhookURL = '' }) => {
     const [store, dispatch, setError] = useStore();
     
-    const [{ webhookURL, loading }, setState] = useState({
+    const [{ webhookURL, prevWebhookURL, loading }, setState] = useState({
         webhookURL: '',
+        prevWebhookURL: '',
         loading: false
     });
     
@@ -35,7 +36,7 @@ const Alerts = ({ serviceId = '', slackWebhookURL = '' }) => {
             tmpServices[index].slackWebhookURL = webhookURL;
             
             dispatch({ action: 'update', payload: { services: tmpServices } });
-            setState(prevState => ({ ...prevState, loading: false }));
+            setState(prevState => ({ ...prevState, loading: false, prevWebhookURL: webhookURL }));
         } catch (error) {
             console.error(error);
             setState(prevState => ({ ...prevState, loading: false }));
@@ -44,11 +45,11 @@ const Alerts = ({ serviceId = '', slackWebhookURL = '' }) => {
     };
     
     useEffect(() => {
-        setState(prevState => ({ ...prevState, webhookURL: slackWebhookURL }));
+        setState(prevState => ({ ...prevState, prevWebhookURL: slackWebhookURL, webhookURL: slackWebhookURL }));
     }, [slackWebhookURL]);
     
     // Determines if the webhook URL is valid
-    const webhookURLIsValid = webhookURL.length > 70 || webhookURL.includes('https://hooks.slack.com/services/');
+    const webhookURLIsValid = webhookURL === '' || webhookURL.length > 70 || webhookURL.includes('https://hooks.slack.com/services/');
     
     return (
         <Card>
@@ -72,7 +73,7 @@ const Alerts = ({ serviceId = '', slackWebhookURL = '' }) => {
             />
             
             <div className={styling.controls}>
-                <Button onClick={updateService} disabled={!webhookURLIsValid || loading}>Save</Button>
+                <Button onClick={updateService} disabled={!webhookURLIsValid || webhookURL === prevWebhookURL || loading}>Save</Button>
             </div>
         </Card>
     );

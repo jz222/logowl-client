@@ -6,12 +6,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 4rem;
     border-bottom: 1px solid var(--color-2-darker);
     background-color: var(--color-2);
     box-shadow: var(--shadow);
-    transform: translateY(-100%);
-    animation: appear 0.4s forwards;
+    animation: slideIn 0.7s forwards;
     z-index: 9;
 
     > div:first-child {
@@ -42,8 +40,13 @@
     font-size: 1.2rem;
 }
 
-@keyframes appear {
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4rem);
+    }
     to {
+        opacity: 1;
         transform: translateY(0);
     }
 }

@@ -1,11 +1,11 @@
 :root {
-    --color-1: #0d143c;
+    --color-1: #212a45;
 
     --color-2: white;
     --color-2-darker: #E5ECF9;
     --color-2-dark: #5B6F8C;
 
-    --color-3-lighter: #DBE8FF;
+    --color-3-light: #DBE8FF;
     --color-3: #0368ff;
 
     --color-4-light: #FFE5EE;
@@ -13,7 +13,19 @@
 
     --color-5-light: #E5FFF8;
     --color-5-lighter: #DAFCC9;
-    --color-5: #1ECCA0;
+    --color-5: #36d9d8;
+
+    --color-6: #7C4DFF;
+    --color-6-opacity: rgba(124, 77, 2500, 0.2);
+
+    --color-7: #448AFF;
+    --color-7-opacity: rgba(68, 138, 255,0.2);
+
+    --color-8: #00BCD4;
+    --color-8-opacity: rgba(0, 188, 212, 0.2);
+
+    --color-9: #1DE9B6;
+    --color-9-opacity: rgba(29, 233, 182, 0.2);
 
     --max-width: 135rem;
     --border-radius: 7px;
@@ -50,7 +62,8 @@ main {
     max-width: var(--max-width);
     display: block;
     margin: 0 auto;
-    padding: 2.5rem 4rem 4rem 4rem;
+    padding: 2.5rem 2rem 2.5rem 2rem;
+    background-color: var(--color-2);
     overflow: hidden;
 }
 
@@ -115,6 +128,10 @@ strong {
     font-weight: bolder;
 }
 
+nav {
+    padding: 0 2rem;
+}
+
 img {
     border-style: none;
 }
@@ -133,7 +150,8 @@ li {
     list-style-type: none;
 }
 
-.axis {
+.axis,
+.legend-dataset-text {
     fill: var(--color-2-dark) !important;
 }
 
@@ -151,5 +169,11 @@ li {
 @media screen and (min-width: 992px) {
     html {
         font-size: 62.5%;
+    }
+    main {
+        padding: 2.5rem 4rem 4rem 4rem;
+    }
+    nav {
+        padding: 0 4rem;
     }
 }

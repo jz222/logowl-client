@@ -1,0 +1,10 @@
+.row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-gap: 3rem;
+}
+
+.item {
+    height: 30rem;
+}
