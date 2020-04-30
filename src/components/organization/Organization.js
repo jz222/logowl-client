@@ -4,6 +4,7 @@ import Stepper from 'components/UI/stepper/Stepper';
 import { Menu, Tab } from 'components/UI/menu/Menu';
 import Delete from './delete/Delete';
 import Invite from './invite/Invite';
+import Quota from './quota/Quota';
 import Info from './info/Info';
 import Team from './team/Team';
 
@@ -16,6 +17,7 @@ const Organization = ({ history }) => {
     
     const [activeTab, setActiveTab] = useState('info');
     
+    const organization = store.organization || {};
     const isAdmin = store.role === 'admin';
     
     return (
@@ -31,13 +33,15 @@ const Organization = ({ history }) => {
                 <Tab active={activeTab === 'info'} click={() => setActiveTab('info')}>Info</Tab>
                 <Tab active={activeTab === 'team'} click={() => setActiveTab('team')}>Team</Tab>
                 <Tab active={activeTab === 'invite'} click={() => setActiveTab('invite')} hidden={!isAdmin}>Invite</Tab>
+                <Tab active={activeTab === 'quota'} click={() => setActiveTab('quota')}>Quota</Tab>
                 <Tab active={activeTab === 'delete'} click={() => setActiveTab('delete')} hidden={!isAdmin}>Delete</Tab>
             </Menu>
             
-            {activeTab === 'info' && <Info organization={store.organization} />}
+            {activeTab === 'info' && <Info organization={organization} />}
             {activeTab === 'team' && <Team team={store.team} userId={store.id} />}
             {activeTab === 'invite' && <Invite tabHandler={setActiveTab} />}
-            {activeTab === 'delete' && <Delete name={store.organization.name} history={history} />}
+            {activeTab === 'quota' && <Quota receivedRequests={organization.receivedRequests} requestLimit={organization.monthlyRequestLimit} />}
+            {activeTab === 'delete' && <Delete name={organization.name} history={history} />}
         </>
     );
 };

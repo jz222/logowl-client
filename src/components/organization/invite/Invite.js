@@ -66,7 +66,10 @@ const Invite = ({ tabHandler }) => {
     };
     
     
-    const availableRoles = [{ key: 'User', value: 'user', id: 'user' }, { key: 'admin', value: 'admin', id: 'admin' }];
+    const availableRoles = [
+        { key: 'User', value: 'user', id: 'user' },
+        { key: 'Admin', value: 'admin', id: 'admin' }
+    ];
     
     const inputIsValid = firstName && lastName && role && config.regex.email.test(email);
     
