@@ -9,7 +9,7 @@ const getGraphOptions = (hideLegend, hideAxes, adjustedPadding) => ({
         display: !hideLegend,
         labels: {
             usePointStyle: true,
-            fontFamily: 'Montserrat',
+            fontFamily: 'metropolis',
             fontColor: root.getPropertyValue('--color-2-dark')
         }
     },
@@ -21,7 +21,7 @@ const getGraphOptions = (hideLegend, hideAxes, adjustedPadding) => ({
                     color: root.getPropertyValue('--color-2-darker'),
                 },
                 ticks: {
-                    fontFamily: 'Montserrat',
+                    fontFamily: 'metropolis',
                     fontColor: root.getPropertyValue('--color-2-dark')
                 }
             }],
@@ -34,7 +34,7 @@ const getGraphOptions = (hideLegend, hideAxes, adjustedPadding) => ({
                 ticks: {
                     stepSize: 1,
                     maxTicksLimit: 7,
-                    fontFamily: 'Montserrat',
+                    fontFamily: 'metropolis',
                     fontColor: root.getPropertyValue('--color-2-dark')
                 }
             }]
