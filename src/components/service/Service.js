@@ -13,7 +13,7 @@ import { useStore } from 'context';
 const Service = ({ history, match }) => {
     const [store] = useStore();
     
-    const [activeTab, setActiveTab] = useState('errors');
+    const [activeTab, setActiveTab] = useState('analytics');
     
     const service = store.services.find(x => x.id === match.params.serviceId) || {};
     

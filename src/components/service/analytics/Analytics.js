@@ -112,6 +112,10 @@ const Analytics = ({ serviceId = '' }) => {
                 <div className={styling.item}>
                     <DoughnutChart pageViews={pageViews} title='Referrer' type='referrer' />
                 </div>
+                
+                <div className={styling.item}>
+                    <DoughnutChart pageViews={pageViews} title='Devices' type='devices' />
+                </div>
             </div>
         </>
     );
