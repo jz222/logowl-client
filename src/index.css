@@ -1,3 +1,57 @@
+@font-face {
+    font-family: 'metropolis';
+    src: url('./assets/fonts/metropolis-regular-webfont.woff2') format('woff2'),
+    url('./assets/fonts/metropolis-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('./assets/fonts/metropolis-medium-webfont.woff2') format('woff2'),
+    url('./assets/fonts/metropolis-medium-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('assets/fonts/metropolis-semibold-webfont.woff2') format('woff2'),
+    url('assets/fonts/metropolis-semibold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('assets/fonts/metropolis-bold-webfont.woff2') format('woff2'),
+    url('assets/fonts/metropolis-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('assets/fonts/metropolis-extrabold-webfont.woff2') format('woff2'),
+    url('assets/fonts/metropolis-extrabold-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('assets/fonts/metropolis-black-webfont.woff2') format('woff2'),
+    url('assets/fonts/metropolis-black-webfont.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --color-1: #212a45;
 
@@ -50,7 +104,7 @@ body {
 
 *, *:before, *:after {
     box-sizing: inherit;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'metropolis', sans-serif;
 }
 
 [hidden] {

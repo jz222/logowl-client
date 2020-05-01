@@ -10,7 +10,7 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
     
     /**
      * Aggregates browser data for the given metrics.
-     * @param pageViews {array} contains analytic data.
+     * @param pageViews {array} contains analytic data
      * @returns {{data: [], labels: []}}
      */
     const aggregateBrowserData = (pageViews) => {
@@ -76,7 +76,7 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
     
     /**
      * Aggregates referrer data for the given metrics.
-     * @param pageViews {array} contains analytic data.
+     * @param pageViews {array} contains analytic data
      * @returns {{data: [], labels: []}}
      */
     const aggregateReferrerData = (pageViews) => {
@@ -105,6 +105,44 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
     
     
     /**
+     * Aggregates device data for the given metrics.
+     * @param pageViews {array} contains analytic data
+     * @returns {{data: [], labels: []}}
+     */
+    const aggregateDeviceData = (pageViews) => {
+        const data = [];
+        const labels = [];
+        
+        let mobile = 0;
+        let tablet = 0;
+        let desktop = 0;
+        
+        for (let pageView of pageViews) {
+            mobile += pageView.mobile || 0;
+            tablet += pageView.tablet || 0;
+            desktop += pageView.desktop || 0;
+        }
+        
+        if (mobile) {
+            data.push(mobile);
+            labels.push('mobile');
+        }
+        
+        if (tablet) {
+            data.push(tablet);
+            labels.push('tablet');
+        }
+        
+        if (desktop) {
+            data.push(desktop);
+            labels.push('desktop');
+        }
+        
+        return { data, labels };
+    };
+    
+    
+    /**
      * Renders the graph for the given analytic data.
      */
     useEffect(() => {
@@ -122,6 +160,13 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
         
         if (type === 'referrer') {
             const aggregatedData = aggregateReferrerData(pageViews);
+            
+            labels = aggregatedData.labels;
+            data = aggregatedData.data;
+        }
+        
+        if (type === 'devices') {
+            const aggregatedData = aggregateDeviceData(pageViews);
             
             labels = aggregatedData.labels;
             data = aggregatedData.data;

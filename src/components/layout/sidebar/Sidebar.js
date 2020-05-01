@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { FiCompass, FiHome, FiLogOut, FiSettings } from 'react-icons/fi';
+import { AiOutlineHome, AiOutlineLogout, AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
 
 import styling from './Sidebar.module.scss';
 
@@ -28,19 +28,19 @@ const Sidebar = ({ history }) => {
                 
                 <ul className={styling.menu}>
                     <li className={getStyling('services')} onClick={() => history.push('/services')}>
-                        <FiCompass />
+                        <AiOutlineUnorderedList />
                     </li>
                     
                     <li className={getStyling('organization')} onClick={() => history.push('/organization')}>
-                        <FiHome />
+                        <AiOutlineHome />
                     </li>
                     
                     <li className={getStyling('settings')} onClick={() => history.push('/settings')}>
-                        <FiSettings />
+                        <AiOutlineSetting />
                     </li>
                     
                     <li onClick={signOut}>
-                        <FiLogOut />
+                        <AiOutlineLogout />
                     </li>
                 </ul>
             </div>

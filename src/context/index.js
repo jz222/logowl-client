@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useCallback } from 'react';
+import React, { createContext, useCallback, useContext, useReducer } from 'react';
 
 const Context = createContext({});
 
@@ -13,6 +13,8 @@ const initialState = {
         id: '',
         name: '',
         identifier: '',
+        receivedRequests: {},
+        monthlyRequestLimit: 0,
         createdAt: '',
         updatedAt: ''
     },
@@ -39,7 +41,7 @@ export const StoreProvider = ({ children }) => {
     
     const setError = useCallback((error) => {
         dispatch({ type: 'update', payload: { error: error.message } });
-    
+        
         setTimeout(() => {
             dispatch({ type: 'update', payload: { error: '' } });
         }, 10000);
