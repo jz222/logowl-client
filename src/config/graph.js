@@ -61,7 +61,7 @@ const getLineOptions = (ctx, fill) => {
     gradientFill.addColorStop(0, root.getPropertyValue('--color-6-opacity'));
     gradientFill.addColorStop(0.3, root.getPropertyValue('--color-7-opacity'));
     gradientFill.addColorStop(0.6, root.getPropertyValue('--color-8-opacity'));
-    gradientFill.addColorStop(0, root.getPropertyValue('--color-9-opacity'));
+    gradientFill.addColorStop(1, root.getPropertyValue('--color-9-opacity'));
     
     return {
         type: 'line',

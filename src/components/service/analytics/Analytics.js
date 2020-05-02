@@ -4,6 +4,7 @@ import PageViewsChart from './pageViewsChart/PageViewsChart';
 import DoughnutChart from './doughnutChart/DoughnutChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
 import VisitedPages from './visitedPages/VisitedPages';
+import SessionTime from './sessionTime/SessionTime';
 import Header from './header/Header';
 
 import { useStore } from 'context';
@@ -120,6 +121,8 @@ const Analytics = ({ serviceId = '' }) => {
             </div>
             
             <VisitedPages pageViews={pageViews} />
+            
+            <SessionTime pageViews={pageViews} />
         </>
     );
 };
