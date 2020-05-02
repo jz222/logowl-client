@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PageViewsChart from './pageViewsChart/PageViewsChart';
 import DoughnutChart from './doughnutChart/DoughnutChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
+import VisitedPages from './visitedPages/VisitedPages';
 import Header from './header/Header';
 
 import { useStore } from 'context';
@@ -117,6 +118,8 @@ const Analytics = ({ serviceId = '' }) => {
                     <DoughnutChart pageViews={pageViews} title='Devices' type='devices' />
                 </div>
             </div>
+            
+            <VisitedPages pageViews={pageViews} />
         </>
     );
 };
