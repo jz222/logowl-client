@@ -3,11 +3,12 @@
     top: 0;
     left: 7.5rem;
     right: 0;
-    width: calc(100% - 9rem);
+    width: calc(100% - 7.5rem);
     height: 100vh;
     padding: 2rem;
-    transition: background-color 0.4s;
-    animation: fadein 2s forwards;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.5s;
+    animation: fadein 0.5s forwards;
     overflow: scroll;
     z-index: 99;
 }
@@ -20,7 +21,7 @@
     border-radius: var(--border-radius);
     border: 1px solid var(--color-2-darker);
     background-color: var(--color-2);
-    animation: enter 1s;
+    animation: enter 0.5s;
 }
 
 .small {
@@ -29,7 +30,7 @@
 }
 
 .disappear {
-    animation: exit 1s forwards;
+    animation: exit 0.5s forwards;
 }
 
 .fadeout {
@@ -45,27 +46,29 @@
 }
 
 @keyframes enter {
-    from {
-        transform: translateY(60rem) rotateX(30deg) scale(0);
-        transform-origin: 50% 100%;
+    0% {
+        transform: translateY(2rem);
         opacity: 0;
     }
-    to {
-        transform: translateY(0) rotateX(0) scale(1);
-        transform-origin: 50% -140rem;
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
         opacity: 1;
     }
 }
 
 @keyframes exit {
-    from {
-        transform: translateY(0) rotateX(0) scale(1);
-        transform-origin: 50% -140rem;
+    0% {
+        transform: translateY(0);
         opacity: 1;
     }
-    to {
-        transform: translateY(60rem) rotateX(30deg) scale(0);
-        transform-origin: 50% 100%;
+    20% {
         opacity: 1;
+    }
+    100% {
+        transform: translateY(2rem);
+        opacity: 0;
     }
 }
