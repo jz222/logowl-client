@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { FiHelpCircle, FiPlusCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import Spinner from 'components/UI/spinner/Spinner';
 import InputField from 'components/UI/inputField/InputField';
@@ -111,14 +111,6 @@ const Authentication = ({ history, location }) => {
     
     
     /**
-     * Starts the setup process.
-     */
-    const navigateToSetup = () => {
-        history.push('/auth/setup');
-    };
-    
-    
-    /**
      * Validates the provided data for signing in.
      * @returns {boolean} if the provided data is valid
      */
@@ -166,8 +158,13 @@ const Authentication = ({ history, location }) => {
     return (
         <>
             <nav className={styling.nav} ref={nav}>
-                <div>
+                <div className={styling.content}>
                     <span>LOGGY</span>
+                    
+                    <ul>
+                        <li onClick={toggleMode}>{mode === 'signIn' ? 'Sign Up' : 'Sign In'}</li>
+                        <li><Link to='/auth/setup'>New Organization</Link></li>
+                    </ul>
                 </div>
             </nav>
             
@@ -255,16 +252,6 @@ const Authentication = ({ history, location }) => {
                         <span className={styling.passwordNotice} hidden={!showPasswordNotice()}>
                             12-20 lower case, upper case and special characters and numbers
                         </span>
-                        
-                        <div key='switchMode' className={styling.label} onClick={toggleMode}>
-                            <FiHelpCircle />
-                            <span>{mode === 'signUp' ? 'Sign in with an existing account' : 'Sign up a new account'}</span>
-                        </div>
-                        
-                        <div key='createOrganization' className={styling.label} onClick={navigateToSetup}>
-                            <FiPlusCircle />
-                            <span>Create an organization</span>
-                        </div>
                     </motion.form>
                 </div>
             </main>

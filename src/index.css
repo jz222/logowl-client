@@ -175,6 +175,12 @@ hr {
 a {
     background-color: transparent;
     text-decoration: none;
+    color: var(--color-1);
+}
+
+a:active,
+a:focus {
+    color: var(--color-1);
 }
 
 b,
