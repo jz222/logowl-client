@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Spinner from 'components/UI/spinner/Spinner';
 import InputField from 'components/UI/inputField/InputField';
+import Menu from 'components/layout/menu/Menu';
 
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
@@ -157,16 +158,12 @@ const Authentication = ({ history, location }) => {
     
     return (
         <>
-            <nav className={styling.nav} ref={nav}>
-                <div className={styling.content}>
-                    <span>LOGGY</span>
-                    
-                    <ul>
-                        <li onClick={toggleMode}>{mode === 'signIn' ? 'Sign Up' : 'Sign In'}</li>
-                        <li><Link to='/auth/setup'>New Organization</Link></li>
-                    </ul>
-                </div>
-            </nav>
+            <Menu reference={nav}>
+                <ul>
+                    <li onClick={toggleMode}>{mode === 'signIn' ? 'Sign Up' : 'Sign In'}</li>
+                    <li><Link to='/auth/setup'>New Organization</Link></li>
+                </ul>
+            </Menu>
             
             <main>
                 <div className={styling.box} ref={box}>

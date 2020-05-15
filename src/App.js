@@ -10,10 +10,12 @@ import Settings from './components/settings/Settings';
 import Toast from './components/layout/toast/Toast';
 import Service from './components/service/Service';
 import Setup from './components/auth/setup/Setup';
+import Auth from './components/auth/Auth';
 
 const App = () => (
     <>
         <Switch>
+            <Route path='/auth' component={Auth} exact />
             <Route path='/auth/signin' component={Authentication} />
             <Route path='/auth/signup' component={Authentication} />
             <Route path='/auth/setup' component={Setup} />
