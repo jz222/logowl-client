@@ -92,7 +92,7 @@ const Team = ({ team = [], userId }) => {
                                 <Action
                                     icon={<FiTrash2 />}
                                     onClick={() => setUserToDelete(user.id)}
-                                    hidden={user.id === userId || store.role !== 'admin'}
+                                    hidden={user.id === userId || store.role !== 'admin' || user.isOrganizationOwner}
                                 >
                                     Delete
                                 </Action>
