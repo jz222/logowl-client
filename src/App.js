@@ -20,7 +20,8 @@ const App = () => (
             <Route path='/auth/signin' component={Authentication} />
             <Route path='/auth/signup' component={Authentication} />
             <Route path='/auth/setup' component={Setup} />
-            <Route path='/auth/passwordreset' component={PasswordReset} />
+            <Route path='/auth/resetpassword' component={PasswordReset} />
+            <Route path='/auth/newpassword' component={PasswordReset} />
             
             <Blueprint>
                 <Route exact path='/services' component={Services} />
