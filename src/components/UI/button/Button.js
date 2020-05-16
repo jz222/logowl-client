@@ -6,6 +6,10 @@ const Button = (props) => (
     <button className={(styling[props.size] || styling.button) + ' ' + (styling[props.color] || '')} {...props} />
 );
 
+export const WideButton = (props) => (
+    <button className={styling.wideButton} {...props} />
+);
+
 export const Action = (props) => (
     <button className={styling.action} {...props}>{props.icon} <span>{props.children}</span></button>
 );

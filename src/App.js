@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Authentication from './components/auth/authentication/Authentication';
 import ErrorDetails from './components/service/errorDetails/ErrorDetails';
+import PasswordReset from './components/auth/passwordReset/PasswordReset';
 import Organization from './components/organization/Organization';
 import Blueprint from './components/layout/blueprint/Blueprint';
 import Services from './components/services/Services';
@@ -19,6 +20,7 @@ const App = () => (
             <Route path='/auth/signin' component={Authentication} />
             <Route path='/auth/signup' component={Authentication} />
             <Route path='/auth/setup' component={Setup} />
+            <Route path='/auth/passwordreset' component={PasswordReset} />
             
             <Blueprint>
                 <Route exact path='/services' component={Services} />

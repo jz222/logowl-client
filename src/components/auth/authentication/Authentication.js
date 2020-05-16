@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-import Spinner from 'components/UI/spinner/Spinner';
 import InputField from 'components/UI/inputField/InputField';
+import { WideButton } from 'components/UI/button/Button';
+import Spinner from 'components/UI/spinner/Spinner';
 import Menu from 'components/layout/menu/Menu';
 
 import fetchClient from 'fetchClient';
@@ -226,7 +227,7 @@ const Authentication = ({ history, location }) => {
                             hidden={mode !== 'signUp' || (mode === 'signUp' && (!password || password !== passwordRepeat))}
                         />
                         
-                        <button
+                        <WideButton
                             key='signInSubmit'
                             type='submit'
                             disabled={loading}
@@ -234,9 +235,9 @@ const Authentication = ({ history, location }) => {
                         >
                             <Spinner hidden={!loading} />
                             <span>{loading ? 'Please wait' : 'Sign In'}</span>
-                        </button>
+                        </WideButton>
                         
-                        <button
+                        <WideButton
                             key='signUpSubmit'
                             type='submit'
                             disabled={loading}
@@ -244,11 +245,15 @@ const Authentication = ({ history, location }) => {
                         >
                             <Spinner hidden={!loading} />
                             <span>{loading ? 'Please wait' : 'Sign Up'}</span>
-                        </button>
+                        </WideButton>
                         
                         <span className={styling.passwordNotice} hidden={!showPasswordNotice()}>
                             12-20 lower case, upper case and special characters and numbers
                         </span>
+                        
+                        <div className={styling.resetPassword}>
+                            <Link to='/auth/passwordreset'>Forgot your password?</Link>
+                        </div>
                     </motion.form>
                 </div>
             </main>

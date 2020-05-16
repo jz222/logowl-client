@@ -7,7 +7,7 @@
 .box {
     width: 100%;
     max-width: 40rem;
-    margin: 10rem auto 0 auto;
+    margin: 15rem auto 0 auto;
     animation: slideIn 1s forwards;
 
     input {
@@ -15,23 +15,6 @@
 
         &:first-of-type {
             margin: 2rem 0;
-        }
-    }
-
-    button {
-        width: 100%;
-        height: 5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 1rem;
-        border-radius: var(--border-radius);
-        background-color: var(--color-3);
-        font-size: 2rem;
-        color: var(--color-2);
-
-        span {
-            margin-left: 1rem;
         }
     }
 }
@@ -68,4 +51,9 @@
     text-align: center;
     font-size: 1.2rem;
     color: var(--color-4);
+}
+
+.resetPassword {
+    width: 100%;
+    text-align: center;
 }
