@@ -6,12 +6,14 @@ import { WideButton } from 'components/UI/button/Button';
 import Menu from 'components/layout/menu/Menu';
 
 import fetchClient from 'fetchClient';
+import config from 'config';
 
 import styling from './PasswordReset.module.scss';
 
 const PasswordReset = ({ history }) => {
-    const [{ mode, email, password, passwordRepeat, newPasswordSet, requestLinkSent }, setState] = useState({
+    const [{ mode, token, email, password, passwordRepeat, newPasswordSet, requestLinkSent }, setState] = useState({
         mode: history.location.pathname.includes('resetpassword') ? 'resetPassword' : 'setNewPassword',
+        token: new URLSearchParams(history.location.search).get('token') || '',
         email: '',
         password: '',
         passwordRepeat: '',
@@ -46,6 +48,16 @@ const PasswordReset = ({ history }) => {
     };
     
     
+    const setNewPassword = async (e) => {
+        try {
+            e.preventDefault();
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    
     // Password reset content
     const resetPasswordContent = (
         <div className={styling.content}>
@@ -67,30 +79,47 @@ const PasswordReset = ({ history }) => {
     );
     
     
+    // Escape invalid characters in password
+    // eslint-disable-next-line
+    const passwordMatchRegex = password.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    const passwordValid = config.regex.password.test(password);
+    
     // Set new password content
     const setNewPasswordContent = (
         <div className={styling.content}>
             <h1>Set new Password</h1>
             
-            <h4>Enter and repeat new password</h4>
+            <h4>Enter and repeat a new password</h4>
             
             <div className={styling.success} hidden={!newPasswordSet}>New password was set</div>
             
-            <InputField
-                placeholder='Password'
-                name='password'
-                value={password}
-                onChange={changeHandler}
-            />
-            
-            <InputField
-                placeholder='Repeat Password'
-                name='passwordRepeat'
-                value={passwordRepeat}
-                onChange={changeHandler}
-            />
-            
-            <WideButton>Set new Password</WideButton>
+            <form onSubmit={setNewPassword}>
+                <InputField
+                    placeholder='Password'
+                    name='password'
+                    type='password'
+                    value={password}
+                    onChange={changeHandler}
+                    test={config.regex.password}
+                />
+                
+                <span className={passwordValid ? styling.noticeValid : styling.notice}>
+                    12-20 lower case, upper case and special characters and numbers
+                </span>
+                
+                <InputField
+                    placeholder='Repeat Password'
+                    name='passwordRepeat'
+                    type='password'
+                    value={passwordRepeat}
+                    onChange={changeHandler}
+                    test={new RegExp(passwordMatchRegex)}
+                />
+                
+                <WideButton type='submit' disabled={!token || !passwordValid || password !== passwordRepeat}>
+                    Set new Password
+                </WideButton>
+            </form>
         </div>
     );
     
