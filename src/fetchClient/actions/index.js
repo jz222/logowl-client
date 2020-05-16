@@ -1,4 +1,4 @@
-import { resetPassword, setup, signIn, signUp } from './auth';
+import { resetPassword, setNewPassword, setup, signIn, signUp } from './auth';
 import { deleteUserAccount, deleteUserById, getUser, inviteUser } from './user';
 import { deleteError, getAllErrors, getAnalytics, getErrorById, updateError } from './events';
 import { createService, deleteService, updateService } from './service';
@@ -9,6 +9,7 @@ export default {
     signUp,
     signIn,
     resetPassword,
+    setNewPassword,
     getUser,
     deleteUserAccount,
     deleteUserById,

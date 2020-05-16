@@ -52,6 +52,10 @@ const PasswordReset = ({ history }) => {
         try {
             e.preventDefault();
             
+            await fetchClient('setNewPassword', { email, token, password });
+            
+            setState(prevState => ({ ...prevState, newPasswordSet: true }));
+            
         } catch (error) {
             console.error(error);
         }
@@ -94,6 +98,13 @@ const PasswordReset = ({ history }) => {
             <div className={styling.success} hidden={!newPasswordSet}>New password was set</div>
             
             <form onSubmit={setNewPassword}>
+                <InputField
+                    placeholder='Email'
+                    name='email'
+                    value={email}
+                    onChange={changeHandler}
+                />
+                
                 <InputField
                     placeholder='Password'
                     name='password'
