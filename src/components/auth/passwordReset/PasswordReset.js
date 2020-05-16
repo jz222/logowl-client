@@ -5,6 +5,8 @@ import InputField from 'components/UI/inputField/InputField';
 import { WideButton } from 'components/UI/button/Button';
 import Menu from 'components/layout/menu/Menu';
 
+import fetchClient from 'fetchClient';
+
 import styling from './PasswordReset.module.scss';
 
 const PasswordReset = ({ history }) => {
@@ -18,12 +20,34 @@ const PasswordReset = ({ history }) => {
     });
     
     
+    /**
+     * Handles input field changes.
+     * @param name {string} name of the input field
+     * @param value {string} value that was entered into the input field
+     */
     const changeHandler = ({ target: { name, value } }) => {
         setState(prevState => ({ ...prevState, [name]: value }));
     };
     
     
-    const resetPassword = (
+    /**
+     * Sends a request to the server to generate a reset token.
+     * @returns {Promise<void>}
+     */
+    const resetPassword = async () => {
+        try {
+            await fetchClient('resetPassword', { email });
+            
+            setState(prevState => ({ ...prevState, requestLinkSent: true }));
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    
+    // Password reset content
+    const resetPasswordContent = (
         <div className={styling.content}>
             <h1>Reset Password</h1>
             
@@ -38,12 +62,13 @@ const PasswordReset = ({ history }) => {
                 onChange={changeHandler}
             />
             
-            <WideButton disabled={email === ''}>Send reset link</WideButton>
+            <WideButton onClick={resetPassword} disabled={email === ''}>Send reset link</WideButton>
         </div>
     );
     
     
-    const setNewPassword = (
+    // Set new password content
+    const setNewPasswordContent = (
         <div className={styling.content}>
             <h1>Set new Password</h1>
             
@@ -80,7 +105,7 @@ const PasswordReset = ({ history }) => {
             </Menu>
             
             <main>
-                {mode === 'resetPassword' ? resetPassword : setNewPassword}
+                {mode === 'resetPassword' ? resetPasswordContent : setNewPasswordContent}
             </main>
         </>
     );

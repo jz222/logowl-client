@@ -252,7 +252,7 @@ const Authentication = ({ history, location }) => {
                         </span>
                         
                         <div className={styling.resetPassword}>
-                            <Link to='/auth/passwordreset'>Forgot your password?</Link>
+                            <Link to='/auth/resetpassword'>Forgot your password?</Link>
                         </div>
                     </motion.form>
                 </div>
