@@ -251,7 +251,7 @@ const Authentication = ({ history, location }) => {
                             12-20 lower case, upper case and special characters and numbers
                         </span>
                         
-                        <div className={styling.resetPassword}>
+                        <div className={styling.resetPassword} hidden={mode === 'signUp'}>
                             <Link to='/auth/resetpassword'>Forgot your password?</Link>
                         </div>
                     </motion.form>

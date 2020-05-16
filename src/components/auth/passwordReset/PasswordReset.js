@@ -131,6 +131,7 @@ const PasswordReset = ({ history }) => {
                 <InputField
                     placeholder='Email'
                     name='email'
+                    autoComplete='email'
                     value={email}
                     onChange={changeHandler}
                 />
@@ -139,6 +140,7 @@ const PasswordReset = ({ history }) => {
                     placeholder='Password'
                     name='password'
                     type='password'
+                    autoComplete='new-password'
                     value={password}
                     onChange={changeHandler}
                     test={config.regex.password}
@@ -152,6 +154,7 @@ const PasswordReset = ({ history }) => {
                     placeholder='Repeat Password'
                     name='passwordRepeat'
                     type='password'
+                    autoComplete='new-password'
                     value={passwordRepeat}
                     onChange={changeHandler}
                     test={new RegExp(passwordMatchRegex)}
