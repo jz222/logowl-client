@@ -11,15 +11,19 @@ import config from 'config';
 import styling from './PasswordReset.module.scss';
 
 const PasswordReset = ({ history }) => {
-    const [{ mode, token, email, password, passwordRepeat, newPasswordSet, requestLinkSent }, setState] = useState({
+    const [state, setState] = useState({
         mode: history.location.pathname.includes('resetpassword') ? 'resetPassword' : 'setNewPassword',
         token: new URLSearchParams(history.location.search).get('token') || '',
         email: '',
         password: '',
         passwordRepeat: '',
         requestLinkSent: false,
-        newPasswordSet: false
+        newPasswordSet: false,
+        error: '',
+        loading: false
     });
+    
+    const { mode, token, email, password, passwordRepeat, newPasswordSet, requestLinkSent, error, loading } = state;
     
     
     /**
@@ -38,26 +42,50 @@ const PasswordReset = ({ history }) => {
      */
     const resetPassword = async () => {
         try {
+            setState(prevState => ({ ...prevState, loading: true }));
+            
             await fetchClient('resetPassword', { email });
             
-            setState(prevState => ({ ...prevState, requestLinkSent: true }));
+            setState(prevState => ({ ...prevState, requestLinkSent: true, email: '', loading: false }));
             
         } catch (error) {
             console.error(error);
+            setState(prevState => ({ ...prevState, loading: false }));
         }
     };
     
     
+    /**
+     * Sends a request to the server to set a new password.
+     * @param e
+     * @returns {Promise<void>}
+     */
     const setNewPassword = async (e) => {
         try {
             e.preventDefault();
             
+            setState(prevState => ({ ...prevState, loading: true }));
+            
             await fetchClient('setNewPassword', { email, token, password });
             
-            setState(prevState => ({ ...prevState, newPasswordSet: true }));
+            setState(prevState => ({
+                ...prevState,
+                email: '',
+                password: '',
+                passwordRepeat: '',
+                newPasswordSet: true,
+                loading: false,
+                error: ''
+            }));
             
         } catch (error) {
             console.error(error);
+            
+            setState(prevState => ({
+                ...prevState,
+                error: 'The provided data has been expired or is invalid',
+                loading: false
+            }));
         }
     };
     
@@ -78,7 +106,7 @@ const PasswordReset = ({ history }) => {
                 onChange={changeHandler}
             />
             
-            <WideButton onClick={resetPassword} disabled={email === ''}>Send reset link</WideButton>
+            <WideButton onClick={resetPassword} disabled={email === '' || loading}>Send reset link</WideButton>
         </div>
     );
     
@@ -96,6 +124,8 @@ const PasswordReset = ({ history }) => {
             <h4>Enter and repeat a new password</h4>
             
             <div className={styling.success} hidden={!newPasswordSet}>New password was set</div>
+            
+            <div className={styling.error} hidden={!error}>{error}</div>
             
             <form onSubmit={setNewPassword}>
                 <InputField
@@ -127,7 +157,7 @@ const PasswordReset = ({ history }) => {
                     test={new RegExp(passwordMatchRegex)}
                 />
                 
-                <WideButton type='submit' disabled={!token || !passwordValid || password !== passwordRepeat}>
+                <WideButton type='submit' disabled={!token || !passwordValid || password !== passwordRepeat || loading}>
                     Set new Password
                 </WideButton>
             </form>
