@@ -128,10 +128,6 @@ input {
     font-size: unset;
 }
 
-button {
-    cursor: pointer;
-}
-
 h1 {
     margin: 0 0 0.5rem 0;
     font-size: 3.5rem;

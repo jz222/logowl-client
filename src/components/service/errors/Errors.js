@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { FiTrash2 } from 'react-icons/fi';
 
 import { Placeholder } from 'components/UI/placeholder/Placeholder';
 import Evolution from 'components/UI/evolution/Evolution';
 import Checkbox from 'components/UI/checkbox/Checkbox';
 import Spinner from 'components/UI/spinner/Spinner';
-import Button from 'components/UI/button/Button';
+import Button, { Action } from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
 import Badge from 'components/UI/badge/Badge';
 
@@ -132,6 +133,25 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     
     /**
+     * Deletes all selected errors.
+     * @returns {Promise<void>}
+     */
+    const deleteErrors = async () => {
+        try {
+            const errorIds = Object.keys(selected);
+            
+            await fetchClient('deleteErrors', { errorIds }, '/event/' + serviceId + '/error/');
+            
+            fetchErrors();
+            
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        }
+    };
+    
+    
+    /**
      * Handles changes of the checkboxes.
      * @param target {object} the DOM node that was clicked
      */
@@ -186,9 +206,17 @@ const Errors = ({ serviceId, history, type = '' }) => {
     );
     
     
+    // Determines if at least one error is selected
+    const activeSelection = Object.keys(selected).some(k => selected[k]);
+    
+    
     // List of errors
     const errorList = (
         <>
+            <div className={styling.header}>
+                <Action icon={<FiTrash2 />} disabled={!activeSelection} onClick={deleteErrors}>Delete</Action>
+            </div>
+            
             <ul className={styling.wrapper}>
                 {errors.map(error => (
                     

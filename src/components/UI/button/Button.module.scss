@@ -6,6 +6,7 @@
     background-color: var(--color-3);
     transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
     color: var(--color-2);
+    cursor: pointer;
     outline: none;
 
     &:focus {
@@ -44,6 +45,7 @@
     transition: background-color 0.2s, color 0.2s;
     font-size: 2rem;
     color: var(--color-2);
+    cursor: pointer;
 
     span {
         margin-left: 1rem;
@@ -77,8 +79,9 @@
         margin-left: 0.8rem;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         border: 1px solid var(--color-1);
         color: var(--color-1);
+        cursor: pointer;
     }
 }
