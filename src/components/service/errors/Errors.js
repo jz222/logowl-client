@@ -20,13 +20,14 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     const [state, setState] = useState({
         errors: [],
+        selected: {},
         loading: true,
         pageLoading: false,
         currentPage: 0,
         fetchedAll: false
     });
     
-    const { errors, loading, pageLoading, currentPage, fetchedAll } = state;
+    const { errors, selected, loading, pageLoading, currentPage, fetchedAll } = state;
     
     
     const intervalId = useRef(0);
@@ -129,13 +130,13 @@ const Errors = ({ serviceId, history, type = '' }) => {
         });
     };
     
-    const changeHandler = ({target}) => {
+    const changeHandler = ({ target }) => {
         const id = target.getAttribute('data-id');
         
-        const tmpErrors = [...errors];
-        tmpErrors[id].checked = true;
+        const tmpSelected = { ...selected };
+        tmpSelected[id] = !tmpSelected[id];
         
-        setState(prevState => ({...prevState, errors: tmpErrors}));
+        setState(prevState => ({ ...prevState, selected: tmpSelected }));
     };
     
     useEffect(() => {
@@ -183,12 +184,16 @@ const Errors = ({ serviceId, history, type = '' }) => {
     const errorList = (
         <>
             <ul className={styling.wrapper}>
-                {errors.map((error, i) => (
+                {errors.map(error => (
                     
                     <Event key={error.fingerprint}>
                         <div className={styling.error}>
                             <div className={styling.checkbox}>
-                                <Checkbox checked={error.checked || false} id={i} changeHandler={changeHandler} />
+                                <Checkbox
+                                    checked={selected[error.id] || false}
+                                    id={error.id}
+                                    changeHandler={changeHandler}
+                                />
                             </div>
                             
                             <div className={styling.cell}>
