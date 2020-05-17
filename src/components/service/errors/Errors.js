@@ -130,6 +130,11 @@ const Errors = ({ serviceId, history, type = '' }) => {
         });
     };
     
+    
+    /**
+     * Handles changes of the checkboxes.
+     * @param target {object} the DOM node that was clicked
+     */
     const changeHandler = ({ target }) => {
         const id = target.getAttribute('data-id');
         
@@ -138,6 +143,7 @@ const Errors = ({ serviceId, history, type = '' }) => {
         
         setState(prevState => ({ ...prevState, selected: tmpSelected }));
     };
+    
     
     useEffect(() => {
         fetchErrors(true);
