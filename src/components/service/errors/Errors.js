@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Placeholder } from 'components/UI/placeholder/Placeholder';
 import Evolution from 'components/UI/evolution/Evolution';
+import Checkbox from 'components/UI/checkbox/Checkbox';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
@@ -128,6 +129,14 @@ const Errors = ({ serviceId, history, type = '' }) => {
         });
     };
     
+    const changeHandler = ({target}) => {
+        const id = target.getAttribute('data-id');
+        
+        const tmpErrors = [...errors];
+        tmpErrors[id].checked = true;
+        
+        setState(prevState => ({...prevState, errors: tmpErrors}));
+    };
     
     useEffect(() => {
         fetchErrors(true);
@@ -172,46 +181,55 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     // List of errors
     const errorList = (
-        <ul className={styling.wrapper}>
-            {errors.map(error => (
+        <>
+            <ul className={styling.wrapper}>
+                {errors.map((error, i) => (
+                    
+                    <Event key={error.fingerprint}>
+                        <div className={styling.error}>
+                            <div className={styling.checkbox}>
+                                <Checkbox checked={error.checked || false} id={i} changeHandler={changeHandler} />
+                            </div>
+                            
+                            <div className={styling.cell}>
+                                <div className={styling.title} onClick={() => openErrorDetails(error)}>
+                                    {error.message}
+                                </div>
+                                
+                                <Badge size='small' type='neutral'>{error.type}</Badge>
+                                <Badge size='small' type='info' hidden={!error.resolved}>resolved</Badge>
+                            </div>
+                            
+                            <div>
+                                <Evolution data={error.evolution} />
+                            </div>
+                            
+                            <div>
+                                <div className={styling.cell}>
+                                    <div>{utils.getDate(error.createdAt)}</div>
+                                    <div>first seen</div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div className={styling.cell}>
+                                    <div>{utils.getDate(error.updatedAt)}</div>
+                                    <div>last seen</div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div className={styling.count}>
+                                    <div>{error.count}</div>
+                                    <div>count</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Event>
                 
-                <Event key={error.fingerprint}>
-                    <div className={styling.error} onClick={() => openErrorDetails(error)}>
-                        <div className={styling.cell}>
-                            <div>{error.message}</div>
-                            <Badge size='small' type='neutral'>{error.type}</Badge>
-                            <Badge size='small' type='info' hidden={!error.resolved}>resolved</Badge>
-                        </div>
-                        
-                        <div>
-                            <Evolution data={error.evolution} />
-                        </div>
-                        
-                        <div>
-                            <div className={styling.cell}>
-                                <div>{utils.getDate(error.createdAt)}</div>
-                                <div>first seen</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div className={styling.cell}>
-                                <div>{utils.getDate(error.updatedAt)}</div>
-                                <div>last seen</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div className={styling.count}>
-                                <div>{error.count}</div>
-                                <div>count</div>
-                            </div>
-                        </div>
-                    </div>
-                </Event>
-            
-            ))}
-        </ul>
+                ))}
+            </ul>
+        </>
     );
     
     
