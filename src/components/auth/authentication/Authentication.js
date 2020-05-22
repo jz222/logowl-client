@@ -75,7 +75,7 @@ const Authentication = ({ history, location }) => {
             
             dispatch({ type: 'update', payload: res });
             
-            localStorage.setItem('access-pass', res.jwt);
+            localStorage.setItem('access-pass', res.accessPass);
             localStorage.setItem('expiration-time', res.expirationTime);
             
             utils.expirationHandler(history, res.expirationTime);

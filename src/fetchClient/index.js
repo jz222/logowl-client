@@ -26,6 +26,7 @@ const request = async (type, payload = {}, url) => {
             'Content-Type': 'application/json',
             ...(!action.noAuthRequired) && { 'Authorization': 'Bearer ' + jwt }
         },
+        credentials: 'include',
         ...(action.method === 'POST' || action.method === 'PUT' || action.method === 'DELETE') && { body: JSON.stringify(payload) }
     };
     

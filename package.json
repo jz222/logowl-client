@@ -28,7 +28,9 @@
         "production": [
             ">0.2%",
             "not dead",
-            "not op_mini all"
+            "not op_mini all",
+            "Firefox > 50",
+            "Edge > 15"
         ],
         "development": [
             "last 1 chrome version",
