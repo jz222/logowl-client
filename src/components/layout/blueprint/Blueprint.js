@@ -61,8 +61,10 @@ const Blueprint = ({ children, history }) => {
     useEffect(() => {
         if (!store.id) {
             fetchUserData();
+        } else if (!store.organization.isSetUp) {
+            setTimeout(() => setStartPaymentFlow(true), 1000);
         }
-    }, [fetchUserData, store.id]);
+    }, [fetchUserData, store.id, store.organization.isSetUp]);
     
     
     // Spinner
@@ -87,7 +89,7 @@ const Blueprint = ({ children, history }) => {
             </div>
             
             <Modal open={startPaymentFlow}>
-                <PaymentFlow />
+                <PaymentFlow endPaymentFlow={() => setStartPaymentFlow(false)} />
             </Modal>
         </>
     );

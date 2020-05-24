@@ -3,13 +3,35 @@ import React, { useState } from 'react';
 import Checkbox from 'components/UI/checkbox/Checkbox';
 import Button from 'components/UI/button/Button';
 
+import { useStore } from 'context';
+import fetchClient from 'fetchClient';
+
 import styling from './PaymentFlow.module.scss';
 
-const PaymentFlow = () => {
+const PaymentFlow = ({ endPaymentFlow }) => {
+    const [, , setError] = useStore();
     const [selectedPlan, setSelectedPlan] = useState('freePlan');
     
+    /**
+     * Handles checkbox selections.
+     * @param target {object} the checkbox that was selected
+     */
     const selectHandler = ({ target }) => {
         setSelectedPlan(target.getAttribute('data-id'));
+    };
+    
+    /**
+     * Confirms the selected plan and ends the payment flow.
+     * @returns {Promise<void>}
+     */
+    const confirmPlan = async () => {
+        try {
+            await fetchClient('updateOrganization', { isSetUp: true });
+            endPaymentFlow();
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        }
     };
     
     return (
@@ -40,7 +62,7 @@ const PaymentFlow = () => {
                 </div>
             </div>
             
-            <Button>Confirm</Button>
+            <Button onClick={confirmPlan}>Confirm</Button>
         </>
     );
 };
