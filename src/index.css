@@ -193,6 +193,7 @@ img {
 }
 
 p {
+    line-height: 1.4;
     color: var(--color-2-dark);
 }
 
