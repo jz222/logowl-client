@@ -83,7 +83,7 @@ const Authentication = ({ history, location }) => {
             box.current.classList.add(styling.boxExit);
             nav.current.classList.add(styling.navExit);
             
-            document.title = 'Loggy Dashboard | ' + res.organization.name;
+            document.title = 'Log Owl Dashboard | ' + res.organization.name;
             
             setTimeout(() => history.push('/services'), 1000);
             

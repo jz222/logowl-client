@@ -2,6 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineLogout, AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
 
+import logo from 'assets/logos/log-owl.svg';
+
 import styling from './Sidebar.module.scss';
 
 const Sidebar = ({ history }) => {
@@ -24,7 +26,7 @@ const Sidebar = ({ history }) => {
     return (
         <aside className={styling.sidebar}>
             <div className={styling.content}>
-                <div className={styling.logo}>LOGGY</div>
+                <img src={logo} className={styling.logo} alt='log owl logo' />
                 
                 <ul className={styling.menu}>
                     <li className={getStyling('services')} onClick={() => history.push('/services')}>

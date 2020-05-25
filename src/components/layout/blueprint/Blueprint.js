@@ -38,7 +38,7 @@ const Blueprint = ({ children, history }) => {
             
             utils.expirationHandler(history, +expirationTime);
             
-            document.title = 'Loggy Dashboard | ' + user.organization.name;
+            document.title = 'Log Owl Dashboard | ' + user.organization.name;
             
             if (!user.organization.isSetUp) {
                 setTimeout(() => setStartPaymentFlow(true), 1000);

@@ -1,8 +1,8 @@
-![loggy header](https://github.com/jz222/loggy-client/blob/master/assets/header.png?raw=true)
+![log owl hero](./assets/header.png?raw=true)
 
 <div align="center">
   <p>
-    <h2>LOGGY Client</h2>
+    <h3>Log Owl</h3>
   </p>
   <p>
     <i>Monitor your services and track errors in production. 🚀📈</i>
@@ -11,69 +11,20 @@
 
 ---
 
-**Related:**
+**Related Repositories:**
 
-🚀 [**LOGGY Service**](https://github.com/jz222/loggy)
+🚀 [**Log Owl Service**](https://github.com/jz222/logowl)
 
-📡 [**LOGGY NodeJS Adapter**](https://github.com/jz222/loggy-adapter-nodejs)
+📡 [**Log Owl NodeJS Adapter**](https://github.com/jz222/logowl-adapter-nodejs)
 
-🌐 [**LOGGY Browser Adapter**](https://github.com/jz222/loggy-adapter-browser)
+🌐 [**Log Owl Browser Adapter**](https://github.com/jz222/logowl-adapter-browser)
 
-<br />
+## About
 
-### Features
+Get the insights you need on how your IT services perform in production. Track errors with all the details you need to fix issues and get detailed user analytics, transparent and all in one place. Log Owl is open-source and can be self-hosted.
 
-🔥 **Flexible**
+## Getting started
 
-- Group events by services
-- Easy-to-use adapter
-- Custom adapters for any platform and language
-- Customizable
-- Can be self-hosted
+The Log Owl documentation helps you to get started quickly.
 
-🔥 **Extensive Event Details**
-
-- Platform information
-- Detailed evolution
-- Stacktrace
-- Code Snippets
-- Logs
-- Metrics
-- Individual badges
-- Adapter information
-
-🔥 **Aggregated events**
-
-- Live updates
-- Same events are aggregated
-- Event count
-- Evolution preview
-
-🔥 **User management**
-
-- Invite and remove users from your organization
-
-🔥 **Highly scalable infrastructure**
-
-- Containerized backend
-- Simple to deploy and scale
-
-### Insights
-
-![services](https://github.com/jz222/loggy-client/blob/master/assets/services.png?raw=true)
-
-![evolution](https://github.com/jz222/loggy-client/blob/master/assets/evolution.png?raw=true)
-
-![stacktrace](https://github.com/jz222/loggy-client/blob/master/assets/stacktrace.png?raw=true)
-
-## Local Development 🛠
-
-Clone the repository and install dependencies with `npm i` or `yarn` and start the development server with `npm start` or `yarn start`. To create a bundled production build run `npm run build` or `yarn build`.
-
-## Configuration ⚙️
-
-By default, the client is expecting the backend to be available at `http://localhost:2800`. If you use a different port or host LOGGY yourself, you can set the address in `public/config.js` before you create a production build.
-
-## Hosting 💻
-
-If you want to host LOGGY yourself, but don't want to create your own production build, you can find the static files in the `dist/` folder. These files can be hosted like any other website, just make sure to update the backend URL in `dist/config.js`.
+📘 [**Documentation**](https://docs.logowl.io)

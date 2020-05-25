@@ -160,13 +160,6 @@ const Setup = ({ history }) => {
                     </span>
                 </div>
             </div>
-            
-            <div className={styling.demoNotice} hidden={!config.connectivity.isDemoInstance}>
-                Your data will not be shared with any third party.
-                In fact, you can provide a pseudo email address.
-                Please notice that this is a demo instance and your data
-                can be deleted at any time without notice.
-            </div>
         </div>
     );
     
