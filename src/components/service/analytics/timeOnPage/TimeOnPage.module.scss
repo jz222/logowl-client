@@ -1,0 +1,55 @@
+.chart {
+    position: relative;
+    width: 100%;
+    height: 40rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.info {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1px;
+    border-radius: 50%;
+    background-color: var(--color-2-darker);
+    font-size: 1.4rem;
+    color: var(--color-2-dark);
+    cursor: pointer;
+
+    &:hover + .disclaimer {
+        opacity: 1;
+    }
+}
+
+.disclaimer {
+    position: absolute;
+    top: 0.75rem;
+    left: 6.5rem;
+    width: 29rem;
+    height: 6rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-1);
+    transition: opacity 0.4s;
+    opacity: 0;
+    font-size: 1.2rem;
+    color: var(--color-2);
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 2.2rem;
+        left: -1rem;
+        width: 0;
+        height: 0;
+        border-top: 0.8rem solid transparent;
+        border-right: 1rem solid var(--color-1);
+        border-bottom: 0.8rem solid transparent;
+    }
+}
