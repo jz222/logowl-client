@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { FiTrash2 } from 'react-icons/fi';
 
 import { Placeholder } from 'components/UI/placeholder/Placeholder';
 import Evolution from 'components/UI/evolution/Evolution';
+import Checkbox from 'components/UI/checkbox/Checkbox';
 import Spinner from 'components/UI/spinner/Spinner';
-import Button from 'components/UI/button/Button';
+import Button, { Action } from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
 import Badge from 'components/UI/badge/Badge';
 
@@ -19,13 +21,14 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     const [state, setState] = useState({
         errors: [],
+        selected: {},
         loading: true,
         pageLoading: false,
         currentPage: 0,
         fetchedAll: false
     });
     
-    const { errors, loading, pageLoading, currentPage, fetchedAll } = state;
+    const { errors, selected, loading, pageLoading, currentPage, fetchedAll } = state;
     
     
     const intervalId = useRef(0);
@@ -129,6 +132,39 @@ const Errors = ({ serviceId, history, type = '' }) => {
     };
     
     
+    /**
+     * Deletes all selected errors.
+     * @returns {Promise<void>}
+     */
+    const deleteErrors = async () => {
+        try {
+            const errorIds = Object.keys(selected);
+            
+            await fetchClient('deleteErrors', { errorIds }, '/event/' + serviceId + '/error/');
+            
+            fetchErrors();
+            
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        }
+    };
+    
+    
+    /**
+     * Handles changes of the checkboxes.
+     * @param target {object} the DOM node that was clicked
+     */
+    const changeHandler = ({ target }) => {
+        const id = target.getAttribute('data-id');
+        
+        const tmpSelected = { ...selected };
+        tmpSelected[id] = !tmpSelected[id];
+        
+        setState(prevState => ({ ...prevState, selected: tmpSelected }));
+    };
+    
+    
     useEffect(() => {
         fetchErrors(true);
         
@@ -170,48 +206,69 @@ const Errors = ({ serviceId, history, type = '' }) => {
     );
     
     
+    // Determines if at least one error is selected
+    const activeSelection = Object.keys(selected).some(k => selected[k]);
+    
+    
     // List of errors
     const errorList = (
-        <ul className={styling.wrapper}>
-            {errors.map(error => (
-                
-                <Event key={error.fingerprint}>
-                    <div className={styling.error} onClick={() => openErrorDetails(error)}>
-                        <div className={styling.cell}>
-                            <div>{error.message}</div>
-                            <Badge size='small' type='neutral'>{error.type}</Badge>
-                            <Badge size='small' type='info' hidden={!error.resolved}>resolved</Badge>
-                        </div>
-                        
-                        <div>
-                            <Evolution data={error.evolution} />
-                        </div>
-                        
-                        <div>
-                            <div className={styling.cell}>
-                                <div>{utils.getDate(error.createdAt)}</div>
-                                <div>first seen</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div className={styling.cell}>
-                                <div>{utils.getDate(error.updatedAt)}</div>
-                                <div>last seen</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div className={styling.count}>
-                                <div>{error.count}</div>
-                                <div>count</div>
-                            </div>
-                        </div>
-                    </div>
-                </Event>
+        <>
+            <div className={styling.header}>
+                <Action icon={<FiTrash2 />} disabled={!activeSelection} onClick={deleteErrors}>Delete</Action>
+            </div>
             
-            ))}
-        </ul>
+            <ul className={styling.wrapper}>
+                {errors.map(error => (
+                    
+                    <Event key={error.fingerprint}>
+                        <div className={styling.error}>
+                            <div className={styling.checkbox}>
+                                <Checkbox
+                                    checked={selected[error.id] || false}
+                                    id={error.id}
+                                    changeHandler={changeHandler}
+                                />
+                            </div>
+                            
+                            <div className={styling.cell}>
+                                <div className={styling.title} onClick={() => openErrorDetails(error)}>
+                                    {error.message}
+                                </div>
+                                
+                                <Badge size='small' type='neutral'>{error.type}</Badge>
+                                <Badge size='small' type='info' hidden={!error.resolved}>resolved</Badge>
+                            </div>
+                            
+                            <div>
+                                <Evolution data={error.evolution} />
+                            </div>
+                            
+                            <div>
+                                <div className={styling.cell}>
+                                    <div>{utils.getDate(error.createdAt)}</div>
+                                    <div>first seen</div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div className={styling.cell}>
+                                    <div>{utils.getDate(error.updatedAt)}</div>
+                                    <div>last seen</div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div className={styling.count}>
+                                    <div>{error.count}</div>
+                                    <div>count</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Event>
+                
+                ))}
+            </ul>
+        </>
     );
     
     

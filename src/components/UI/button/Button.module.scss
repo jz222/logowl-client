@@ -6,17 +6,11 @@
     background-color: var(--color-3);
     transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
     color: var(--color-2);
+    cursor: pointer;
     outline: none;
 
     &:focus {
         box-shadow: 0 0 0 4px var(--color-3-light);
-    }
-
-    &:disabled {
-        background-color: var(--color-2-darker);
-        transition: none;
-        color: var(--color-2-dark);
-        cursor: default;
     }
 }
 
@@ -38,6 +32,34 @@
     }
 }
 
+.wideButton {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-3);
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 2rem;
+    color: var(--color-2);
+    cursor: pointer;
+
+    span {
+        margin-left: 1rem;
+    }
+}
+
+.button:disabled,
+.wideButton:disabled {
+    background-color: var(--color-2-darker);
+    transition: none;
+    color: var(--color-2-dark);
+    cursor: default;
+}
+
 .action {
     height: 2.8rem;
     line-height: 1.4rem;
@@ -57,8 +79,9 @@
         margin-left: 0.8rem;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         border: 1px solid var(--color-1);
         color: var(--color-1);
+        cursor: pointer;
     }
 }

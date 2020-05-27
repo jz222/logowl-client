@@ -26,7 +26,8 @@ const request = async (type, payload = {}, url) => {
             'Content-Type': 'application/json',
             ...(!action.noAuthRequired) && { 'Authorization': 'Bearer ' + jwt }
         },
-        ...(action.method === 'POST' || action.method === 'PUT') && { body: JSON.stringify(payload) }
+        credentials: 'include',
+        ...(action.method === 'POST' || action.method === 'PUT' || action.method === 'DELETE') && { body: JSON.stringify(payload) }
     };
     
     let res = await fetch(config.connectivity.backendURL + (url || action.url), opts);

@@ -14,7 +14,7 @@ const Ticket = ({ ticket, serviceName }) => (
         </div>
         
         <p>
-            Use this ticket to initialize your LOGGY adapter.
+            Use this ticket to initialize your Log Owl adapter.
             All events sent with this ticket will be attached to {serviceName}.
         </p>
     </Card>

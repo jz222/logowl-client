@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { FiHelpCircle, FiPlusCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-import Spinner from 'components/UI/spinner/Spinner';
 import InputField from 'components/UI/inputField/InputField';
+import { WideButton } from 'components/UI/button/Button';
+import Spinner from 'components/UI/spinner/Spinner';
+import Menu from 'components/layout/menu/Menu';
 
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
@@ -73,7 +75,7 @@ const Authentication = ({ history, location }) => {
             
             dispatch({ type: 'update', payload: res });
             
-            localStorage.setItem('access-pass', res.jwt);
+            localStorage.setItem('access-pass', res.accessPass);
             localStorage.setItem('expiration-time', res.expirationTime);
             
             utils.expirationHandler(history, res.expirationTime);
@@ -81,7 +83,7 @@ const Authentication = ({ history, location }) => {
             box.current.classList.add(styling.boxExit);
             nav.current.classList.add(styling.navExit);
             
-            document.title = 'Loggy Dashboard | ' + res.organization.name;
+            document.title = 'Log Owl Dashboard | ' + res.organization.name;
             
             setTimeout(() => history.push('/services'), 1000);
             
@@ -107,14 +109,6 @@ const Authentication = ({ history, location }) => {
         }));
         
         history.push('/auth/' + newMode.toLowerCase());
-    };
-    
-    
-    /**
-     * Starts the setup process.
-     */
-    const navigateToSetup = () => {
-        history.push('/auth/setup');
     };
     
     
@@ -165,11 +159,12 @@ const Authentication = ({ history, location }) => {
     
     return (
         <>
-            <nav className={styling.nav} ref={nav}>
-                <div>
-                    <span>LOGGY</span>
-                </div>
-            </nav>
+            <Menu reference={nav}>
+                <ul>
+                    <li onClick={toggleMode}>{mode === 'signIn' ? 'Sign Up' : 'Sign In'}</li>
+                    <li><Link to='/auth/setup'>New Organization</Link></li>
+                </ul>
+            </Menu>
             
             <main>
                 <div className={styling.box} ref={box}>
@@ -232,7 +227,7 @@ const Authentication = ({ history, location }) => {
                             hidden={mode !== 'signUp' || (mode === 'signUp' && (!password || password !== passwordRepeat))}
                         />
                         
-                        <button
+                        <WideButton
                             key='signInSubmit'
                             type='submit'
                             disabled={loading}
@@ -240,9 +235,9 @@ const Authentication = ({ history, location }) => {
                         >
                             <Spinner hidden={!loading} />
                             <span>{loading ? 'Please wait' : 'Sign In'}</span>
-                        </button>
+                        </WideButton>
                         
-                        <button
+                        <WideButton
                             key='signUpSubmit'
                             type='submit'
                             disabled={loading}
@@ -250,20 +245,14 @@ const Authentication = ({ history, location }) => {
                         >
                             <Spinner hidden={!loading} />
                             <span>{loading ? 'Please wait' : 'Sign Up'}</span>
-                        </button>
+                        </WideButton>
                         
                         <span className={styling.passwordNotice} hidden={!showPasswordNotice()}>
                             12-20 lower case, upper case and special characters and numbers
                         </span>
                         
-                        <div key='switchMode' className={styling.label} onClick={toggleMode}>
-                            <FiHelpCircle />
-                            <span>{mode === 'signUp' ? 'Sign in with an existing account' : 'Sign up a new account'}</span>
-                        </div>
-                        
-                        <div key='createOrganization' className={styling.label} onClick={navigateToSetup}>
-                            <FiPlusCircle />
-                            <span>Create an organization</span>
+                        <div className={styling.resetPassword} hidden={mode === 'signUp'}>
+                            <Link to='/auth/resetpassword'>Forgot your password?</Link>
                         </div>
                     </motion.form>
                 </div>

@@ -1,0 +1,51 @@
+.content {
+    width: 100%;
+    margin: 2.5rem auto 4rem auto;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+
+    div:first-child {
+        width: 3rem;
+    }
+
+    .selected,
+    .description {
+        flex: 1;
+
+        h6 {
+            transition: color 0.2s;
+        }
+
+        p {
+            font-size: 1.4rem;
+        }
+    }
+
+    .selected {
+        h6 {
+            color: var(--color-3);
+        }
+    }
+
+    .price {
+        width: 5.5rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+        background-color: var(--color-3-light);
+        text-align: center;
+        font-weight: 600;
+        color: var(--color-3);
+    }
+
+    &:first-of-type {
+        margin-top: 2rem;
+    }
+}

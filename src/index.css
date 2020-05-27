@@ -53,14 +53,14 @@
 }
 
 :root {
-    --color-1: #212a45;
+    --color-1: #071840;
 
     --color-2: white;
     --color-2-darker: #E5ECF9;
     --color-2-dark: #5B6F8C;
 
-    --color-3-light: #DBE8FF;
-    --color-3: #0368ff;
+    --color-3-light: #F4F8FE;
+    --color-3: #0252fc;
 
     --color-4-light: #FFE5EE;
     --color-4: #FF0055;
@@ -128,12 +128,8 @@ input {
     font-size: unset;
 }
 
-button {
-    cursor: pointer;
-}
-
 h1 {
-    margin: 0;
+    margin: 0 0 0.5rem 0;
     font-size: 3.5rem;
 }
 
@@ -175,6 +171,12 @@ hr {
 a {
     background-color: transparent;
     text-decoration: none;
+    color: var(--color-1);
+}
+
+a:active,
+a:focus {
+    color: var(--color-1);
 }
 
 b,
@@ -191,6 +193,7 @@ img {
 }
 
 p {
+    line-height: 1.4;
     color: var(--color-2-dark);
 }
 

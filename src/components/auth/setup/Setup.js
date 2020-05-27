@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import InputField from 'components/UI/inputField/InputField';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
+import Menu from 'components/layout/menu/Menu';
 
 import fetchClient from 'fetchClient';
 import config from 'config';
@@ -158,13 +160,6 @@ const Setup = ({ history }) => {
                     </span>
                 </div>
             </div>
-            
-            <div className={styling.demoNotice} hidden={!config.connectivity.isDemoInstance}>
-                Your data will not be shared with any third party.
-                In fact, you can provide a pseudo email address.
-                Please notice that this is a demo instance and your data
-                can be deleted at any time without notice.
-            </div>
         </div>
     );
     
@@ -201,48 +196,56 @@ const Setup = ({ history }) => {
     
     
     return (
-        <div className={styling.wrapper}>
-            <div className={styling.box}>
-                <div className={styling.stepper}>
-                    {steps.map((step, i) => {
-                        const highlighted = (currentStep >= i) ? styling.highlighted : '';
-                        
-                        return (
-                            <div className={styling.step} key={step}>
-                                <div className={styling.bubble + ' ' + highlighted}>{i + 1}</div>
-                                <div>{step}</div>
-                            </div>
-                        );
-                    })}
-                </div>
-                
-                <hr />
-                
-                {(currentStep === 0) && organization}
-                {(currentStep === 1) && user}
-                {(currentStep === 2 && isLoading) && loading}
-                {(currentStep === 2 && !isLoading && !error) && success}
-                {(currentStep === 2 && !isLoading && error) && failure}
-                
-                <div className={styling.navigation}>
-                    <Button
-                        color='light'
-                        onClick={() => stepHandler(-1)}
-                        hidden={currentStep !== 1}
-                    >
-                        Back
-                    </Button>
+        <>
+            <Menu>
+                <ul>
+                    <li><Link to='/auth/signin'>Sign In</Link></li>
+                </ul>
+            </Menu>
+            
+            <main>
+                <div className={styling.box}>
+                    <div className={styling.stepper}>
+                        {steps.map((step, i) => {
+                            const highlighted = (currentStep >= i) ? styling.highlighted : '';
+                            
+                            return (
+                                <div className={styling.step} key={step}>
+                                    <div className={styling.bubble + ' ' + highlighted}>{i + 1}</div>
+                                    <div>{step}</div>
+                                </div>
+                            );
+                        })}
+                    </div>
                     
-                    <Button
-                        onClick={() => stepHandler(1)}
-                        disabled={!stepIsValid}
-                        hidden={currentStep === 2}
-                    >
-                        Next
-                    </Button>
+                    <hr />
+                    
+                    {(currentStep === 0) && organization}
+                    {(currentStep === 1) && user}
+                    {(currentStep === 2 && isLoading) && loading}
+                    {(currentStep === 2 && !isLoading && !error) && success}
+                    {(currentStep === 2 && !isLoading && error) && failure}
+                    
+                    <div className={styling.navigation}>
+                        <Button
+                            color='light'
+                            onClick={() => stepHandler(-1)}
+                            hidden={currentStep !== 1}
+                        >
+                            Back
+                        </Button>
+                        
+                        <Button
+                            onClick={() => stepHandler(1)}
+                            disabled={!stepIsValid}
+                            hidden={currentStep === 2}
+                        >
+                            Next
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </main>
+        </>
     );
 };
 

@@ -1,0 +1,33 @@
+@import "stylesheets/animations";
+
+.box {
+    width: 100%;
+    max-width: 40rem;
+    margin: 15rem auto 0 auto;
+    background-color: var(--color-2);
+    animation: slideIn 1s;
+
+    hr {
+        margin: 4rem 0;
+    }
+
+    h6 {
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+    }
+}
+
+.element {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    font-size: 5rem;
+}

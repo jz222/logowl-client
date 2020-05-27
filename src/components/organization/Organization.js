@@ -17,7 +17,7 @@ const Organization = ({ history }) => {
     
     const [activeTab, setActiveTab] = useState('info');
     
-    const organization = store.organization || {};
+    const org = store.organization || {};
     const isAdmin = store.role === 'admin';
     
     return (
@@ -37,11 +37,11 @@ const Organization = ({ history }) => {
                 <Tab active={activeTab === 'delete'} click={() => setActiveTab('delete')} hidden={!isAdmin}>Delete</Tab>
             </Menu>
             
-            {activeTab === 'info' && <Info organization={organization} />}
+            {activeTab === 'info' && <Info organization={org} />}
             {activeTab === 'team' && <Team team={store.team} userId={store.id} />}
             {activeTab === 'invite' && <Invite tabHandler={setActiveTab} />}
-            {activeTab === 'quota' && <Quota receivedRequests={organization.receivedRequests} requestLimit={organization.monthlyRequestLimit} />}
-            {activeTab === 'delete' && <Delete name={organization.name} history={history} />}
+            {activeTab === 'quota' && <Quota activePlan={org.plan} receivedRequests={org.receivedRequests} requestLimit={org.monthlyRequestLimit} />}
+            {activeTab === 'delete' && <Delete name={org.name} history={history} />}
         </>
     );
 };

@@ -1,13 +1,15 @@
-import { setup, signIn, signUp } from './auth';
+import { resetPassword, setNewPassword, setup, signIn, signUp } from './auth';
 import { deleteUserAccount, deleteUserById, getUser, inviteUser } from './user';
-import { deleteError, getAllErrors, getErrorById, updateError, getAnalytics } from './events';
-import { createService, updateService, deleteService } from './service';
-import { deleteOrganization } from './organization';
+import { deleteError, deleteErrors, getAllErrors, getAnalytics, getErrorById, updateError } from './events';
+import { createService, deleteService, updateService } from './service';
+import { deleteOrganization, updateOrganization } from './organization';
 
 export default {
     setup,
     signUp,
     signIn,
+    resetPassword,
+    setNewPassword,
     getUser,
     deleteUserAccount,
     deleteUserById,
@@ -15,10 +17,12 @@ export default {
     getErrorById,
     getAllErrors,
     deleteError,
+    deleteErrors,
     updateError,
     getAnalytics,
     createService,
     updateService,
     deleteService,
-    deleteOrganization
+    deleteOrganization,
+    updateOrganization
 };

@@ -49,8 +49,7 @@ const Delete = ({ isOrganizationOwner, history }) => {
                         <p>{caption}</p>
                     </div>
                     
-                    <Button size='smaller' onClick={toggleConfirmVisibility}
-                            disabled={isOrganizationOwner}>Delete</Button>
+                    <Button size='smaller' onClick={toggleConfirmVisibility} disabled={isOrganizationOwner}>Delete</Button>
                 </div>
             </Card>
             

@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Nav from '../nav/Nav';
-import Sidebar from '../sidebar/Sidebar';
+import PaymentFlow from 'components/paymentFlow/PaymentFlow';
 import Spinner from 'components/UI/spinner/Spinner';
+import Modal from 'components/UI/modal/Modal';
+import Sidebar from '../sidebar/Sidebar';
+import Nav from '../nav/Nav';
 
 import { useStore } from 'context';
 import fetchClient from 'fetchClient';
@@ -15,6 +17,7 @@ const Blueprint = ({ children, history }) => {
     const [store, dispatch] = useStore();
     
     const [loading, setLoading] = useState(true);
+    const [startPaymentFlow, setStartPaymentFlow] = useState(false);
     
     
     /**
@@ -35,7 +38,11 @@ const Blueprint = ({ children, history }) => {
             
             utils.expirationHandler(history, +expirationTime);
             
-            document.title = 'Loggy Dashboard | ' + user.organization.name;
+            document.title = 'Log Owl Dashboard | ' + user.organization.name;
+            
+            if (!user.organization.isSetUp) {
+                setTimeout(() => setStartPaymentFlow(true), 1000);
+            }
             
             dispatch({ type: 'update', payload: user });
             setLoading(false);
@@ -54,8 +61,10 @@ const Blueprint = ({ children, history }) => {
     useEffect(() => {
         if (!store.id) {
             fetchUserData();
+        } else if (!store.organization.isSetUp) {
+            setTimeout(() => setStartPaymentFlow(true), 1000);
         }
-    }, [fetchUserData, store.id]);
+    }, [fetchUserData, store.id, store.organization.isSetUp]);
     
     
     // Spinner
@@ -78,6 +87,10 @@ const Blueprint = ({ children, history }) => {
                     {children}
                 </main>
             </div>
+            
+            <Modal open={startPaymentFlow}>
+                <PaymentFlow endPaymentFlow={() => setStartPaymentFlow(false)} />
+            </Modal>
         </>
     );
     

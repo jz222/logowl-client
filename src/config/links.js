@@ -1,6 +1,6 @@
 export default {
     adapters: {
-        nodejs: 'https://github.com/jz222/loggy-adapter-nodejs',
-        browser: 'https://github.com/jz222/loggy-adapter-browser'
+        nodejs: 'https://github.com/jz222/logowl-adapter-nodejs',
+        browser: 'https://github.com/jz222/logowl-adapter-browser'
     }
 }

@@ -42,23 +42,6 @@ const Team = ({ team = [], userId }) => {
         }
     };
     
-    /**
-     * Opens an email client to send an email with the invite code.
-     * @param firstName {string} first name of the invited user
-     * @param lastName {string} last name of the invited user
-     * @param email {string} email of the invited user
-     * @param inviteCode {string} invite code of the user
-     */
-    const sendEmail = (firstName, lastName, email, inviteCode) => {
-        const greeting = `Hello ${firstName} ${lastName},%0D%0A%0D%0A`;
-        const text = 'I would like to invite you to LOGGY. Please click the link below to register your account.%0D%0A%0D%0A';
-        const url = window.location.origin + '/auth/signup?code=' + inviteCode;
-        
-        const message = (greeting + text + url).replace(' ', '%20');
-        
-        window.location.href = 'mailto:' + email + '?subject=LOGGY%20Sign%20Up&body=' + message;
-    };
-    
     const reversedTeam = [...team].reverse();
     
     return (
@@ -83,7 +66,6 @@ const Team = ({ team = [], userId }) => {
                                         type='neutral'
                                         size='small'
                                         hidden={user.isVerified}
-                                        click={() => sendEmail(user.firstName, user.lastName, user.email, user.inviteCode)}
                                     >
                                         Invite Code: {user.inviteCode}
                                     </Badge>
@@ -92,7 +74,7 @@ const Team = ({ team = [], userId }) => {
                                 <Action
                                     icon={<FiTrash2 />}
                                     onClick={() => setUserToDelete(user.id)}
-                                    hidden={user.id === userId || store.role !== 'admin'}
+                                    hidden={user.id === userId || store.role !== 'admin' || user.isOrganizationOwner}
                                 >
                                     Delete
                                 </Action>

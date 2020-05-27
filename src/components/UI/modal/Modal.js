@@ -24,7 +24,7 @@ const Modal = ({ children, open, size }) => {
         
         setTimeout(() => {
             element.current.parentElement === modalRoot && modalRoot.removeChild(element.current);
-        }, 1000);
+        }, 500);
     };
     
     

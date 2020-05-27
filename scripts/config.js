@@ -1,3 +1,3 @@
-window.loggyConnectivity = {
-    backendURL: 'https://loggy-demo-qvnfzcesoq-ew.a.run.app'
+window.logowlConnectivity = {
+    backendURL: 'https://api.logowl.io'
 };
