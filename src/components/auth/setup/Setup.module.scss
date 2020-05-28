@@ -6,11 +6,8 @@
     display: flex;
     flex-direction: column;
     margin: 10rem auto 0 auto;
-    padding: 4.5rem;
     border-radius: var(--border-radius);
-    border: 1px solid var(--color-2-darker);
     background-color: var(--color-2);
-    box-shadow: var(--shadow);
     animation: slideIn 1s;
     text-align: center;
 
@@ -27,8 +24,8 @@
     }
 
     hr {
-        width: 80%;
-        margin: 3rem auto;
+        width: 100%;
+        margin: 3rem auto 7rem auto;
     }
 }
 
@@ -73,20 +70,23 @@
 
 .row {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 
     > div,
     > input {
-        width: 50%;
+        width: 100%;
     }
 
-    input:first-of-type {
-        margin-right: 2rem;
+    > input:first-of-type {
+        margin: 0 2rem 2rem 0;
     }
 }
 
 .passwordNotice {
+    display: block;
+    margin-top: 0.7rem;
     font-size: 1rem;
     font-weight: 500;
     color: var(--color-4);
@@ -99,7 +99,7 @@
 
 .organization {
     input {
-        width: 80%;
+        width: 100%;
     }
 }
 
@@ -155,4 +155,36 @@
     justify-content: center;
     align-items: center;
     margin: 4rem auto 0 auto;
+}
+
+@media screen and (min-width: 576px) {
+    .box {
+        padding: 4.5rem;
+        border: 1px solid var(--color-2-darker);
+        box-shadow: var(--shadow);
+
+        hr {
+            width: 80%;
+            margin: 3rem auto;
+        }
+    }
+
+    .organization {
+        input {
+            width: 80%;
+        }
+    }
+
+    .row {
+        flex-direction: row;
+
+        > div,
+        > input {
+            width: 50%;
+        }
+
+        > input:first-of-type {
+            margin: 0 2rem 0 0;
+        }
+    }
 }
