@@ -16,7 +16,7 @@ const TimeOnPage = ({ pageViews = [] }) => {
         const labels = [];
         
         for (let pageView of pageViews) {
-            data.push(Math.floor(pageView.totalTimeOnPage / (pageView.visits - pageView.mobile)));
+            data.push(Math.floor(pageView.totalTimeOnPage / (pageView.visits - (pageView.mobile || 0))));
             labels.push(pageView.day);
         }
         
