@@ -1,12 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import {
-    AiOutlineHome,
-    AiOutlineLogout,
-    AiOutlineQuestionCircle,
-    AiOutlineSetting,
-    AiOutlineUnorderedList
-} from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineLogout, AiOutlineQuestionCircle, AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
 
 import logo from 'assets/logos/log-owl.svg';
 
