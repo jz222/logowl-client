@@ -27,7 +27,7 @@ Get the insights you need on how your IT services perform in production. Track e
 
 The Log Owl documentation helps you to get started quickly.
 
-📘 [**Documentation**](https://docs.logowl.io)
+📘 [**Documentation**](https://docs.logowl.io/docs/getting-started#client)
 
 ## Insights
 
