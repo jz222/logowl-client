@@ -88,7 +88,7 @@ const Blueprint = ({ children, history }) => {
                 </main>
             </div>
             
-            <Modal open={startPaymentFlow}>
+            <Modal open={true}>
                 <PaymentFlow endPaymentFlow={() => setStartPaymentFlow(false)} />
             </Modal>
         </>

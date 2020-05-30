@@ -1,3 +1,4 @@
 export default {
-    backendURL: window.logowlConnectivity.backendURL
+    backendURL: window.logowlConnectivity.backendURL,
+    paymentServer: 'http://localhost:2500'
 }
