@@ -1,8 +1,13 @@
+.successMessageWrapper,
 .content {
     position: relative;
     width: 100%;
     min-height: 245px;
     margin: 2.5rem auto 0 auto;
+}
+
+.successMessageWrapper {
+    min-height: 0;
 }
 
 .card {

@@ -10,14 +10,23 @@ import config from 'config';
 
 import styling from './PaymentFlow.module.scss';
 
+// Link components
+const PrivacyPolicy = () => <a href='https://logowl.io/privacy-policy' rel='noreferrer noopener' target='_blank'>Privacy Policy</a>;
+const TC = () => <a href='https://logowl.io/terms-and-conditions' rel='noreferrer noopener' target='_blank'>Terms and Conditions</a>;
+
+// PaymentFlow component
 const PaymentFlow = ({ endPaymentFlow }) => {
     const [store, , setError] = useStore();
-    const [{ step, selectedPlan, isLoading, payload }, setState] = useState({
+    const [state, setState] = useState({
         step: 1,
         selectedPlan: 'free',
-        isLoading: true,
-        payload: null
+        payload: null,
+        successfullySubscribed: false,
+        isCreatingSubscription: false,
+        isLoading: true
     });
+    
+    const { step, selectedPlan, payload, successfullySubscribed, isCreatingSubscription, isLoading } = state;
     
     const dropInContainer = useRef({});
     const braintreeInstance = useRef({});
@@ -46,19 +55,20 @@ const PaymentFlow = ({ endPaymentFlow }) => {
     
     
     /**
-     * Requests the payment method.
+     * Requests the payment method and thereby
+     * confirms the payment details.
      * @returns {Promise<void>}
      */
-    const requestPaymentMethod = async() => {
+    const getConfirmation = async () => {
         try {
             const payload = await braintreeInstance.current.requestPaymentMethod();
-    
+            
             payload.firstName = store.firstName;
             payload.lastName = store.lastName;
             payload.email = store.email;
             payload.organizationId = store.organizationId;
             payload.plan = selectedPlan;
-    
+            
             setState(prevState => ({ ...prevState, step: 3, payload }));
         } catch (error) {
             console.error(error);
@@ -70,13 +80,22 @@ const PaymentFlow = ({ endPaymentFlow }) => {
      * Creates a subscription.
      * @returns {Promise<void>}
      */
-    const createSubscription = async () => {
+    const subscribe = async () => {
         try {
-                await fetch(config.connectivity.paymentServer + '/logowl/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+            setState(prevState => ({ ...prevState, isCreatingSubscription: true }));
+            
+            let res = await fetch(config.connectivity.paymentServer + '/logowl/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            
+            res = await res.json();
+            
+            if (res.success) {
+                setState(prevState => ({ ...prevState, successfullySubscribed: true }));
+            }
+            
         } catch (error) {
             console.error(error);
         }
@@ -90,7 +109,9 @@ const PaymentFlow = ({ endPaymentFlow }) => {
     const navigateBack = async () => {
         try {
             await braintreeInstance.current.teardown();
+            
             setState(prevState => ({ ...prevState, step: 1, isLoading: true, payload: null }));
+            
         } catch (error) {
             console.error(error);
         }
@@ -114,7 +135,9 @@ const PaymentFlow = ({ endPaymentFlow }) => {
         try {
             if (selectedPlan === 'free') {
                 await fetchClient('updateOrganization', { isSetUp: true });
+                
                 endPaymentFlow();
+                
             } else {
                 setState(prevState => ({ ...prevState, step: 2 }));
             }
@@ -186,6 +209,10 @@ const PaymentFlow = ({ endPaymentFlow }) => {
     
     
     // View that lets the user add their payment details
+    const cancelLabel = step === 2 ? 'Back' : 'Cancel';
+    const submitLabel = step === 2 ? 'Next' : 'Submit';
+    const submitFunc = step === 2 ? getConfirmation : subscribe;
+    
     const payment = (
         <>
             <h2>Place Payment</h2>
@@ -203,17 +230,40 @@ const PaymentFlow = ({ endPaymentFlow }) => {
                 </div>
                 
                 <p className={styling.notice} hidden={!payload}>
-                    By creating a subscription you accept our <a href='https://logowl.io/privacy-policy' rel='noreferrer noopener' target='_blank'>Privacy Policy</a> and <a href='https://logowl.io/terms-and-conditions' rel='noreferrer noopener' target='_blank'>Terms and conditions</a>.
+                    By creating a subscription you accept our <PrivacyPolicy /> and <TC />.
                 </p>
             </div>
             
             <div className={styling.controls}>
-                <Button size='smaller' color='light' onClick={navigateBack}>{step === 2 ? 'Back' : 'Cancel'}</Button>
-                <Button size='smaller' onClick={step === 2 ? requestPaymentMethod : createSubscription}>{step === 2 ? 'Next' : 'Submit'}</Button>
+                <Button size='smaller' color='light' onClick={navigateBack}>{cancelLabel}</Button>
+                <Button size='smaller' onClick={submitFunc} disabled={isCreatingSubscription}>{submitLabel}</Button>
             </div>
         </>
     );
     
+    
+    // Success message shown if the subscription was created successfully
+    const successMessage = (
+        <>
+            <h2>Subscription successful</h2>
+            
+            <div className={styling.successMessageWrapper}>
+                <p>
+                    Thank you for your trust in Log Owl. You can manage your subscription in the settings of your
+                    organization. If you have any questions, please do not hesitate to contact us for further
+                    assistance.
+                </p>
+            </div>
+            
+            <div className={styling.controls}>
+                <Button size='smaller' onClick={endPaymentFlow}>Finish</Button>
+            </div>
+        </>
+    );
+    
+    if (successfullySubscribed) {
+        return successMessage;
+    }
     
     return step < 2 ? selectPlan : payment;
 };
