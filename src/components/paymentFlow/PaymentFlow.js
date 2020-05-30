@@ -16,7 +16,8 @@ const TC = () => <a href='https://logowl.io/terms-and-conditions' rel='noreferre
 
 // PaymentFlow component
 const PaymentFlow = ({ endPaymentFlow }) => {
-    const [store, , setError] = useStore();
+    const [store, dispatch, setError] = useStore();
+    
     const [state, setState] = useState({
         step: 1,
         selectedPlan: 'free',
@@ -84,16 +85,20 @@ const PaymentFlow = ({ endPaymentFlow }) => {
         try {
             setState(prevState => ({ ...prevState, isCreatingSubscription: true }));
             
-            let res = await fetch(config.connectivity.paymentServer + '/logowl/subscribe', {
+            const endpoint = config.connectivity.paymentServer + '/logowl/subscribe';
+            const opts = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
-            });
+            };
             
-            res = await res.json();
+            const res = await (await fetch(endpoint, opts)).json();
             
             if (res.success) {
                 setState(prevState => ({ ...prevState, successfullySubscribed: true }));
+                
+                const updatedUserData = await fetchClient('getUser');
+                dispatch({ type: 'update', payload: updatedUserData });
             }
             
         } catch (error) {
@@ -219,9 +224,11 @@ const PaymentFlow = ({ endPaymentFlow }) => {
             
             <div className={styling.content}>
                 <p>
-                    Please enter your credit details below. This data never reaches our servers and securely processes
-                    by our payment partner.
+                    Please enter your credit details below. This data never reaches our servers and will be securely
+                    processes by our payment partner.
                 </p>
+                
+                <p className={styling.selectedPlan}><b>Subscribing to:</b> Business Plan (15$ / month)</p>
                 
                 <div className={styling.paymentDetails} ref={dropInContainer} />
                 

@@ -2,7 +2,7 @@
 .content {
     position: relative;
     width: 100%;
-    min-height: 245px;
+    min-height: 255px;
     margin: 2.5rem auto 0 auto;
 }
 
@@ -66,6 +66,13 @@
     }
 }
 
+.selectedPlan {
+    position: relative;
+    margin: 2rem 0 -2rem 0;
+    font-weight: 500;
+    z-index: 9;
+}
+
 .spinnerWrapper {
     position: absolute;
     top: 0;
@@ -76,6 +83,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--color-2);
+    z-index: 10;
 }
 
 .notice {
