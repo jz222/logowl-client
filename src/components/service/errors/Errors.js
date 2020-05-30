@@ -259,7 +259,7 @@ const Errors = ({ serviceId, history, type = '' }) => {
                             
                             <div>
                                 <div className={styling.count}>
-                                    <div>{error.count}</div>
+                                    <div>{utils.shortNumber(error.count)}</div>
                                     <div>count</div>
                                 </div>
                             </div>
