@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { PrivacyPolicy, TermsAndConditions } from 'components/UI/links/Links';
 import Checkbox from 'components/UI/checkbox/Checkbox';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
@@ -9,10 +10,6 @@ import { useStore } from 'context';
 import config from 'config';
 
 import styling from './PaymentFlow.module.scss';
-
-// Link components
-const PrivacyPolicy = () => <a href='https://logowl.io/privacy-policy' rel='noreferrer noopener' target='_blank'>Privacy Policy</a>;
-const TC = () => <a href='https://logowl.io/terms-and-conditions' rel='noreferrer noopener' target='_blank'>Terms and Conditions</a>;
 
 // PaymentFlow component
 const PaymentFlow = ({ endPaymentFlow }) => {
@@ -237,7 +234,7 @@ const PaymentFlow = ({ endPaymentFlow }) => {
                 </div>
                 
                 <p className={styling.notice} hidden={!payload}>
-                    By creating a subscription you accept our <PrivacyPolicy /> and <TC />.
+                    By creating a subscription you accept our <PrivacyPolicy /> and <TermsAndConditions />.
                 </p>
             </div>
             
