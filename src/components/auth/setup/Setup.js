@@ -21,7 +21,7 @@ const Setup = ({ history }) => {
         lastName: '',
         email: '',
         password: '',
-        givenConsent: false,
+        givenConsent: config.environment.isSelfHosted,
         isLoading: true,
         error: ''
     });
