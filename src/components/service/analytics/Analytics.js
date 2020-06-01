@@ -93,7 +93,7 @@ const Analytics = ({ serviceId = '' }) => {
         <Placeholder>
             <h4>No analytic data available</h4>
             
-            <p>Install and configure the browser adapter to use analytics</p>
+            <p>Install and configure the adapter to use analytics</p>
             
             <Button onClick={() => window.open(config.links.adapters.browser, '_blank').focus()}>
                 Get Started
