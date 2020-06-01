@@ -326,6 +326,7 @@ li {
 .braintree-sheet__error-text {
     margin-top: -4rem;
     margin-bottom: -4rem;
+    font-size: 1.2rem !important;
     color: var(--color-4) !important;
 }
 

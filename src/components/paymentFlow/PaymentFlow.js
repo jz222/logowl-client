@@ -15,16 +15,19 @@ import styling from './PaymentFlow.module.scss';
 const PaymentFlow = ({ endPaymentFlow }) => {
     const [store, dispatch, setError] = useStore();
     
-    const [state, setState] = useState({
+    const initState = {
         step: 1,
         selectedPlan: 'free',
         payload: null,
         successfullySubscribed: false,
         isCreatingSubscription: false,
-        isLoading: true
-    });
+        isLoading: true,
+        errorMsg: ''
+    };
     
-    const { step, selectedPlan, payload, successfullySubscribed, isCreatingSubscription, isLoading } = state;
+    const [state, setState] = useState(initState);
+    
+    const { step, selectedPlan, payload, successfullySubscribed, isCreatingSubscription, isLoading, errorMsg } = state;
     
     const dropInContainer = useRef({});
     const braintreeInstance = useRef({});
@@ -48,6 +51,7 @@ const PaymentFlow = ({ endPaymentFlow }) => {
             
         } catch (error) {
             console.error(error);
+            setState(prevState => ({ ...prevState, errorMsg: error.message }));
         }
     }, []);
     
@@ -100,6 +104,7 @@ const PaymentFlow = ({ endPaymentFlow }) => {
             
         } catch (error) {
             console.error(error);
+            setState(prevState => ({ ...prevState, errorMsg: error.message }));
         }
     };
     
@@ -110,12 +115,13 @@ const PaymentFlow = ({ endPaymentFlow }) => {
      */
     const navigateBack = async () => {
         try {
-            await braintreeInstance.current.teardown();
-            
-            setState(prevState => ({ ...prevState, step: 1, isLoading: true, payload: null }));
-            
+            if (braintreeInstance.current.teardown) {
+                await braintreeInstance.current.teardown();
+            }
         } catch (error) {
             console.error(error);
+        } finally {
+            setState(initState);
         }
     };
     
@@ -246,6 +252,27 @@ const PaymentFlow = ({ endPaymentFlow }) => {
     );
     
     
+    // Error message shown if the subscription failed
+    const errorMessage = (
+        <>
+            <h2>Subscription failed</h2>
+            
+            <div className={styling.messageWrapper}>
+                <p>
+                    Something went wrong when processing the payment details you've provided. Please try again and make
+                    sure the data you provide is correct. If the problem persists, please contact our support.
+                </p>
+                
+                <code>{errorMsg}</code>
+            </div>
+            
+            <div className={styling.controls}>
+                <Button size='smaller' onClick={navigateBack}>Cancel</Button>
+            </div>
+        </>
+    );
+    
+    
     // Success message shown if the subscription was created successfully
     const successMessage = (
         <>
@@ -264,6 +291,10 @@ const PaymentFlow = ({ endPaymentFlow }) => {
             </div>
         </>
     );
+    
+    if (errorMsg) {
+        return errorMessage;
+    }
     
     if (successfullySubscribed) {
         return successMessage;
