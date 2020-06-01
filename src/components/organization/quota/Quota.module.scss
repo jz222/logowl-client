@@ -13,3 +13,18 @@
         margin-bottom: 0;
     }
 }
+
+.flexWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h6 {
+        margin-bottom: 0.2rem;
+    }
+
+    p {
+        margin-right: 1rem;
+        font-size: unset;
+    }
+}

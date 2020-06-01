@@ -40,7 +40,7 @@ const Organization = ({ history }) => {
             {activeTab === 'info' && <Info organization={org} />}
             {activeTab === 'team' && <Team team={store.team} userId={store.id} />}
             {activeTab === 'invite' && <Invite tabHandler={setActiveTab} />}
-            {activeTab === 'quota' && <Quota activePlan={org.plan} receivedRequests={org.receivedRequests} requestLimit={org.monthlyRequestLimit} />}
+            {activeTab === 'quota' && <Quota org={org} />}
             {activeTab === 'delete' && <Delete name={org.name} history={history} />}
         </>
     );

@@ -15,6 +15,7 @@ const initialState = {
         identifier: '',
         receivedRequests: {},
         monthlyRequestLimit: 0,
+        subscriptionId: '',
         createdAt: '',
         updatedAt: ''
     },
