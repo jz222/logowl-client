@@ -17,8 +17,8 @@ const Service = ({ history, match }) => {
     
     const service = store.services.find(x => x.id === match.params.serviceId) || {};
     
-    // Only the browser adapter offers analytics
-    const analyticsAvailable = service.type === 'browser';
+    // Only the browser and custom adapters offer analytics
+    const analyticsAvailable = service.type === 'browser' || service.type === 'custom';
     
     return (
         <>
