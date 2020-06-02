@@ -239,111 +239,14 @@ li {
 }
 
 /* Braintree Overrides */
-[data-braintree-id="toggle"] {
-    display: none;
+.braintree-hosted-fields-focused {
+    box-shadow: 0 0 0 1px var(--color-3-light), 0 0 0 5px var(--color-2-darker);
 }
 
-.braintree-dropin {
-    margin-bottom: -2rem;
+.braintree-hosted-fields-invalid {
+    box-shadow: 0 0 0 1px var(--color-4);
 }
 
-.braintree-sheet__container {
-    margin: 0 auto !important;
-}
-
-.braintree-card {
-    border: none;
-}
-
-.braintree-sheet__content {
-    padding: 0;
-}
-
-.braintree-sheet__header {
-    margin-bottom: 0;
-    padding: 0;
-    border-bottom: none;
-}
-
-.braintree-form__field-group:nth-child(2) {
-    margin-left: 4rem !important;
-}
-
-.braintree-form__field-group {
-    padding-left: 0 !important;
-    margin-bottom: 2rem !important;
-}
-
-.braintree-form__field-error {
-    margin-left: 0.4rem !important;
-    color: var(--color-4) !important;
-}
-
-.braintree-form__hosted-field,
-.braintree-form__hosted-field:hover {
-    height: 5rem !important;
-    border-radius: var(--border-radius) !important;
-    border: 1px solid var(--color-2-darker) !important;
-    -webkit-appearance: none !important;
-    transition: box-shadow 0.2s !important;
-    font-size: 1.6rem !important;
-    color: var(--color-1) !important;
-}
-
-.braintree-sheet__logo--header,
-.braintree-sheet__text,
-.braintree-form__icon {
-    display: none !important;
-}
-
-.braintree-form__label {
-    margin-left: 0.4rem !important;
-    font-weight: 500 !important;
-    color: var(--color-1) !important;
-}
-
-.braintree-form__descriptor {
-    color: var(--color-2-dark) !important;
-}
-
-.braintree-heading {
-    display: none !important;
-}
-
-.braintree-method__label {
-    color: var(--color-1) !important;
-}
-
-.braintree-icon--bordered {
-    border: none !important;
-}
-
-.braintree-sheet__error {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.braintree-sheet__error-text {
-    margin-top: -4rem;
-    margin-bottom: -4rem;
-    font-size: 1.2rem !important;
-    color: var(--color-4) !important;
-}
-
-.braintree-sheet--has-error .braintree-sheet {
-    border: none !important;
-}
-
-.braintree-method__check {
-    background-color: var(--color-3) !important;
-}
-
-.braintree-method__check svg {
-    background-color: transparent !important;
-}
-
-.braintree-method--active {
-    border-color: var(--color-2-darker) !important;
-    outline: none !important;
-    cursor: default;
+.braintree-hosted-fields-focused.braintree-hosted-fields-invalid {
+    box-shadow: 0 0 0 1px var(--color-4), 0 0 0 5px var(--color-4-light);
 }
