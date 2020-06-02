@@ -22,7 +22,7 @@ const Quota = ({ org }) => {
      */
     const cancelSubscription = async () => {
         try {
-            const url = config.connectivity.paymentServer + '/logowl/cancel';
+            const url = config.connectivity.paymentServer + '/cancel';
             
             const opts = {
                 method: 'POST',
