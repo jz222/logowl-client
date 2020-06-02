@@ -5,17 +5,27 @@ import InputField from 'components/UI/inputField/InputField';
 import Button from 'components/UI/button/Button';
 import Card from 'components/UI/card/Card';
 
+import { useStore } from 'context';
 import config from 'config';
 
 import styling from './Quota.module.scss';
 
 const Quota = ({ org }) => {
+    const [, dispatch, setError] = useStore();
+    
     const [{ cancelConfirmationOpen }, setState] = useState({
         cancelConfirmationOpen: false,
     });
     
     // Deconstruct organization object
     const { id = '', plan = '', receivedRequests = {}, monthlyRequestLimit = 0, subscriptionId = '' } = org;
+    
+    /**
+     * Toggles the confirmation modal visibility.
+     */
+    const toggleConfirmationModal = () => {
+        setState(prevState => ({ ...prevState, cancelConfirmationOpen: !prevState.cancelConfirmationOpen }));
+    };
     
     /**
      * Cancels the active subscription.
@@ -32,16 +42,14 @@ const Quota = ({ org }) => {
             
             await fetch(url, opts);
             
+            dispatch({ type: 'resetActivePlan' });
+            toggleConfirmationModal();
+            
         } catch (error) {
             console.error(error);
+            setError(error);
+            toggleConfirmationModal();
         }
-    };
-    
-    /**
-     * Toggles the confirmation modal visibility.
-     */
-    const toggleConfirmationModal = () => {
-        setState(prevState => ({ ...prevState, cancelConfirmationOpen: !prevState.cancelConfirmationOpen }));
     };
     
     // Get the current month

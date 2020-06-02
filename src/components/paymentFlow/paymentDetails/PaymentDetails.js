@@ -13,9 +13,10 @@ import styling from '../PaymentFlow.module.scss';
 const PaymentDetails = ({ selectedPlan, updateState }) => {
     const [store] = useStore();
     
-    const [{ hostedFields, errorMsg }, setState] = useState({
+    const [{ hostedFields, errorMsg, isLoading }, setState] = useState({
         hostedFields: undefined,
-        errorMsg: ''
+        errorMsg: '',
+        isLoading: true
     });
     
     
@@ -35,10 +36,11 @@ const PaymentDetails = ({ selectedPlan, updateState }) => {
             const opts = getBraintreeOptions(client);
             const hostedFields = await window.braintree.hostedFields.create(opts);
             
-            setState(prevState => ({ ...prevState, hostedFields }));
+            setState(prevState => ({ ...prevState, hostedFields, isLoading: false }));
             
         } catch (error) {
             console.error();
+            
             updateState({ errorMsg: 'Payments are currently unavailable. Please contact our support.' });
         }
     }, [updateState]);
@@ -57,6 +59,8 @@ const PaymentDetails = ({ selectedPlan, updateState }) => {
      */
     const submitHandler = async () => {
         try {
+            setState(prevState => ({ ...prevState, isLoading: true }));
+            
             const payload = await hostedFields.tokenize();
             
             payload.firstName = store.firstName;
@@ -85,11 +89,11 @@ const PaymentDetails = ({ selectedPlan, updateState }) => {
             
             if (error.message.includes('input fields are invalid')) {
                 error.message = 'Some payment details are invalid';
-                setState(prevState => ({ ...prevState, errorMsg: error.message }));
+                setState(prevState => ({ ...prevState, errorMsg: error.message, isLoading: false }));
                 
             } else if (error.message.includes('All fields are empty')) {
                 error.message = 'All fields are empty. Please fill out all the fields above.';
-                setState(prevState => ({ ...prevState, errorMsg: error.message }));
+                setState(prevState => ({ ...prevState, errorMsg: error.message, isLoading: false }));
                 
             } else {
                 updateState({ errorMsg: error.message });
@@ -104,6 +108,18 @@ const PaymentDetails = ({ selectedPlan, updateState }) => {
     useEffect(() => {
         initHostedFields();
     }, [initHostedFields]);
+    
+    
+    /**
+     * Removes the hosted fields when the component is unmounted.
+     */
+    useEffect(() => {
+        return () => {
+            if (hostedFields) {
+                hostedFields.teardown();
+            }
+        };
+    }, [hostedFields])
     
     
     return (
@@ -141,7 +157,7 @@ const PaymentDetails = ({ selectedPlan, updateState }) => {
                 <Button size='smaller' onClick={submitHandler}>Submit</Button>
             </div>
             
-            <div className={styling.spinner} hidden={hostedFields}>
+            <div className={styling.spinner} hidden={!isLoading}>
                 <Spinner invert />
             </div>
         </div>
