@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import PlanDetails from '../planDetails/PlanDetails';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 
@@ -108,6 +109,8 @@ const PaymentDetails = ({ selectedPlan, updateState }) => {
     return (
         <div className={styling.paymentDetails}>
             <h2>Enter Credit Card Details</h2>
+            
+            <PlanDetails selectedPlan={selectedPlan} />
             
             <p className={styling.caption}>
                 Please enter your credit details below. This data never reaches our servers and will be securely

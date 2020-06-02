@@ -28,7 +28,7 @@ export default (client) => {
             },
             expirationDate: {
                 selector: '#braintree-expiration-date',
-                placeholder: '10/22'
+                placeholder: '10/2021'
             }
         }
     };

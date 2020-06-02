@@ -1,13 +1,16 @@
 import React from 'react';
 
+import PlanDetails from '../planDetails/PlanDetails';
 import Button from 'components/UI/button/Button';
 
 import styling from '../PaymentFlow.module.scss';
 
 // Error message shown if the subscription failed
-export const ErrorMessage = ({ errorMsg, resetPaymentFlow }) => (
+export const ErrorMessage = ({ errorMsg, resetPaymentFlow, selectedPlan }) => (
     <>
         <h2>Subscription failed</h2>
+        
+        <PlanDetails selectedPlan={selectedPlan} failure />
         
         <div className={styling.message}>
             <p>
@@ -26,9 +29,11 @@ export const ErrorMessage = ({ errorMsg, resetPaymentFlow }) => (
 
 
 // Success message shown if the subscription was created successfully
-export const SuccessMessage = ({ endPaymentFlow }) => (
+export const SuccessMessage = ({ endPaymentFlow, selectedPlan }) => (
     <>
         <h2>Subscription successful</h2>
+        
+        <PlanDetails selectedPlan={selectedPlan} success />
         
         <div className={styling.message}>
             <p>

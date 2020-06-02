@@ -57,13 +57,12 @@ const PaymentFlow = ({ endPaymentFlow }) => {
         }
     };
     
-    
     if (successfullySubscribed) {
-        return <SuccessMessage endPaymentFlow={endPaymentFlow} />
+        return <SuccessMessage endPaymentFlow={endPaymentFlow} selectedPlan={selectedPlan} />
     }
     
     if (errorMsg) {
-        return <ErrorMessage errorMsg={errorMsg} resetPaymentFlow={() => setState(initState)} />
+        return <ErrorMessage errorMsg={errorMsg} selectedPlan={selectedPlan} resetPaymentFlow={() => setState(initState)} />
     }
     
     if (step === 2) {

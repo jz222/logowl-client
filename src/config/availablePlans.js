@@ -10,5 +10,11 @@ export default [
         name: 'Business Plan',
         description: 'Includes 5000 requests/month and maximum one additional team member.',
         price: '15$'
+    },
+    {
+        id: 'enterprise',
+        name: 'Enterprise Plan',
+        description: 'Includes 5000 requests/month and maximum one additional team member.',
+        price: '45$'
     }
 ];

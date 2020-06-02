@@ -81,6 +81,9 @@
     --color-9: #1DE9B6;
     --color-9-opacity: rgba(29, 233, 182, 0.2);
 
+    --color-10-lighter: #fff1ea;
+    --color-10: #fea686;
+
     --max-width: 135rem;
     --border-radius: 7px;
     --shadow: var(--color-2-darker) 0 5px 20px 0;
