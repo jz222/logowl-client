@@ -18,7 +18,7 @@ const Quota = ({ org }) => {
     });
     
     // Deconstruct organization object
-    const { id = '', plan = '', receivedRequests = {}, monthlyRequestLimit = 0, subscriptionId = '' } = org;
+    const { id = '', plan = '', receivedRequests = {}, monthlyRequestLimit = 0, subscriptionId = '', paidThroughDate = '' } = org;
     
     /**
      * Toggles the confirmation modal visibility.
@@ -40,9 +40,11 @@ const Quota = ({ org }) => {
                 body: JSON.stringify({ organizationId: id, subscriptionId })
             };
             
-            await fetch(url, opts);
+            const res = await (await fetch(url, opts)).json();
             
-            dispatch({ type: 'resetActivePlan' });
+            console.log(res);
+            
+            dispatch({ type: 'updateOrganization', payload: { paidThroughDate: res.message.paidThroughDate } });
             toggleConfirmationModal();
             
         } catch (error) {
@@ -62,6 +64,17 @@ const Quota = ({ org }) => {
     return (
         <>
             <Card>
+                <div className={styling.row} hidden={!paidThroughDate}>
+                    <div className={styling.notice}>
+                        <h6>Subscription Cancelled</h6>
+                        <p>
+                            The subscription has been cancelled. Your credit card will no longer be charged. You can use
+                            the <span>{plan}</span> Plan until {paidThroughDate}. Afterwards, you will be downgraded to
+                            the Free Plan.
+                        </p>
+                    </div>
+                </div>
+                
                 <div className={styling.row}>
                     <h6>Active Plan</h6>
                     <InputField value={plan.toUpperCase()} disabled />
@@ -91,8 +104,10 @@ const Quota = ({ org }) => {
                     <InputField value={monthlyRequestLimit} disabled />
                     <p>Total requests that are tracked per month</p>
                 </div>
+    
+                <hr className={styling.dangerZone} />
                 
-                <div className={styling.row} hidden={!subscriptionId}>
+                <div className={styling.row} hidden={!subscriptionId || paidThroughDate}>
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Cancel Subscription</h6>

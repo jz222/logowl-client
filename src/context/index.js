@@ -17,6 +17,7 @@ const initialState = {
         monthlyRequestLimit: 0,
         plan: '',
         subscriptionId: '',
+        paidThroughDate: '',
         createdAt: '',
         updatedAt: ''
     },
@@ -31,8 +32,8 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'resetActivePlan':
-            return { ...state, organization: { ...state.organization, plan: 'free', subscriptionId: '' } };
+        case 'updateOrganization':
+            return { ...state, organization: { ...state.organization, ...action.payload } };
         case 'update':
             return { ...state, ...action.payload };
         default:

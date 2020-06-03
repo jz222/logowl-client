@@ -14,6 +14,22 @@
     }
 }
 
+.notice {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-4-light);
+    color: var(--color-4);
+
+    h6 {
+        margin-bottom: 0.5  rem;
+    }
+
+    span {
+        text-transform: capitalize;
+    }
+}
+
 .flexWrapper {
     display: flex;
     justify-content: space-between;
@@ -26,5 +42,27 @@
     p {
         margin-right: 1rem;
         font-size: unset;
+    }
+}
+
+.dangerZone {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    margin: 2.5rem 0;
+    border: none;
+    background-color: var(--color-4-light);
+    overflow: visible;
+
+    &:after {
+        content: "Danger Zone";
+        position: absolute;
+        top: -0.7rem;
+        left: 2rem;
+        padding: 0 1rem;
+        background-color: var(--color-2);
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: var(--color-4);
     }
 }
