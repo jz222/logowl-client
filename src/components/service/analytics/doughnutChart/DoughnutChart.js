@@ -96,7 +96,7 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
         }
         
         for (let [key, value] of Object.entries(aggregatedResult)) {
-            labels.push(key);
+            labels.push(key.replace('%2E', '.'));
             data.push(value);
         }
         
