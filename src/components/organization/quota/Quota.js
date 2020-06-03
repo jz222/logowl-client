@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import Confirmation from 'components/UI/confirmation/Confirmation';
 import InputField from 'components/UI/inputField/InputField';
+import PaymentFlow from 'components/paymentFlow/PaymentFlow';
 import Button from 'components/UI/button/Button';
+import Modal from 'components/UI/modal/Modal';
 import Card from 'components/UI/card/Card';
 
 import { useStore } from 'context';
@@ -13,8 +15,9 @@ import styling from './Quota.module.scss';
 const Quota = ({ org }) => {
     const [, dispatch, setError] = useStore();
     
-    const [{ cancelConfirmationOpen }, setState] = useState({
+    const [{ cancelConfirmationOpen, paymentFlowOpen }, setState] = useState({
         cancelConfirmationOpen: false,
+        paymentFlowOpen: false
     });
     
     // Deconstruct organization object
@@ -25,6 +28,10 @@ const Quota = ({ org }) => {
      */
     const toggleConfirmationModal = () => {
         setState(prevState => ({ ...prevState, cancelConfirmationOpen: !prevState.cancelConfirmationOpen }));
+    };
+    
+    const togglePaymentFlow = () => {
+        setState(prevState => ({ ...prevState, paymentFlowOpen: !prevState.paymentFlowOpen }));
     };
     
     /**
@@ -70,7 +77,7 @@ const Quota = ({ org }) => {
                         <p>
                             The subscription has been cancelled. Your credit card will no longer be charged. You can use
                             the <span>{plan}</span> Plan until {paidThroughDate}. Afterwards, you will be downgraded to
-                            the Free Plan.
+                            the Free Plan. You can create a new subscription below to prevent being downgraded.
                         </p>
                     </div>
                 </div>
@@ -104,7 +111,7 @@ const Quota = ({ org }) => {
                     <InputField value={monthlyRequestLimit} disabled />
                     <p>Total requests that are tracked per month</p>
                 </div>
-    
+                
                 <hr className={styling.dangerZone} />
                 
                 <div className={styling.row} hidden={!subscriptionId || paidThroughDate}>
@@ -117,7 +124,22 @@ const Quota = ({ org }) => {
                         <Button size='smaller' onClick={toggleConfirmationModal}>Cancel</Button>
                     </div>
                 </div>
+                
+                <div className={styling.row} hidden={!paidThroughDate}>
+                    <div className={styling.flexWrapper}>
+                        <div>
+                            <h6>Create a Subscription</h6>
+                            <p>Create a new subscription and enjoy a higher quota.</p>
+                        </div>
+                        
+                        <Button size='smaller' onClick={togglePaymentFlow}>Create</Button>
+                    </div>
+                </div>
             </Card>
+            
+            <Modal open={paymentFlowOpen}>
+                <PaymentFlow endPaymentFlow={togglePaymentFlow} />
+            </Modal>
             
             <Confirmation
                 open={cancelConfirmationOpen}
