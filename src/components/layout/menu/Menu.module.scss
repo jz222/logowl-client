@@ -21,7 +21,7 @@
 
     img {
         width: auto;
-        height: 4.5rem;
+        height: 4rem;
     }
 
     ul {
@@ -33,7 +33,7 @@
     li {
         margin-left: 2.5rem;
         transition: color 0.2s;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 500;
         cursor: pointer;
     }
@@ -41,5 +41,17 @@
     a:hover,
     li:hover {
         color: var(--color-3);
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .nav {
+        img {
+            height: 4.5rem;
+        }
+
+        li {
+            font-size: 1.8rem;
+        }
     }
 }

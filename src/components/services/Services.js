@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { Placeholder } from 'components/UI/placeholder/Placeholder';
+import Placeholder from 'components/UI/placeholder/Placeholder';
 import InputField from 'components/UI/inputField/InputField';
 import Dropdown from 'components/UI/dropdown/Dropdown';
 import Stepper from 'components/UI/stepper/Stepper';
@@ -149,8 +149,10 @@ const Services = ({ history }) => {
     
     
     const placeholder = (
-        <Placeholder title='No services available'>
-            <h4>Create your first service and get started</h4>
+        <Placeholder>
+            <h4>You have no services yet</h4>
+            
+            <p>Create your first service and get started</p>
             
             <Button onClick={openModal}>New Service</Button>
         </Placeholder>

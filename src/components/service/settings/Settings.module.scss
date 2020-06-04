@@ -22,21 +22,6 @@
     }
 }
 
-.caption {
-    line-height: 1.5;
-    margin: 2rem 0 2.5rem 0;
-}
-
-.controls {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-
-    button:first-of-type {
-        margin-right: 1rem;
-    }
-}
-
 .deleteButton {
     display: flex;
     align-items: center;

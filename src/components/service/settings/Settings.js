@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
 
+import Confirmation from 'components/UI/confirmation/Confirmation';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
-import Modal from 'components/UI/modal/Modal';
 import Card, { Header } from 'components/UI/card/Card';
 
 import fetchClient from 'fetchClient';
@@ -47,8 +47,7 @@ const Settings = ({ history, serviceName, serviceId }) => {
     };
     
     
-    const buttonContent = isLoading ?
-        <div className={styling.deleteButton}><Spinner invert /> Deleting</div> : 'Delete';
+    const buttonContent = isLoading ? <div className={styling.deleteButton}><Spinner invert /> Deleting</div> : 'Delete';
     
     
     return (
@@ -66,19 +65,15 @@ const Settings = ({ history, serviceName, serviceId }) => {
                 </div>
             </Card>
             
-            <Modal open={confirmVisibility} size='small'>
-                <h3>Delete {serviceName}</h3>
-                
-                <p className={styling.caption}>
-                    Please confirm that you want to delete the service {serviceName} and all its data.
-                    Deleting a service is permanent and can not be undone.
-                </p>
-                
-                <div className={styling.controls}>
-                    <Button size='smaller' color='light' onClick={toggleConfirmVisibility}>Cancel</Button>
-                    <Button size='smaller' onClick={deleteService} disabled={isLoading}>{buttonContent}</Button>
-                </div>
-            </Modal>
+            <Confirmation
+                open={confirmVisibility}
+                title={'Delete ' + serviceName}
+                message={`Please confirm that you want to delete the service ${serviceName} and all its data. Deleting a service is permanent and can not be undone.`}
+                label={buttonContent}
+                cancelHandler={toggleConfirmVisibility}
+                confirmHandler={deleteService}
+                disabled={isLoading}
+            />
         </>
     );
 };

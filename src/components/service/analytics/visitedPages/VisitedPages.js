@@ -22,7 +22,7 @@ const VisitedPages = ({pageViews = []}) => {
             <ul>
                 {Object.keys(aggregatedPageViews).map(key => (
                     <li key={key}>
-                        <span>{key}</span>
+                        <span>{key.replace('%2E', '.')}</span>
                         <span>{aggregatedPageViews[key]} views</span>
                     </li>
                 ))}

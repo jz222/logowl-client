@@ -83,8 +83,9 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
         const data = [];
         const labels = [];
         
-        const aggregatedResult = {};
+        let aggregatedResult = {};
         
+        // Aggregate all units
         for (let pageView of pageViews) {
             for (let [key, value] of Object.entries(pageView.referrer || {})) {
                 if (key in aggregatedResult) {
@@ -95,9 +96,21 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
             }
         }
         
-        for (let [key, value] of Object.entries(aggregatedResult)) {
-            labels.push(key);
-            data.push(value);
+        // Sort referrers
+        aggregatedResult = Object
+            .entries(aggregatedResult)
+            .map(([key, value]) => ({ key, value }))
+            .sort((a, b) => b.value - a.value);
+        
+        // Only show the greatest referrers
+        for (let { key, value } of aggregatedResult) {
+            if (data.length === 6 || data.length === 7) {
+                data[6] = (data[6] || 0) + value;
+                labels[6] = 'others';
+            } else {
+                labels.push(key.replace('%2E', '.'));
+                data.push(value);
+            }
         }
         
         return { data, labels };

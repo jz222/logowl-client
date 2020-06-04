@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 
-import { Placeholder } from 'components/UI/placeholder/Placeholder';
+import Placeholder from 'components/UI/placeholder/Placeholder';
 import Evolution from 'components/UI/evolution/Evolution';
 import Checkbox from 'components/UI/checkbox/Checkbox';
 import Spinner from 'components/UI/spinner/Spinner';
@@ -194,8 +194,8 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     // Placeholder if no errors available
     const placeholder = (
-        <Placeholder title='No errors available'>
-            <h4>Connect your Service</h4>
+        <Placeholder>
+            <h4>Connect your service</h4>
             
             <p>Install the adapter to register errors</p>
             
@@ -259,7 +259,7 @@ const Errors = ({ serviceId, history, type = '' }) => {
                             
                             <div>
                                 <div className={styling.count}>
-                                    <div>{error.count}</div>
+                                    <div>{utils.shortNumber(error.count)}</div>
                                     <div>count</div>
                                 </div>
                             </div>
