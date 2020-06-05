@@ -4,7 +4,6 @@ import Confirmation from 'components/UI/confirmation/Confirmation';
 import InputField from 'components/UI/inputField/InputField';
 import PaymentFlow from 'components/paymentFlow/PaymentFlow';
 import Button from 'components/UI/button/Button';
-import Modal from 'components/UI/modal/Modal';
 import Card from 'components/UI/card/Card';
 
 import { useStore } from 'context';
@@ -15,7 +14,8 @@ import styling from './Quota.module.scss';
 const Quota = ({ org }) => {
     const [, dispatch, setError] = useStore();
     
-    const [{ cancelConfirmationOpen, paymentFlowOpen }, setState] = useState({
+    const [{ mode, cancelConfirmationOpen, paymentFlowOpen }, setState] = useState({
+        mode: '',
         cancelConfirmationOpen: false,
         paymentFlowOpen: false
     });
@@ -30,8 +30,11 @@ const Quota = ({ org }) => {
         setState(prevState => ({ ...prevState, cancelConfirmationOpen: !prevState.cancelConfirmationOpen }));
     };
     
-    const togglePaymentFlow = () => {
-        setState(prevState => ({ ...prevState, paymentFlowOpen: !prevState.paymentFlowOpen }));
+    /**
+     * Toggle the payment flow visibility
+     */
+    const togglePaymentFlow = (mode = '') => {
+        setState(prevState => ({ ...prevState, paymentFlowOpen: !prevState.paymentFlowOpen, mode }));
     };
     
     /**
@@ -48,8 +51,6 @@ const Quota = ({ org }) => {
             };
             
             const res = await (await fetch(url, opts)).json();
-            
-            console.log(res);
             
             dispatch({ type: 'updateOrganization', payload: { paidThroughDate: res.message.paidThroughDate } });
             toggleConfirmationModal();
@@ -135,11 +136,20 @@ const Quota = ({ org }) => {
                         <Button size='smaller' onClick={togglePaymentFlow}>Create</Button>
                     </div>
                 </div>
+                
+                <div className={styling.row}>
+                    <div className={styling.flexWrapper}>
+                        <div>
+                            <h6>Update Credit Card</h6>
+                            <p>Update the credit card that is charged for the subscription.</p>
+                        </div>
+                        
+                        <Button size='smaller' onClick={() => togglePaymentFlow('updateCC')}>Update</Button>
+                    </div>
+                </div>
             </Card>
             
-            <Modal open={paymentFlowOpen}>
-                <PaymentFlow endPaymentFlow={togglePaymentFlow} />
-            </Modal>
+            {paymentFlowOpen && <PaymentFlow open={paymentFlowOpen} endPaymentFlow={togglePaymentFlow} mode={mode} />}
             
             <Confirmation
                 open={cancelConfirmationOpen}

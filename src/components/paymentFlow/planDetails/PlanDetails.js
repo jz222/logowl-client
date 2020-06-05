@@ -8,7 +8,7 @@ import config from 'config';
 
 import styling from './PlanDetails.module.scss';
 
-const PlanDetails = ({ selectedPlan, success, failure }) => {
+const PlanDetails = ({ selectedPlan, success, failure, hidden }) => {
     const plan = config.availablePlans.find(x => x.id === selectedPlan) || {};
     
     let icon = logowl;
@@ -25,7 +25,7 @@ const PlanDetails = ({ selectedPlan, success, failure }) => {
     }
     
     return (
-        <div className={style}>
+        <div className={style} hidden={hidden}>
             <div className={styling.icon}>
                 <img src={icon} alt='logowl logo' />
             </div>

@@ -1,23 +1,27 @@
 import React, { useCallback, useState } from 'react';
 
+import { ErrorMessage, SubscriptionSuccessMessage, UpdateSuccessMessage } from './messages/Messages';
 import PaymentDetails from './paymentDetails/PaymentDetails';
-import { ErrorMessage, SuccessMessage } from './messages/Messages';
+import Modal from 'components/UI/modal/Modal';
 import Plans from './plans/Plans';
 
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 
-const PaymentFlow = ({ endPaymentFlow }) => {
+const PaymentFlow = ({ open, endPaymentFlow, mode }) => {
     const [, , setError] = useStore();
     
     const initState = {
         step: 1,
         selectedPlan: 'free',
         successfullySubscribed: false,
+        successfullyUpdatedCC: false,
         errorMsg: ''
     };
     
-    const [{ step, selectedPlan, successfullySubscribed, errorMsg }, setState] = useState(initState);
+    const [state, setState] = useState(initState);
+    
+    const { step, selectedPlan, successfullyUpdatedCC, successfullySubscribed, errorMsg } = state;
     
     
     /**
@@ -57,24 +61,66 @@ const PaymentFlow = ({ endPaymentFlow }) => {
         }
     };
     
-    if (successfullySubscribed) {
-        return <SuccessMessage endPaymentFlow={endPaymentFlow} selectedPlan={selectedPlan} />
-    }
     
-    if (errorMsg) {
-        return <ErrorMessage errorMsg={errorMsg} selectedPlan={selectedPlan} resetPaymentFlow={() => setState(initState)} />
-    }
-    
-    if (step === 2) {
-        return <PaymentDetails selectedPlan={selectedPlan} updateState={updateState} />
-    }
-    
-    return (
+    const plans = (
         <Plans
             selectedPlan={selectedPlan}
             selectHandler={selectHandler}
             confirmPlan={confirmPlan}
         />
+    );
+    
+    const subscriptionSuccessMessage = (
+        <SubscriptionSuccessMessage
+            endPaymentFlow={endPaymentFlow}
+            selectedPlan={selectedPlan}
+        />
+    );
+    
+    const updateSuccessMessage = (
+        <UpdateSuccessMessage
+            endPaymentFlow={endPaymentFlow}
+        />
+    );
+    
+    const errorMessage = (
+        <ErrorMessage
+            errorMsg={errorMsg}
+            selectedPlan={selectedPlan}
+            resetPaymentFlow={() => setState(initState)}
+        />
+    );
+    
+    const paymentDetails = (
+        <PaymentDetails
+            selectedPlan={selectedPlan}
+            updateState={updateState}
+            endPaymentFlow={endPaymentFlow}
+            mode={mode}
+        />
+    );
+    
+    
+    let component = plans;
+    
+    if (successfullySubscribed) {
+        component = subscriptionSuccessMessage;
+        
+    } else if (successfullyUpdatedCC) {
+        component = updateSuccessMessage;
+        
+    } else if (errorMsg) {
+        component = errorMessage;
+        
+    } else if (step === 2 || mode === 'updateCC') {
+        component = paymentDetails;
+    }
+    
+    
+    return (
+        <Modal open={open}>
+            {component}
+        </Modal>
     );
 };
 

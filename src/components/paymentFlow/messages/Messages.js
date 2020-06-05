@@ -29,7 +29,7 @@ export const ErrorMessage = ({ errorMsg, resetPaymentFlow, selectedPlan }) => (
 
 
 // Success message shown if the subscription was created successfully
-export const SuccessMessage = ({ endPaymentFlow, selectedPlan }) => (
+export const SubscriptionSuccessMessage = ({ endPaymentFlow, selectedPlan }) => (
     <>
         <h2>Subscription successful</h2>
         
@@ -40,6 +40,23 @@ export const SuccessMessage = ({ endPaymentFlow, selectedPlan }) => (
                 Thank you for your trust in Log Owl. You can manage your subscription in the settings of your
                 organization. If you have any questions, please do not hesitate to contact us for further
                 assistance.
+            </p>
+        </div>
+        
+        <div className={styling.controls}>
+            <Button size='smaller' onClick={endPaymentFlow}>Close</Button>
+        </div>
+    </>
+);
+
+export const UpdateSuccessMessage = ({ endPaymentFlow }) => (
+    <>
+        <h2>Billing Profile Updated</h2>
+        
+        <div className={styling.message}>
+            <p>
+                You have successfully updated your billing profile. The changes will take effect in the next billing
+                cycle. If you have any questions, please do not hesitate to contact us for further assistance.
             </p>
         </div>
         
