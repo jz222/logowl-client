@@ -137,7 +137,7 @@ const Quota = ({ org }) => {
                     </div>
                 </div>
                 
-                <div className={styling.row}>
+                <div className={styling.row} hidden={!subscriptionId || paidThroughDate}>
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Update Credit Card</h6>
