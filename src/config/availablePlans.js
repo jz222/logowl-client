@@ -12,8 +12,8 @@ export default [
         price: '15$'
     },
     {
-        id: 'enterprise',
-        name: 'Enterprise Plan',
+        id: 'scaleup',
+        name: 'Scale Up Plan',
         description: 'Includes 5000 requests/month and maximum one additional team member.',
         price: '45$'
     }

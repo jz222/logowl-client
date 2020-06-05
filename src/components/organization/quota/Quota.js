@@ -62,6 +62,7 @@ const Quota = ({ org }) => {
         }
     };
     
+    
     // Get the current month
     const currentMonth = Object.keys(receivedRequests || {}).sort((a, b) => b - a)[0];
     
@@ -69,20 +70,24 @@ const Quota = ({ org }) => {
     const errorRequests = (receivedRequests[currentMonth] || {}).errors || 0;
     const analyticRequests = (receivedRequests[currentMonth] || {}).analytics || 0;
     
+    // Determine if user is in an active paid through period
+    const activePaidThroughPeriod = paidThroughDate ? new Date(paidThroughDate) > Date.now() : false;
+    
     
     const paymentFlow = (
         <PaymentFlow
             open={paymentFlowOpen}
             endPaymentFlow={togglePaymentFlow}
-            paidThroughPlan={paidThroughDate ? plan : ''}
+            paidThroughPlan={activePaidThroughPeriod ? plan : ''}
             updateCC={mode === 'updateCC'}
+            isCancelAble
         />
     );
     
     return (
         <>
             <Card>
-                <div className={styling.row} hidden={!paidThroughDate}>
+                <div className={styling.row} hidden={!activePaidThroughPeriod}>
                     <div className={styling.notice}>
                         <h6>Subscription Cancelled</h6>
                         <p>
@@ -125,7 +130,7 @@ const Quota = ({ org }) => {
                 
                 <hr className={styling.dangerZone} />
                 
-                <div className={styling.row} hidden={!subscriptionId || paidThroughDate}>
+                <div className={styling.row} hidden={!subscriptionId || activePaidThroughPeriod}>
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Cancel Subscription</h6>
@@ -136,7 +141,7 @@ const Quota = ({ org }) => {
                     </div>
                 </div>
                 
-                <div className={styling.row} hidden={!paidThroughDate}>
+                <div className={styling.row} hidden={!activePaidThroughPeriod && plan !== 'free'}>
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Create a Subscription</h6>
@@ -147,7 +152,7 @@ const Quota = ({ org }) => {
                     </div>
                 </div>
                 
-                <div className={styling.row} hidden={!subscriptionId || paidThroughDate}>
+                <div className={styling.row} hidden={!subscriptionId || activePaidThroughPeriod}>
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Update Credit Card</h6>

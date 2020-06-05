@@ -7,41 +7,62 @@ import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
 
-const Plans = ({ selectedPlan, selectHandler, confirmPlan }) => (
-    <>
-        <h2>Select your Plan</h2>
+const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, confirmPlan, isCancelable }) => {
+    
+    /**
+     * Determines if the given plan is visible.
+     * @param plan {string} the plan whose visibility should be determined
+     * @returns {boolean} whether the plan is available
+     */
+    const isVisible = (plan) => {
+        if (!paidThroughPlan) {
+            return true;
+        }
         
+        if (paidThroughPlan === 'business' && plan === 'free') {
+            return false;
+        }
         
-        <p className={styling.caption}>
-            Please choose your plan below and you are good to go. <b>Prices are billed
-            monthly.</b> You can change your plan at any time in the settings of your organization.
-        </p>
-        
-        
-        {config.availablePlans.map(plan => (
-            <div className={styling.plan} key={plan.id}>
-                <div>
-                    <Checkbox
-                        id={plan.id}
-                        checked={selectedPlan === plan.id}
-                        changeHandler={selectHandler}
-                    />
+        return !(paidThroughPlan === 'scaleup' && (plan === 'free' || plan === 'business'));
+    };
+    
+    return (
+        <>
+            <h2>Select your Plan</h2>
+            
+            
+            <p className={styling.caption}>
+                Please choose your plan below and you are good to go. <b>Prices are billed
+                monthly.</b> You can change your plan at any time in the settings of your organization.
+            </p>
+            
+            
+            {config.availablePlans.map(plan => (
+                <div className={styling.plan} key={plan.id} hidden={!isVisible(plan.id)}>
+                    <div>
+                        <Checkbox
+                            id={plan.id}
+                            checked={selectedPlan === plan.id}
+                            changeHandler={selectHandler}
+                        />
+                    </div>
+                    
+                    <div className={selectedPlan === plan.id ? styling.selected : styling.description}>
+                        <h6>{plan.name}</h6>
+                        <p>{plan.description}</p>
+                    </div>
+                    
+                    <div className={styling.price}>{plan.price}</div>
                 </div>
-        
-                <div className={selectedPlan === plan.id ? styling.selected : styling.description}>
-                    <h6>{plan.name}</h6>
-                    <p>{plan.description}</p>
-                </div>
-        
-                <div className={styling.price}>{plan.price}</div>
+            ))}
+            
+            
+            <div className={styling.controls}>
+                <Button size='smaller' color='light' onClick={cancelHandler} hidden={!isCancelable}>Cancel</Button>
+                <Button size='smaller' onClick={confirmPlan}>Confirm</Button>
             </div>
-        ))}
-        
-        
-        <div className={styling.controls}>
-            <Button size='smaller' onClick={confirmPlan}>Confirm</Button>
-        </div>
-    </>
-);
+        </>
+    );
+};
 
 export default Plans;
