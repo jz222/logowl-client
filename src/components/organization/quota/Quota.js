@@ -69,6 +69,16 @@ const Quota = ({ org }) => {
     const errorRequests = (receivedRequests[currentMonth] || {}).errors || 0;
     const analyticRequests = (receivedRequests[currentMonth] || {}).analytics || 0;
     
+    
+    const paymentFlow = (
+        <PaymentFlow
+            open={paymentFlowOpen}
+            endPaymentFlow={togglePaymentFlow}
+            paidThroughPlan={paidThroughDate ? plan : ''}
+            updateCC={mode === 'updateCC'}
+        />
+    );
+    
     return (
         <>
             <Card>
@@ -149,7 +159,7 @@ const Quota = ({ org }) => {
                 </div>
             </Card>
             
-            {paymentFlowOpen && <PaymentFlow open={paymentFlowOpen} endPaymentFlow={togglePaymentFlow} mode={mode} />}
+            {paymentFlowOpen && paymentFlow}
             
             <Confirmation
                 open={cancelConfirmationOpen}

@@ -8,7 +8,7 @@ import Plans from './plans/Plans';
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 
-const PaymentFlow = ({ open, endPaymentFlow, mode }) => {
+const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC }) => {
     const [, , setError] = useStore();
     
     const initState = {
@@ -96,9 +96,11 @@ const PaymentFlow = ({ open, endPaymentFlow, mode }) => {
             selectedPlan={selectedPlan}
             updateState={updateState}
             endPaymentFlow={endPaymentFlow}
-            mode={mode}
+            updateCC={updateCC}
         />
     );
+    
+    console.log(updateCC)
     
     
     let component = plans;
@@ -112,7 +114,7 @@ const PaymentFlow = ({ open, endPaymentFlow, mode }) => {
     } else if (errorMsg) {
         component = errorMessage;
         
-    } else if (step === 2 || mode === 'updateCC') {
+    } else if (step === 2 || updateCC) {
         component = paymentDetails;
     }
     

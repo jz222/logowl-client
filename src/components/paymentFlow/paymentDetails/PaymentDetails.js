@@ -10,7 +10,7 @@ import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
 
-const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, mode = '' }) => {
+const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC }) => {
     const [store] = useStore();
     
     const [{ hostedFields, errorMsg, isLoading }, setState] = useState({
@@ -50,7 +50,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, mode = '' }
      * @returns {*}
      */
     const backHandler = () => {
-        if (mode === 'updateCC') {
+        if (updateCC) {
             endPaymentFlow();
         } else {
             updateState({ step: 1 });
@@ -75,7 +75,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, mode = '' }
             payload.plan = selectedPlan;
             payload.subscriptionId = store.organization.subscriptionId;
             
-            const url = config.connectivity.paymentServer + ((mode === 'updateCC') ? '/update-cc' : '/subscribe');
+            const url = config.connectivity.paymentServer + (updateCC ? '/update-cc' : '/subscribe');
             const opts = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -86,7 +86,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, mode = '' }
             
             if (res.failed) {
                 updateState({ errorMsg: res.message });
-            } else if (mode === 'updateCC') {
+            } else if (updateCC) {
                 updateState({ successfullyUpdatedCC: true });
             } else {
                 updateState({ successfullySubscribed: true });
@@ -127,18 +127,18 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, mode = '' }
                 hostedFields.teardown();
             }
         };
-    }, [hostedFields])
+    }, [hostedFields]);
     
     
     return (
         <div className={styling.paymentDetails}>
             <h2>Enter Credit Card Details</h2>
             
-            <PlanDetails selectedPlan={selectedPlan} hidden={!!mode} />
+            <PlanDetails selectedPlan={selectedPlan} hidden={updateCC} />
             
             <p className={styling.caption}>
                 Please enter your credit details below. This data never reaches our servers and will be securely
-                processed by our payment partner. <b hidden={mode !== 'updateCC'}>This will override your existing
+                processed by our payment partner. <b hidden={!updateCC}>This will override your existing
                 card.</b>
             </p>
             
@@ -162,7 +162,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, mode = '' }
             <div className={styling.paymentDetailsError}>{errorMsg}</div>
             
             <div className={styling.controls}>
-                <Button size='smaller' type='light' onClick={backHandler}>{mode === 'updateCC' ? 'Cancel' : 'Back'}</Button>
+                <Button size='smaller' type='light' onClick={backHandler}>{updateCC ? 'Cancel' : 'Back'}</Button>
                 <Button size='smaller' onClick={submitHandler}>Submit</Button>
             </div>
             
