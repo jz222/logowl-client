@@ -5,7 +5,7 @@ import Modal from '../modal/Modal';
 
 import styling from './Confirmation.module.scss';
 
-const Confirmation = ({ open, title, message, confirmHandler, label = 'Confirm', cancelHandler, disabled }) => (
+const Confirmation = ({ open, title, message, confirmHandler, label = 'Confirm', cancelHandler, isLoading }) => (
     <Modal open={open} size='small'>
         <h3>{title}</h3>
         
@@ -13,7 +13,7 @@ const Confirmation = ({ open, title, message, confirmHandler, label = 'Confirm',
         
         <div className={styling.controls}>
             <Button size='smaller' color='light' onClick={cancelHandler}>Cancel</Button>
-            <Button size='smaller' onClick={confirmHandler} disabled={disabled}>{label}</Button>
+            <Button size='smaller' onClick={confirmHandler} isLoading={isLoading}>{label}</Button>
         </div>
     </Modal>
 );
