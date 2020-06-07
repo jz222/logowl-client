@@ -10,7 +10,7 @@ import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
 
-const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC }) => {
+const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC, upgradePlan }) => {
     const [store] = useStore();
     
     const [{ hostedFields, errorMsg, isLoading }, setState] = useState({
@@ -66,6 +66,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC })
         try {
             setState(prevState => ({ ...prevState, isLoading: true }));
             
+            // Request body
             const payload = await hostedFields.tokenize();
             
             payload.firstName = store.firstName;
@@ -74,14 +75,27 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC })
             payload.organizationId = store.organizationId;
             payload.plan = selectedPlan;
             payload.subscriptionId = store.organization.subscriptionId;
+            payload.upgradedPlanId = selectedPlan;
             
-            const url = config.connectivity.paymentServer + (updateCC ? '/update-cc' : '/subscribe');
+            // Determine endpoint
+            let url = config.connectivity.paymentServer + '/subscribe';
+            
+            if (updateCC) {
+                url = config.connectivity.paymentServer + '/update-cc';
+            }
+            
+            if (upgradePlan) {
+                url = config.connectivity.paymentServer + '/upgrade';
+            }
+            
+            // Request options
             const opts = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             };
             
+            // Request
             const res = await (await fetch(url, opts)).json();
             
             if (res.failed) {

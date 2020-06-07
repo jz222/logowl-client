@@ -80,6 +80,7 @@ const Quota = ({ org }) => {
             endPaymentFlow={togglePaymentFlow}
             paidThroughPlan={activePaidThroughPeriod ? plan : ''}
             updateCC={mode === 'updateCC'}
+            upgradePlan={mode === 'upgradePlan'}
             isCancelAble
         />
     );
@@ -160,6 +161,17 @@ const Quota = ({ org }) => {
                         </div>
                         
                         <Button size='smaller' onClick={() => togglePaymentFlow('updateCC')}>Update</Button>
+                    </div>
+                </div>
+                
+                <div className={styling.row} hidden={plan === 'scaleup' || plan === 'free' || paidThroughDate}>
+                    <div className={styling.flexWrapper}>
+                        <div>
+                            <h6>Upgrade Plan</h6>
+                            <p>Upgrade your current plan and enjoy a higher quota.</p>
+                        </div>
+                        
+                        <Button size='smaller' onClick={() => togglePaymentFlow('upgradePlan')}>Upgrade</Button>
                     </div>
                 </div>
             </Card>

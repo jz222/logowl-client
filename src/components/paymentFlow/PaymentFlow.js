@@ -8,7 +8,7 @@ import Plans from './plans/Plans';
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 
-const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, isCancelAble }) => {
+const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradePlan, isCancelAble }) => {
     const [, , setError] = useStore();
     
     const initState = {
@@ -70,6 +70,7 @@ const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, isCancel
             paidThroughPlan={paidThroughPlan}
             cancelHandler={endPaymentFlow}
             isCancelable={isCancelAble}
+            upgradePlan={upgradePlan}
         />
     );
     
@@ -100,6 +101,7 @@ const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, isCancel
             updateState={updateState}
             endPaymentFlow={endPaymentFlow}
             updateCC={updateCC}
+            upgradePlan={upgradePlan}
         />
     );
     
