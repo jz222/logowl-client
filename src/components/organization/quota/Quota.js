@@ -21,8 +21,9 @@ const Quota = ({ org }) => {
         isLoading: false
     });
     
-    // Deconstruct organization object
+    // Deconstruct
     const { id = '', plan = '', receivedRequests = {}, monthlyRequestLimit = 0, subscriptionId = '', paidThroughDate = '' } = org;
+    const { freePlanId, highPlanId } = config.availablePlans;
     
     /**
      * Toggles the confirmation modal visibility.
@@ -147,7 +148,8 @@ const Quota = ({ org }) => {
                     </div>
                 </div>
                 
-                <div className={styling.row} hidden={!activePaidThroughPeriod && plan !== 'free'}>
+                <div className={styling.row}
+                     hidden={!activePaidThroughPeriod && plan !== freePlanId}>
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Create a Subscription</h6>
@@ -169,7 +171,10 @@ const Quota = ({ org }) => {
                     </div>
                 </div>
                 
-                <div className={styling.row} hidden={plan === 'scaleup' || plan === 'free' || paidThroughDate}>
+                <div
+                    className={styling.row}
+                    hidden={plan === highPlanId || plan === freePlanId || paidThroughDate}
+                >
                     <div className={styling.flexWrapper}>
                         <div>
                             <h6>Upgrade Plan</h6>

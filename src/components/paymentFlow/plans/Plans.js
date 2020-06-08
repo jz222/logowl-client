@@ -8,6 +8,7 @@ import config from 'config';
 import styling from '../PaymentFlow.module.scss';
 
 const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, confirmPlan, isCancelable }) => {
+    const { freePlanId, mediumPlanId, highPlanId } = config.availablePlans;
     
     /**
      * Determines if the given plan is visible.
@@ -19,11 +20,11 @@ const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, co
             return true;
         }
         
-        if (paidThroughPlan === 'business' && plan === 'free') {
+        if (paidThroughPlan === mediumPlanId && plan === freePlanId) {
             return false;
         }
         
-        return !(paidThroughPlan === 'scaleup' && (plan === 'free' || plan === 'business'));
+        return !(paidThroughPlan === highPlanId && (plan === freePlanId || plan === mediumPlanId));
     };
     
     return (
@@ -37,7 +38,7 @@ const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, co
             </p>
             
             
-            {config.availablePlans.map(plan => (
+            {config.availablePlans.allPlans.map(plan => (
                 <div className={styling.plan} key={plan.id} hidden={!isVisible(plan.id)}>
                     <div>
                         <Checkbox

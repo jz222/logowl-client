@@ -8,13 +8,14 @@ import Plans from './plans/Plans';
 
 import fetchClient from 'fetchClient';
 import { useStore } from 'context';
+import config from 'config';
 
 const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradePlan, isCancelAble }) => {
     const [, , setError] = useStore();
     
     const initState = {
         step: 1,
-        selectedPlan: 'free',
+        selectedPlan: config.availablePlans.freePlanId,
         successfullySubscribed: false,
         successfullyUpdatedCC: false,
         errorMsg: ''
@@ -49,7 +50,7 @@ const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradeP
      */
     const confirmPlan = async () => {
         try {
-            if (selectedPlan === 'free') {
+            if (selectedPlan === config.availablePlans.freePlanId) {
                 await fetchClient('updateOrganization', { isSetUp: true });
                 endPaymentFlow();
             } else {

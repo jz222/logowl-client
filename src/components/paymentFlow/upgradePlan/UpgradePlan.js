@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import PlanDetails from '../planDetails/PlanDetails';
 import Button from 'components/UI/button/Button';
 
-import {useStore} from 'context';
+import { useStore } from 'context';
 import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
@@ -11,6 +11,8 @@ import styling from '../PaymentFlow.module.scss';
 const UpgradePlan = ({ cancelHandler, updateState }) => {
     const [store] = useStore();
     const [isLoading, setIsLoading] = useState(false);
+    
+    const { highPlanId } = config.availablePlans;
     
     /**
      * Upgrades the current plan.
@@ -23,7 +25,7 @@ const UpgradePlan = ({ cancelHandler, updateState }) => {
             const payload = {
                 organizationId: store.organizationId,
                 subscriptionId: store.organization.subscriptionId,
-                upgradedPlanId: 'scaleup'
+                upgradedPlanId: highPlanId
             };
             
             const opts = {
@@ -37,17 +39,17 @@ const UpgradePlan = ({ cancelHandler, updateState }) => {
             const res = await (await fetch(url, opts)).json();
             
             if (res.failed) {
-                updateState({ errorMsg: res.message, selectedPlan: 'scaleup' });
+                updateState({ errorMsg: res.message, selectedPlan: highPlanId });
                 setIsLoading(false);
                 return;
             }
             
-            updateState({ successfullySubscribed: true, selectedPlan: 'scaleup' });
+            updateState({ successfullySubscribed: true, selectedPlan: highPlanId });
             setIsLoading(false);
             
         } catch (error) {
             console.error(error);
-            updateState({ errorMsg: error.message, selectedPlan: 'scaleup' });
+            updateState({ errorMsg: error.message, selectedPlan: highPlanId });
             setIsLoading(false);
         }
     };
@@ -56,7 +58,7 @@ const UpgradePlan = ({ cancelHandler, updateState }) => {
         <>
             <h2>Confirm Plan Upgrade</h2>
             
-            <PlanDetails selectedPlan='scaleup' />
+            <PlanDetails selectedPlan={highPlanId} />
             
             <p className={styling.caption}>
                 You are about to upgrade your existing plan to a greater one. You cannot downgrade again but you are

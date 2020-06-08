@@ -9,7 +9,7 @@ import config from 'config';
 import styling from './PlanDetails.module.scss';
 
 const PlanDetails = ({ selectedPlan, success, failure, hidden }) => {
-    const plan = config.availablePlans.find(x => x.id === selectedPlan) || {};
+    const plan = config.availablePlans.allPlans.find(x => x.id === selectedPlan) || {};
     
     let icon = logowl;
     let style = styling.wrapper;
