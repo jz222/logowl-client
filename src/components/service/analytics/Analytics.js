@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import Placeholder from 'components/UI/placeholder/Placeholder';
 import PageViewsChart from './pageViewsChart/PageViewsChart';
 import DoughnutChart from './doughnutChart/DoughnutChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
 import VisitedPages from './visitedPages/VisitedPages';
 import TimeOnPage from './timeOnPage/TimeOnPage';
+import Button from 'components/UI/button/Button';
 import Header from './header/Header';
 
 import { useStore } from 'context';
 import fetchClient from 'fetchClient';
+import config from 'config';
 import utils from 'utils';
 
 import styling from './Analytics.module.scss';
@@ -86,7 +89,19 @@ const Analytics = ({ serviceId = '' }) => {
     }, [fetchAnalyticData]);
     
     
-    return (
+    const placeholder = (
+        <Placeholder>
+            <h4>No analytic data available</h4>
+            
+            <p>Install and configure the adapter to use analytics</p>
+            
+            <Button onClick={() => window.open(config.links.adapters.browser, '_blank').focus()}>
+                Get Started
+            </Button>
+        </Placeholder>
+    );
+    
+    const analyticData = (
         <>
             <Header
                 mode={mode}
@@ -125,6 +140,9 @@ const Analytics = ({ serviceId = '' }) => {
             <TimeOnPage pageViews={pageViews} />
         </>
     );
+    
+    
+    return pageViews.length ? analyticData : placeholder;
 };
 
 export default Analytics;

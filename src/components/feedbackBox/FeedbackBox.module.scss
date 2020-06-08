@@ -1,0 +1,66 @@
+.box {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    width: 29rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-2-darker);
+    box-shadow: var(--shadow);
+    transition: transform 1s;
+    animation: slideIn 1s;
+
+    p {
+        margin: 1rem 0 1.5rem 0;
+        font-size: 1.4rem;
+    }
+
+    textarea {
+        width: 100%;
+        height: 15rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border: none;
+        border-radius: var(--border-radius);
+        background-color: var(--color-2);
+        resize: none;
+        outline: none;
+    }
+
+    span {
+        width: 100%;
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 1rem;
+        color: var(--color-2-dark);
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button:first-child {
+        margin-right: 1rem;
+    }
+}
+
+.closed {
+    transform: translateX(150%);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(150%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

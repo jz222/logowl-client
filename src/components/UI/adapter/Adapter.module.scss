@@ -8,7 +8,7 @@
     background-color: var(--color-2-darker);
 
     img {
-        width: 70%;
+        width: 65%;
         height: auto;
         flex-shrink: 0;
     }
@@ -41,9 +41,18 @@
     background-color: var(--color-5-lighter);
 }
 
+.custom,
 .browser {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color-1);
+}
+
+.custom {
+    background-color: var(--color-3);
+
+    img {
+        margin-left: 15%;
+    }
 }

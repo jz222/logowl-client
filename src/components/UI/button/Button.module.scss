@@ -1,10 +1,18 @@
+@import "stylesheets/animations";
+
+// Regular button
+
 .button {
     min-width: 14rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 4.5rem;
     padding: 0 2rem;
     border-radius: var(--border-radius);
     background-color: var(--color-3);
     transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
+    text-align: center;
     color: var(--color-2);
     cursor: pointer;
     outline: none;
@@ -22,7 +30,7 @@
 }
 
 .light {
-    background-color: var(--color-2);
+    background-color: transparent;
     font-weight: 500;
     color: var(--color-3);
 
@@ -31,6 +39,8 @@
         color: var(--color-2);
     }
 }
+
+// Wide button
 
 .wideButton {
     width: 100%;
@@ -60,6 +70,8 @@
     cursor: default;
 }
 
+// Action button
+
 .action {
     height: 2.8rem;
     line-height: 1.4rem;
@@ -84,4 +96,24 @@
         color: var(--color-1);
         cursor: pointer;
     }
+}
+
+//Spinner
+
+.spinner,
+.spinner:after {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.spinner {
+    position: relative;
+    margin-right: 0.5rem;
+    border-top: 2px solid var(--color-2-dark);
+    border-right: 2px solid var(--color-2-dark);
+    border-bottom: 2px solid var(--color-2-dark);
+    border-left: 2px solid var(--color-7-opacity);
+    transform: translateZ(0);
+    animation: rotate 1s infinite linear;
 }

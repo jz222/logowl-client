@@ -171,7 +171,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC })
             <div className={styling.paymentDetailsError}>{errorMsg}</div>
             
             <div className={styling.controls}>
-                <Button size='smaller' type='light' onClick={backHandler}>{updateCC ? 'Cancel' : 'Back'}</Button>
+                <Button size='smaller' color='light' onClick={backHandler}>{updateCC ? 'Cancel' : 'Back'}</Button>
                 <Button size='smaller' onClick={submitHandler}>Submit</Button>
             </div>
             

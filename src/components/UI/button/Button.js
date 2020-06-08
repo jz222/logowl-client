@@ -2,8 +2,15 @@ import React from 'react';
 
 import styling from './Button.module.scss';
 
-const Button = (props) => (
-    <button className={(styling[props.size] || styling.button) + ' ' + (styling[props.color] || '')} {...props} />
+const Button = ({ size, color, disabled, onClick, isLoading, hidden, children}) => (
+    <button
+        className={(styling[size] || styling.button) + ' ' + (styling[color] || '')}
+        onClick={onClick}
+        disabled={disabled || isLoading}
+        hidden={hidden}
+    >
+        {isLoading && <div className={styling.spinner} />}{children}
+    </button>
 );
 
 export const WideButton = (props) => (

@@ -6,5 +6,9 @@ export default [
     {
         name: 'browser',
         label: 'Frontend'
+    },
+    {
+        name: 'custom',
+        label: 'Custom Adapter'
     }
 ];

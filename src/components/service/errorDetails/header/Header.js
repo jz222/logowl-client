@@ -21,16 +21,18 @@ const Header = ({ type, adapter, message, evolution, fingerprint, count, firstSe
      * @returns {*} JSX component that indicates the difference
      */
     const compareOccurrences = () => {
-        const { difference } = utils.computeEvolution(evolution);
+        let { difference } = utils.computeEvolution(evolution);
+        
+        const shortenedDifference = utils.shortNumber(Math.abs(difference) || 0);
         
         let component = <div className={styling.neutral}><FiChevronRight /> 0%</div>;
         
         if (difference > 0) {
-            component = <div className={styling.increase}><FiChevronUp /> {Math.abs(difference)}%</div>;
+            component = <div className={styling.increase}><FiChevronUp /> {shortenedDifference}%</div>;
         }
         
         if (difference < 0) {
-            component = <div className={styling.decrease}><FiChevronDown /> {Math.abs(difference)}%</div>;
+            component = <div className={styling.decrease}><FiChevronDown /> {shortenedDifference}%</div>;
         }
         
         return component;
@@ -125,7 +127,9 @@ const Header = ({ type, adapter, message, evolution, fingerprint, count, firstSe
                         {resolved ? <FiCheckCircle /> : <FiXCircle />}
                     </div>
                     
-                    <p hidden={!resolved}>This error has been marked as resolved. Uncheck on the right to re-open it.</p>
+                    <p hidden={!resolved}>
+                        This error has been marked as resolved. Uncheck on the right to re-open it.
+                    </p>
                     
                     <p hidden={resolved}>This error hasn't been resolved or was re-opened again. Check to resolve.</p>
                     

@@ -130,7 +130,7 @@ const Invite = ({ tabHandler }) => {
             </div>
             
             <div className={styling.button}>
-                <Button onClick={inviteUser} disabled={!inputIsValid || isLoading}>Invite</Button>
+                <Button onClick={inviteUser} disabled={!inputIsValid} isLoading={isLoading}>Invite</Button>
             </div>
         </Card>
     );

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FiActivity, FiEye, FiUsers } from 'react-icons/fi';
 
+import utils from 'utils';
+
 import styling from './TotalNumbers.module.scss';
 
 /**
@@ -58,7 +60,7 @@ const TotalNumbers = ({ visits, newVisitors, sessions }) => (
             <FiActivity />
             
             <div>
-                <Counter number={visits} />
+                <Counter number={utils.shortNumber(visits)} />
                 <h5>Page Visits</h5>
             </div>
         </div>
@@ -67,7 +69,7 @@ const TotalNumbers = ({ visits, newVisitors, sessions }) => (
             <FiUsers />
             
             <div>
-                <Counter number={newVisitors} />
+                <Counter number={utils.shortNumber(newVisitors)} />
                 <h5>New Visitors</h5>
             </div>
         </div>
@@ -76,7 +78,7 @@ const TotalNumbers = ({ visits, newVisitors, sessions }) => (
             <FiEye />
             
             <div>
-                <Counter number={sessions} />
+                <Counter number={utils.shortNumber(sessions)} />
                 <h5>Sessions</h5>
             </div>
         </div>

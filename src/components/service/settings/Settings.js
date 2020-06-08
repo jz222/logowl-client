@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
 
 import Confirmation from 'components/UI/confirmation/Confirmation';
-import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Card, { Header } from 'components/UI/card/Card';
 
@@ -46,10 +45,6 @@ const Settings = ({ history, serviceName, serviceId }) => {
         setState(prevState => ({ ...prevState, confirmVisibility: !prevState.confirmVisibility }));
     };
     
-    
-    const buttonContent = isLoading ? <div className={styling.deleteButton}><Spinner invert /> Deleting</div> : 'Delete';
-    
-    
     return (
         <>
             <Card>
@@ -69,10 +64,10 @@ const Settings = ({ history, serviceName, serviceId }) => {
                 open={confirmVisibility}
                 title={'Delete ' + serviceName}
                 message={`Please confirm that you want to delete the service ${serviceName} and all its data. Deleting a service is permanent and can not be undone.`}
-                label={buttonContent}
+                label='Delete'
                 cancelHandler={toggleConfirmVisibility}
                 confirmHandler={deleteService}
-                disabled={isLoading}
+                isLoading={isLoading}
             />
         </>
     );

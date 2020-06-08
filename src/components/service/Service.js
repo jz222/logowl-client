@@ -17,13 +17,16 @@ const Service = ({ history, match }) => {
     
     const service = store.services.find(x => x.id === match.params.serviceId) || {};
     
+    // Only the browser and custom adapters offer analytics
+    const analyticsAvailable = service.type === 'browser' || service.type === 'custom';
+    
     return (
         <>
             <Stepper steps={['services', service.name]} />
             
             <Menu>
                 <Tab active={activeTab === 'errors'} click={() => setActiveTab('errors')}>Errors</Tab>
-                <Tab active={activeTab === 'analytics'} click={() => setActiveTab('analytics')}>Analytics</Tab>
+                <Tab active={activeTab === 'analytics'} click={() => setActiveTab('analytics')} hidden={!analyticsAvailable}>Analytics</Tab>
                 <Tab active={activeTab === 'ticket'} click={() => setActiveTab('ticket')}>Ticket</Tab>
                 <Tab active={activeTab === 'integrations'} click={() => setActiveTab('integrations')}>Integrations</Tab>
                 <Tab active={activeTab === 'settings'} click={() => setActiveTab('settings')}>Settings</Tab>
