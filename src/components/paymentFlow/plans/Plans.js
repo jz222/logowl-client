@@ -7,7 +7,7 @@ import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
 
-const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, confirmPlan, isCancelable, upgradePlan }) => {
+const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, confirmPlan, isCancelable }) => {
     
     /**
      * Determines if the given plan is visible.
@@ -15,10 +15,6 @@ const Plans = ({ selectedPlan, paidThroughPlan, selectHandler, cancelHandler, co
      * @returns {boolean} whether the plan is available
      */
     const isVisible = (plan) => {
-        if(upgradePlan && plan !== 'scaleup') {
-            return false;
-        }
-        
         if (!paidThroughPlan) {
             return true;
         }

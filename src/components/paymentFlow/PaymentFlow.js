@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { ErrorMessage, SubscriptionSuccessMessage, UpdateSuccessMessage } from './messages/Messages';
 import PaymentDetails from './paymentDetails/PaymentDetails';
+import UpgradePlan from './upgradePlan/UpgradePlan';
 import Modal from 'components/UI/modal/Modal';
 import Plans from './plans/Plans';
 
@@ -70,7 +71,13 @@ const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradeP
             paidThroughPlan={paidThroughPlan}
             cancelHandler={endPaymentFlow}
             isCancelable={isCancelAble}
-            upgradePlan={upgradePlan}
+        />
+    );
+    
+    const upgradePlanComponent = (
+        <UpgradePlan
+            cancelHandler={endPaymentFlow}
+            updateState={updateState}
         />
     );
     
@@ -101,7 +108,6 @@ const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradeP
             updateState={updateState}
             endPaymentFlow={endPaymentFlow}
             updateCC={updateCC}
-            upgradePlan={upgradePlan}
         />
     );
     
@@ -116,6 +122,9 @@ const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradeP
         
     } else if (errorMsg) {
         component = errorMessage;
+        
+    } else if (upgradePlan) {
+        component = upgradePlanComponent;
         
     } else if (step === 2 || updateCC) {
         component = paymentDetails;

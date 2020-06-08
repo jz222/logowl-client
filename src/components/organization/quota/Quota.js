@@ -14,10 +14,11 @@ import styling from './Quota.module.scss';
 const Quota = ({ org }) => {
     const [, dispatch, setError] = useStore();
     
-    const [{ mode, cancelConfirmationOpen, paymentFlowOpen }, setState] = useState({
+    const [{ mode, cancelConfirmationOpen, paymentFlowOpen, isLoading }, setState] = useState({
         mode: '',
         cancelConfirmationOpen: false,
-        paymentFlowOpen: false
+        paymentFlowOpen: false,
+        isLoading: false
     });
     
     // Deconstruct organization object
@@ -42,6 +43,8 @@ const Quota = ({ org }) => {
      */
     const cancelSubscription = async () => {
         try {
+            setState(prevState => ({ ...prevState, isLoading: true }));
+            
             const url = config.connectivity.paymentServer + '/cancel';
             
             const opts = {
@@ -53,10 +56,12 @@ const Quota = ({ org }) => {
             const res = await (await fetch(url, opts)).json();
             
             dispatch({ type: 'updateOrganization', payload: { paidThroughDate: res.message.paidThroughDate } });
+            setState(prevState => ({ ...prevState, isLoading: false }));
             toggleConfirmationModal();
             
         } catch (error) {
             console.error(error);
+            setState(prevState => ({ ...prevState, isLoading: false }));
             setError(error);
             toggleConfirmationModal();
         }
@@ -184,6 +189,7 @@ const Quota = ({ org }) => {
                 message='Cancelling the subscription will downgrade your organization to the free plan and delete all your team members.'
                 cancelHandler={toggleConfirmationModal}
                 confirmHandler={cancelSubscription}
+                isLoading={isLoading}
             />
         </>
     );

@@ -10,7 +10,7 @@ import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
 
-const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC, upgradePlan }) => {
+const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC }) => {
     const [store] = useStore();
     
     const [{ hostedFields, errorMsg, isLoading }, setState] = useState({
@@ -75,17 +75,12 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC, u
             payload.organizationId = store.organizationId;
             payload.plan = selectedPlan;
             payload.subscriptionId = store.organization.subscriptionId;
-            payload.upgradedPlanId = selectedPlan;
             
             // Determine endpoint
             let url = config.connectivity.paymentServer + '/subscribe';
             
             if (updateCC) {
                 url = config.connectivity.paymentServer + '/update-cc';
-            }
-            
-            if (upgradePlan) {
-                url = config.connectivity.paymentServer + '/upgrade';
             }
             
             // Request options
