@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 
+import Spinner, { LoadingSpinner } from 'components/UI/spinner/Spinner';
 import Placeholder from 'components/UI/placeholder/Placeholder';
+import Button, { Action } from 'components/UI/button/Button';
 import Evolution from 'components/UI/evolution/Evolution';
 import Checkbox from 'components/UI/checkbox/Checkbox';
-import Spinner from 'components/UI/spinner/Spinner';
-import Button, { Action } from 'components/UI/button/Button';
 import Event from 'components/UI/event/Event';
 import Badge from 'components/UI/badge/Badge';
 
@@ -176,12 +176,7 @@ const Errors = ({ serviceId, history, type = '' }) => {
     
     
     // Spinner for initial loading
-    const spinner = (
-        <div className={styling.spinner}>
-            <Spinner invert />
-            <h4>loading</h4>
-        </div>
-    );
+    const spinner = <LoadingSpinner />;
     
     
     // Spinner shown when next page is loading

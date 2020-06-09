@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { LoadingSpinner } from 'components/UI/spinner/Spinner';
 import Placeholder from 'components/UI/placeholder/Placeholder';
 import PageViewsChart from './pageViewsChart/PageViewsChart';
 import DoughnutChart from './doughnutChart/DoughnutChart';
 import TotalNumbers from './totalNumbers/TotalNumbers';
 import VisitedPages from './visitedPages/VisitedPages';
-import Spinner from 'components/UI/spinner/Spinner';
 import TimeOnPage from './timeOnPage/TimeOnPage';
 import Button from 'components/UI/button/Button';
 import Header from './header/Header';
@@ -97,12 +97,7 @@ const Analytics = ({ serviceId = '' }) => {
     
     
     if (isLoading) {
-        return (
-            <div className={styling.spinner}>
-                <Spinner invert />
-                <h4>loading</h4>
-            </div>
-        );
+        return <LoadingSpinner />;
     }
     
     
