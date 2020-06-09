@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Confirmation from 'components/UI/confirmation/Confirmation';
 import InputField from 'components/UI/inputField/InputField';
 import PaymentFlow from 'components/paymentFlow/PaymentFlow';
+import InfoBox from 'components/UI/infoBox/InfoBox';
 import Button from 'components/UI/button/Button';
 import Card from 'components/UI/card/Card';
 
@@ -95,14 +96,11 @@ const Quota = ({ org }) => {
         <>
             <Card>
                 <div className={styling.row} hidden={!activePaidThroughPeriod}>
-                    <div className={styling.notice}>
-                        <h6>Subscription Cancelled</h6>
-                        <p>
-                            The subscription has been cancelled. Your credit card will no longer be charged. You can use
-                            the <span>{plan}</span> Plan until {paidThroughDate}. Afterwards, you will be downgraded to
-                            the Free Plan. You can create a new subscription below to prevent being downgraded.
-                        </p>
-                    </div>
+                    <InfoBox title='Subscription Cancelled' type='caution'>
+                        The subscription has been cancelled. Your credit card will no longer be charged. You can use
+                        the <span>{plan}</span> Plan until {paidThroughDate}. Afterwards, you will be downgraded to
+                        the Free Plan. You can create a new subscription below to prevent being downgraded.
+                    </InfoBox>
                 </div>
                 
                 <div className={styling.row}>
