@@ -151,7 +151,7 @@
 
 .unresolved {
     @extend .resolve;
-    background-color: var(--color-2-darker);
+    background-color: var(--color-2-dimmed);
 
     .badge {
         color: var(--color-2-dark);

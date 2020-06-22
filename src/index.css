@@ -56,11 +56,12 @@
     --color-1: #071840;
 
     --color-2: white;
+    --color-2-dimmed: #f5f7fb;
     --color-2-darker: #E5ECF9;
     --color-2-dark: #5B6F8C;
 
     --color-3-light: #F4F8FE;
-    --color-3-lighter: #E7F5FE;
+    --color-3-lighter: #E5F6FF;
     --color-3: #0252fc;
 
     --color-4-light: #FFE5EE;
@@ -74,7 +75,7 @@
     --color-6-opacity: rgba(124, 77, 2500, 0.2);
 
     --color-7: #448AFF;
-    --color-7-opacity: rgba(68, 138, 255,0.2);
+    --color-7-opacity: rgba(68, 138, 255, 0.2);
 
     --color-8: #00BCD4;
     --color-8-opacity: rgba(0, 188, 212, 0.2);
@@ -228,9 +229,11 @@ li {
     html {
         font-size: 62.5%;
     }
+
     main {
         padding: 2.5rem 4rem 4rem 4rem;
     }
+
     nav {
         padding: 0 4rem;
     }
