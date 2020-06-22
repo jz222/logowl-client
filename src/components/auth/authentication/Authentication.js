@@ -85,7 +85,9 @@ const Authentication = ({ history, location }) => {
             
             document.title = 'Log Owl Dashboard | ' + res.organization.name;
             
-            setTimeout(() => history.push('/services'), 1000);
+            const redirectUrl = history.location?.state?.redirectUrl;
+            
+            setTimeout(() => history.push(redirectUrl || '/services'), 1000);
             
         } catch (error) {
             setState(prevState => ({ ...prevState, loading: false, error: error.message }));

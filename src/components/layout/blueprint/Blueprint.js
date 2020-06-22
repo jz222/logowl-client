@@ -30,7 +30,7 @@ const Blueprint = ({ children, history }) => {
             const expirationTime = localStorage.getItem('expiration-time');
             
             if (!accessPass || !expirationTime || new Date(parseInt(expirationTime)) < new Date()) {
-                history.push('/auth/signin');
+                history.push({ pathname: '/auth/signin', state: { redirectUrl: history.location.pathname } });
                 return;
             }
             
