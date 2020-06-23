@@ -96,7 +96,7 @@ const Quota = ({ org }) => {
         <>
             <Card>
                 <div className={styling.row} hidden={!activePaidThroughPeriod}>
-                    <InfoBox title='Subscription Cancelled' type='caution'>
+                    <InfoBox title='Subscription Cancelled' type='warning'>
                         The subscription has been cancelled. Your credit card will no longer be charged. You can use
                         the <span>{plan}</span> Plan until {paidThroughDate}. Afterwards, you will be downgraded to
                         the Free Plan. You can create a new subscription below to prevent being downgraded.

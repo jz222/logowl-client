@@ -41,7 +41,7 @@ const Organization = ({ history }) => {
             {activeTab === 'team' && <Team team={store.team} userId={store.id} />}
             {activeTab === 'invite' && <Invite tabHandler={setActiveTab} />}
             {activeTab === 'quota' && <Quota org={org} />}
-            {activeTab === 'delete' && <Delete name={org.name} history={history} />}
+            {activeTab === 'delete' && <Delete name={org.name} history={history} hasActiveSubscription={org.plan !== 'free' && !org.paidThroughDate} />}
         </>
     );
 };
