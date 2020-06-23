@@ -133,55 +133,57 @@ const Quota = ({ org }) => {
                     <p>Total requests that are tracked per month</p>
                 </div>
                 
-                <hr className={styling.dangerZone} />
-                
-                <div className={styling.row} hidden={!subscriptionId || activePaidThroughPeriod}>
-                    <div className={styling.flexWrapper}>
-                        <div>
-                            <h6>Cancel Subscription</h6>
-                            <p>Cancel your subscription and get downgraded to the free plan.</p>
+                <span hidden={config.environment.isSelfHosted}>
+                    <hr className={styling.dangerZone} />
+                    
+                    <div className={styling.row} hidden={!subscriptionId || activePaidThroughPeriod}>
+                        <div className={styling.flexWrapper}>
+                            <div>
+                                <h6>Cancel Subscription</h6>
+                                <p>Cancel your subscription and get downgraded to the free plan.</p>
+                            </div>
+                            
+                            <Button size='smaller' onClick={toggleConfirmationModal}>Cancel</Button>
                         </div>
-                        
-                        <Button size='smaller' onClick={toggleConfirmationModal}>Cancel</Button>
                     </div>
-                </div>
-                
-                <div className={styling.row}
-                     hidden={!activePaidThroughPeriod && plan !== freePlanId}>
-                    <div className={styling.flexWrapper}>
-                        <div>
-                            <h6>Create a Subscription</h6>
-                            <p>Create a new subscription and enjoy a higher quota.</p>
+                    
+                    <div className={styling.row}
+                         hidden={!activePaidThroughPeriod && plan !== freePlanId}>
+                        <div className={styling.flexWrapper}>
+                            <div>
+                                <h6>Create a Subscription</h6>
+                                <p>Create a new subscription and enjoy a higher quota.</p>
+                            </div>
+                            
+                            <Button size='smaller' onClick={togglePaymentFlow}>Create</Button>
                         </div>
-                        
-                        <Button size='smaller' onClick={togglePaymentFlow}>Create</Button>
                     </div>
-                </div>
-                
-                <div className={styling.row} hidden={!subscriptionId || activePaidThroughPeriod}>
-                    <div className={styling.flexWrapper}>
-                        <div>
-                            <h6>Update Credit Card</h6>
-                            <p>Update the credit card that is charged for the subscription.</p>
+                    
+                    <div className={styling.row} hidden={!subscriptionId || activePaidThroughPeriod}>
+                        <div className={styling.flexWrapper}>
+                            <div>
+                                <h6>Update Credit Card</h6>
+                                <p>Update the credit card that is charged for the subscription.</p>
+                            </div>
+                            
+                            <Button size='smaller' onClick={() => togglePaymentFlow('updateCC')}>Update</Button>
                         </div>
-                        
-                        <Button size='smaller' onClick={() => togglePaymentFlow('updateCC')}>Update</Button>
                     </div>
-                </div>
-                
-                <div
-                    className={styling.row}
-                    hidden={plan === highPlanId || plan === freePlanId || paidThroughDate}
-                >
-                    <div className={styling.flexWrapper}>
-                        <div>
-                            <h6>Upgrade Plan</h6>
-                            <p>Upgrade your current plan and enjoy a higher quota.</p>
+                    
+                    <div
+                        className={styling.row}
+                        hidden={plan === highPlanId || plan === freePlanId || paidThroughDate}
+                    >
+                        <div className={styling.flexWrapper}>
+                            <div>
+                                <h6>Upgrade Plan</h6>
+                                <p>Upgrade your current plan and enjoy a higher quota.</p>
+                            </div>
+                            
+                            <Button size='smaller' onClick={() => togglePaymentFlow('upgradePlan')}>Upgrade</Button>
                         </div>
-                        
-                        <Button size='smaller' onClick={() => togglePaymentFlow('upgradePlan')}>Upgrade</Button>
                     </div>
-                </div>
+                </span>
             </Card>
             
             {paymentFlowOpen && paymentFlow}

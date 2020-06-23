@@ -42,6 +42,15 @@
     }
 }
 
+.success {
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color-3);
+}
+
 .controls {
     display: flex;
     justify-content: flex-end;
