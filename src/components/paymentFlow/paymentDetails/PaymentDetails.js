@@ -5,13 +5,14 @@ import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 
 import getBraintreeOptions from './options';
+import fetchClient from 'fetchClient';
 import { useStore } from 'context';
 import config from 'config';
 
 import styling from '../PaymentFlow.module.scss';
 
 const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC }) => {
-    const [store] = useStore();
+    const [store, dispatch, setError] = useStore();
     
     const [{ hostedFields, errorMsg, isLoading }, setState] = useState({
         hostedFields: undefined,
@@ -38,8 +39,7 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC })
             setState(prevState => ({ ...prevState, hostedFields, isLoading: false }));
             
         } catch (error) {
-            console.error();
-            
+            console.error(error);
             updateState({ errorMsg: 'Payments are currently unavailable. Please contact our support.' });
         }
     }, [updateState]);
@@ -57,6 +57,20 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC })
         }
     };
     
+    
+    /**
+     * Fetches the latest user data and updates the global context.
+     * @returns {Promise<void>}
+     */
+    const updateUserData = async () => {
+        try {
+            const user = await fetchClient('getUser');
+            dispatch({ type: 'update', payload: user });
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        }
+    };
     
     /**
      * Creates a subscription with the provided payment details.
@@ -97,8 +111,10 @@ const PaymentDetails = ({ selectedPlan, updateState, endPaymentFlow, updateCC })
                 updateState({ errorMsg: res.message });
             } else if (updateCC) {
                 updateState({ successfullyUpdatedCC: true });
+                setTimeout(() => updateUserData(), 3500);
             } else {
                 updateState({ successfullySubscribed: true });
+                setTimeout(() => updateUserData(), 3500);
             }
             
         } catch (error) {
