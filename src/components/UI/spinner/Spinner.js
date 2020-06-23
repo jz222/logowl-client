@@ -13,4 +13,11 @@ const Spinner = ({ size, invert, hidden }) => {
     );
 };
 
+export const LoadingSpinner = () => (
+    <div className={styling.loadingSpinner}>
+        <Spinner invert />
+        <h4>loading</h4>
+    </div>
+);
+
 export default Spinner;

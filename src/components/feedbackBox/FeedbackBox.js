@@ -74,7 +74,7 @@ const FeedbackBox = () => {
         if (store.organization.isSetUp && !feedbackDisabled) {
             setTimeout(() => {
                 setState(prevState => ({ ...prevState, open: true }));
-            }, 1000);
+            }, 15000);
         }
     }, [store]);
     

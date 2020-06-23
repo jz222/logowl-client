@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { LoadingSpinner } from 'components/UI/spinner/Spinner';
 import Placeholder from 'components/UI/placeholder/Placeholder';
 import PageViewsChart from './pageViewsChart/PageViewsChart';
 import DoughnutChart from './doughnutChart/DoughnutChart';
@@ -26,7 +27,8 @@ const Analytics = ({ serviceId = '' }) => {
         totalVisits: 0,
         totalNewVisitors: 0,
         totalSessions: 0,
-        pageViews: []
+        pageViews: [],
+        isLoading: true
     });
     
     const {
@@ -36,7 +38,8 @@ const Analytics = ({ serviceId = '' }) => {
         totalVisits,
         totalNewVisitors,
         totalSessions,
-        pageViews
+        pageViews,
+        isLoading
     } = state;
     
     
@@ -55,6 +58,8 @@ const Analytics = ({ serviceId = '' }) => {
      */
     const fetchAnalyticData = useCallback(async () => {
         try {
+            setState(prevState => ({ ...prevState, isLoading: true }));
+            
             const url = '/event/' + serviceId + '/analytics';
             const queryParam = '?mode=' + mode;
             
@@ -73,9 +78,11 @@ const Analytics = ({ serviceId = '' }) => {
                 return pageView;
             });
             
-            setState(prevState => ({ ...prevState, ...(res || {}) }));
+            setState(prevState => ({ ...prevState, ...(res || {}), isLoading: false }));
+            
         } catch (error) {
             console.error(error);
+            setState(prevState => ({ ...prevState, isLoading: false }));
             setError(error);
         }
     }, [mode, serviceId, setError]);
@@ -87,6 +94,11 @@ const Analytics = ({ serviceId = '' }) => {
     useEffect(() => {
         fetchAnalyticData();
     }, [fetchAnalyticData]);
+    
+    
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
     
     
     const placeholder = (
