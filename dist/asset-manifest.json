@@ -1,27 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.3c659500.chunk.css",
-    "main.js": "/static/js/main.5620f2e4.chunk.js",
-    "main.js.map": "/static/js/main.5620f2e4.chunk.js.map",
+    "main.css": "/static/css/main.3288fbfd.chunk.css",
+    "main.js": "/static/js/main.85c9e265.chunk.js",
+    "main.js.map": "/static/js/main.85c9e265.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.8793f9d2.js",
     "runtime-main.js.map": "/static/js/runtime-main.8793f9d2.js.map",
-    "static/js/2.130a12a0.chunk.js": "/static/js/2.130a12a0.chunk.js",
-    "static/js/2.130a12a0.chunk.js.map": "/static/js/2.130a12a0.chunk.js.map",
+    "static/js/2.788741fb.chunk.js": "/static/js/2.788741fb.chunk.js",
+    "static/js/2.788741fb.chunk.js.map": "/static/js/2.788741fb.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.d11cc369ed1fe54975f882c71328f153.js": "/precache-manifest.d11cc369ed1fe54975f882c71328f153.js",
+    "precache-manifest.c53adc1861ae74f80baf6442dc027585.js": "/precache-manifest.c53adc1861ae74f80baf6442dc027585.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.3c659500.chunk.css.map": "/static/css/main.3c659500.chunk.css.map",
-    "static/js/2.130a12a0.chunk.js.LICENSE.txt": "/static/js/2.130a12a0.chunk.js.LICENSE.txt",
+    "static/css/main.3288fbfd.chunk.css.map": "/static/css/main.3288fbfd.chunk.css.map",
+    "static/js/2.788741fb.chunk.js.LICENSE.txt": "/static/js/2.788741fb.chunk.js.LICENSE.txt",
     "static/media/browser.svg": "/static/media/browser.fd115b34.svg",
     "static/media/log-owl-logo-dark.svg": "/static/media/log-owl-logo-dark.26972a44.svg",
+    "static/media/log-owl-uni-green.svg": "/static/media/log-owl-uni-green.e6c9f4cb.svg",
+    "static/media/log-owl-uni-orange.svg": "/static/media/log-owl-uni-orange.c67e2aa5.svg",
+    "static/media/log-owl-uni-red.svg": "/static/media/log-owl-uni-red.a99f00c5.svg",
     "static/media/log-owl-uni.svg": "/static/media/log-owl-uni.8adc0bcb.svg",
     "static/media/log-owl.svg": "/static/media/log-owl.b1a41534.svg",
     "static/media/index.css": "/static/media/metropolis-semibold-webfont.be0a1af5.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.8793f9d2.js",
-    "static/js/2.130a12a0.chunk.js",
-    "static/css/main.3c659500.chunk.css",
-    "static/js/main.5620f2e4.chunk.js"
+    "static/js/2.788741fb.chunk.js",
+    "static/css/main.3288fbfd.chunk.css",
+    "static/js/main.85c9e265.chunk.js"
   ]
 }
