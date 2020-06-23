@@ -1,24 +1,48 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import Checkbox from 'components/UI/checkbox/Checkbox';
-import Button from 'components/UI/button/Button';
+import { ErrorMessage, SubscriptionSuccessMessage, UpdateSuccessMessage } from './messages/Messages';
+import PaymentDetails from './paymentDetails/PaymentDetails';
+import UpgradePlan from './upgradePlan/UpgradePlan';
+import Modal from 'components/UI/modal/Modal';
+import Plans from './plans/Plans';
 
-import { useStore } from 'context';
 import fetchClient from 'fetchClient';
+import { useStore } from 'context';
+import config from 'config';
 
-import styling from './PaymentFlow.module.scss';
-
-const PaymentFlow = ({ endPaymentFlow }) => {
+const PaymentFlow = ({ open, endPaymentFlow, paidThroughPlan, updateCC, upgradePlan, isCancelAble }) => {
     const [, , setError] = useStore();
-    const [selectedPlan, setSelectedPlan] = useState('freePlan');
+    
+    const initState = {
+        step: 1,
+        selectedPlan: config.availablePlans.freePlanId,
+        successfullySubscribed: false,
+        successfullyUpdatedCC: false,
+        errorMsg: ''
+    };
+    
+    const [state, setState] = useState(initState);
+    
+    const { step, selectedPlan, successfullyUpdatedCC, successfullySubscribed, errorMsg } = state;
+    
+    
+    /**
+     * Updates the state.
+     * @param update {object} updated keys
+     */
+    const updateState = useCallback((update) => {
+        setState(prevState => ({ ...prevState, ...update }));
+    }, []);
+    
     
     /**
      * Handles checkbox selections.
      * @param target {object} the checkbox that was selected
      */
     const selectHandler = ({ target }) => {
-        setSelectedPlan(target.getAttribute('data-id'));
+        setState(prevState => ({ ...prevState, selectedPlan: target.getAttribute('data-id') }));
     };
+    
     
     /**
      * Confirms the selected plan and ends the payment flow.
@@ -26,44 +50,92 @@ const PaymentFlow = ({ endPaymentFlow }) => {
      */
     const confirmPlan = async () => {
         try {
-            await fetchClient('updateOrganization', { isSetUp: true });
-            endPaymentFlow();
+            if (selectedPlan === config.availablePlans.freePlanId) {
+                await fetchClient('updateOrganization', { isSetUp: true });
+                endPaymentFlow();
+            } else {
+                setState(prevState => ({ ...prevState, step: 2 }));
+            }
         } catch (error) {
             console.error(error);
+            endPaymentFlow();
             setError(error);
         }
     };
     
+    
+    const plans = (
+        <Plans
+            selectedPlan={selectedPlan}
+            selectHandler={selectHandler}
+            confirmPlan={confirmPlan}
+            paidThroughPlan={paidThroughPlan}
+            cancelHandler={endPaymentFlow}
+            isCancelable={isCancelAble}
+        />
+    );
+    
+    const upgradePlanComponent = (
+        <UpgradePlan
+            cancelHandler={endPaymentFlow}
+            updateState={updateState}
+        />
+    );
+    
+    const subscriptionSuccessMessage = (
+        <SubscriptionSuccessMessage
+            endPaymentFlow={endPaymentFlow}
+            selectedPlan={selectedPlan}
+        />
+    );
+    
+    const updateSuccessMessage = (
+        <UpdateSuccessMessage
+            endPaymentFlow={endPaymentFlow}
+        />
+    );
+    
+    const errorMessage = (
+        <ErrorMessage
+            errorMsg={errorMsg}
+            selectedPlan={selectedPlan}
+            resetPaymentFlow={() => setState(initState)}
+        />
+    );
+    
+    const paymentDetails = (
+        <PaymentDetails
+            selectedPlan={selectedPlan}
+            updateState={updateState}
+            endPaymentFlow={endPaymentFlow}
+            updateCC={updateCC}
+        />
+    );
+    
+    
+    let component = plans;
+    
+    if (successfullySubscribed) {
+        component = subscriptionSuccessMessage;
+        
+    } else if (successfullyUpdatedCC) {
+        component = updateSuccessMessage;
+        
+    } else if (errorMsg) {
+        component = errorMessage;
+        
+    } else if (upgradePlan) {
+        component = upgradePlanComponent;
+        
+    } else if (step === 2 || updateCC) {
+        component = paymentDetails;
+    }
+    
+    
     return (
-        <>
-            <h2>Select your Plan</h2>
-            
-            <div className={styling.content}>
-                <p>
-                    Please choose your plan below and you are good to go. <b>Prices are billed
-                    monthly.</b> You can change your plan at any time in the settings of your organization.
-                </p>
-                
-                <div className={styling.card}>
-                    <div>
-                        <Checkbox
-                            id='freePlan'
-                            checked={selectedPlan === 'freePlan'}
-                            changeHandler={selectHandler}
-                        />
-                    </div>
-                    
-                    <div className={selectedPlan === 'freePlan' ? styling.selected : styling.description}>
-                        <h6>Free Plan</h6>
-                        <p>Includes 5000 requests/month and maximum one additional team member.</p>
-                    </div>
-                    
-                    <div className={styling.price}>FREE</div>
-                </div>
-            </div>
-            
-            <Button onClick={confirmPlan}>Confirm</Button>
-        </>
+        <Modal open={open}>
+            {component}
+        </Modal>
     );
 };
 

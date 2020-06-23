@@ -6,6 +6,7 @@ import ErrorDetails from './components/service/errorDetails/ErrorDetails';
 import PasswordReset from './components/auth/passwordReset/PasswordReset';
 import Organization from './components/organization/Organization';
 import Blueprint from './components/layout/blueprint/Blueprint';
+import FeedbackBox from './components/feedbackBox/FeedbackBox';
 import Services from './components/services/Services';
 import Settings from './components/settings/Settings';
 import Toast from './components/layout/toast/Toast';
@@ -33,6 +34,8 @@ const App = () => (
                 <Route exact path='/settings' component={Settings} />
             </Blueprint>
         </Switch>
+        
+        <FeedbackBox />
         
         <Toast />
     </>

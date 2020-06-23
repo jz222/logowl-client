@@ -109,6 +109,21 @@
     }
 }
 
+.consent {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 0.5rem;
+    text-align: left;
+
+    p {
+        margin-left: 1rem;
+        font-size: 1.4rem;
+    }
+}
+
 .loading {
     height: 100%;
     display: flex;

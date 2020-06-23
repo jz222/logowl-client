@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 
 import PaymentFlow from 'components/paymentFlow/PaymentFlow';
 import Spinner from 'components/UI/spinner/Spinner';
-import Modal from 'components/UI/modal/Modal';
 import Sidebar from '../sidebar/Sidebar';
 import Nav from '../nav/Nav';
 
@@ -88,9 +87,7 @@ const Blueprint = ({ children, history }) => {
                 </main>
             </div>
             
-            <Modal open={startPaymentFlow}>
-                <PaymentFlow endPaymentFlow={() => setStartPaymentFlow(false)} />
-            </Modal>
+            <PaymentFlow open={startPaymentFlow} endPaymentFlow={() => setStartPaymentFlow(false)} />
         </>
     );
     

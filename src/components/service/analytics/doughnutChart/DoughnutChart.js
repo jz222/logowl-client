@@ -108,7 +108,7 @@ const DoughnutChart = ({ pageViews = [], title = '', type = 'browsers' }) => {
                 data[6] = (data[6] || 0) + value;
                 labels[6] = 'others';
             } else {
-                labels.push(key.replace('%2E', '.'));
+                labels.push(key.replace(/%2E/g, '.'));
                 data.push(value);
             }
         }

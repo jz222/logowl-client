@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { PrivacyPolicy, TermsAndConditions } from 'components/UI/links/Links';
 import InputField from 'components/UI/inputField/InputField';
+import Checkbox from 'components/UI/checkbox/Checkbox';
 import Spinner from 'components/UI/spinner/Spinner';
 import Button from 'components/UI/button/Button';
 import Menu from 'components/layout/menu/Menu';
@@ -19,11 +21,12 @@ const Setup = ({ history }) => {
         lastName: '',
         email: '',
         password: '',
+        givenConsent: config.environment.isSelfHosted,
         isLoading: true,
         error: ''
     });
     
-    const { currentStep, organizationName, firstName, lastName, email, password, isLoading, error } = state;
+    const { currentStep, organizationName, firstName, lastName, email, password, givenConsent, isLoading, error } = state;
     
     
     /**
@@ -33,6 +36,14 @@ const Setup = ({ history }) => {
      */
     const changeHandler = ({ target: { name, value } }) => {
         setState(prevState => ({ ...prevState, [name]: value }));
+    };
+    
+    
+    /**
+     * Toggles the consent checkbox.
+     */
+    const consentToggle = () => {
+        setState(prevState => ({ ...prevState, givenConsent: !prevState.givenConsent }));
     };
     
     
@@ -85,7 +96,8 @@ const Setup = ({ history }) => {
             config.regex.notEmpty.test(firstName) &&
             config.regex.notEmpty.test(lastName) &&
             config.regex.email.test(email) &&
-            config.regex.password.test(password)
+            config.regex.password.test(password) &&
+            givenConsent
         )
     );
     
@@ -160,6 +172,14 @@ const Setup = ({ history }) => {
                     </span>
                 </div>
             </div>
+            
+            <div className={styling.consent} hidden={config.environment.isSelfHosted}>
+                <Checkbox id='consentBox' checked={givenConsent} changeHandler={consentToggle} />
+                
+                <p>
+                    I confirm that I have read, understood and accepted the <PrivacyPolicy /> and <TermsAndConditions />.
+                </p>
+            </div>
         </div>
     );
     
@@ -227,19 +247,11 @@ const Setup = ({ history }) => {
                     {(currentStep === 2 && !isLoading && error) && failure}
                     
                     <div className={styling.navigation}>
-                        <Button
-                            color='light'
-                            onClick={() => stepHandler(-1)}
-                            hidden={currentStep !== 1}
-                        >
+                        <Button color='light' onClick={() => stepHandler(-1)} hidden={currentStep !== 1}>
                             Back
                         </Button>
                         
-                        <Button
-                            onClick={() => stepHandler(1)}
-                            disabled={!stepIsValid}
-                            hidden={currentStep === 2}
-                        >
+                        <Button onClick={() => stepHandler(1)} disabled={!stepIsValid} hidden={currentStep === 2}>
                             Next
                         </Button>
                     </div>

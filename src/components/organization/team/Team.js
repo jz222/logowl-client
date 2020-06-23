@@ -63,7 +63,7 @@ const Team = ({ team = [], userId }) => {
                                     <p>{user.email}</p>
                                     
                                     <Badge
-                                        type='neutral'
+                                        type='info'
                                         size='small'
                                         hidden={user.isVerified}
                                     >

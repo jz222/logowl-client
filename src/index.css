@@ -73,13 +73,16 @@
     --color-6-opacity: rgba(124, 77, 2500, 0.2);
 
     --color-7: #448AFF;
-    --color-7-opacity: rgba(68, 138, 255,0.2);
+    --color-7-opacity: rgba(68, 138, 255, 0.2);
 
     --color-8: #00BCD4;
     --color-8-opacity: rgba(0, 188, 212, 0.2);
 
     --color-9: #1DE9B6;
     --color-9-opacity: rgba(29, 233, 182, 0.2);
+
+    --color-10-lighter: #fff1ea;
+    --color-10: #fea686;
 
     --max-width: 135rem;
     --border-radius: 7px;
@@ -207,16 +210,6 @@ li {
     list-style-type: none;
 }
 
-.axis,
-.legend-dataset-text {
-    fill: var(--color-2-dark) !important;
-}
-
-.line-vertical,
-.line-horizontal {
-    stroke: var(--color-2-darker) !important;
-}
-
 @media screen and (min-width: 350px) {
     html {
         font-size: 55%;
@@ -227,10 +220,36 @@ li {
     html {
         font-size: 62.5%;
     }
+
     main {
         padding: 2.5rem 4rem 4rem 4rem;
     }
+
     nav {
         padding: 0 4rem;
     }
+}
+
+/* Chart Override s*/
+.axis,
+.legend-dataset-text {
+    fill: var(--color-2-dark) !important;
+}
+
+.line-vertical,
+.line-horizontal {
+    stroke: var(--color-2-darker) !important;
+}
+
+/* Braintree Overrides */
+.braintree-hosted-fields-focused {
+    box-shadow: 0 0 0 1px var(--color-3-light), 0 0 0 5px var(--color-2-darker);
+}
+
+.braintree-hosted-fields-invalid {
+    box-shadow: 0 0 0 1px var(--color-4);
+}
+
+.braintree-hosted-fields-focused.braintree-hosted-fields-invalid {
+    box-shadow: 0 0 0 1px var(--color-4), 0 0 0 5px var(--color-4-light);
 }

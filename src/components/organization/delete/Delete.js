@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Confirmation from 'components/UI/confirmation/Confirmation';
+import InfoBox from 'components/UI/infoBox/InfoBox';
 import Button from 'components/UI/button/Button';
 import Card from 'components/UI/card/Card';
 
@@ -9,7 +10,7 @@ import fetchClient from 'fetchClient';
 
 import styling from './Delete.module.scss';
 
-const Delete = ({ name, history }) => {
+const Delete = ({ name, hasActiveSubscription, history }) => {
     const [, , setError] = useStore();
     const [confirmVisibility, setConfirmVisibility] = useState(false);
     
@@ -39,13 +40,18 @@ const Delete = ({ name, history }) => {
     return (
         <>
             <Card>
+                <InfoBox title='Cannot delete organization' type='alert' hidden={!hasActiveSubscription}>
+                    You cannot delete the organization because it has an active subscription. Switch to the tab "Quota"
+                    and cancel your subscription first.
+                </InfoBox>
+                
                 <div className={styling.row}>
                     <div className={styling.description}>
                         <h6>Delete Organization</h6>
                         <p>Delete this organization and all its data</p>
                     </div>
                     
-                    <Button size='smaller' onClick={toggleConfirmVisibility}>Delete</Button>
+                    <Button size='smaller' onClick={toggleConfirmVisibility} disabled={hasActiveSubscription}>Delete</Button>
                 </div>
             </Card>
             
