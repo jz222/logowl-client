@@ -10,8 +10,9 @@ import styling from './FeedbackBox.module.scss';
 const FeedbackBox = () => {
     // State
     const [store] = useStore();
-    const [{ open, message }, setState] = useState({
+    const [{ open, sent, message }, setState] = useState({
         open: false,
+        sent: false,
         message: ''
     });
     
@@ -51,6 +52,8 @@ const FeedbackBox = () => {
      */
     const submit = async () => {
         try {
+            setState({ open: true, sent: true, message: '' });
+            
             const opts = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -85,6 +88,8 @@ const FeedbackBox = () => {
             <h3>Anything missing?</h3>
             
             <p>Please let us know if you are missing something and we will try our best to make it happen!</p>
+            
+            <div className={styling.success} hidden={!sent}>Thanks for your feedback!</div>
             
             <textarea
                 placeholder='Enter your anonymous feedback...'
