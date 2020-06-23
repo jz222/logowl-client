@@ -2,13 +2,14 @@ import React from 'react';
 
 import styling from './Button.module.scss';
 
-const Button = (props) => (
+const Button = ({ size, color, disabled, onClick, isLoading, hidden, children}) => (
     <button
-        className={(styling[props.size] || styling.button) + ' ' + (styling[props.color] || '')}
-        {...props}
-        disabled={props.disabled || props.isLoading}
+        className={(styling[size] || styling.button) + ' ' + (styling[color] || '')}
+        onClick={onClick}
+        disabled={disabled || isLoading}
+        hidden={hidden}
     >
-        {props.isLoading && <div className={styling.spinner} />}{props.children}
+        {isLoading && <div className={styling.spinner} />}{children}
     </button>
 );
 

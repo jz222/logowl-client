@@ -1,13 +1,13 @@
-.content {
-    width: 100%;
-    margin: 2.5rem auto 4rem auto;
+// Plans
+.caption {
+    margin: 2rem 0;
 }
 
-.card {
+.plan {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -47,5 +47,99 @@
 
     &:first-of-type {
         margin-top: 2rem;
+    }
+}
+
+
+// Payment details
+.paymentDetails {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    &:first-of-type {
+        margin-top: 2rem;
+    }
+}
+
+.column {
+    width: calc(50% - 2rem);
+
+    h6 {
+        margin-bottom: 0.8rem;
+    }
+}
+
+.spinner {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    right: -1px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-2);
+}
+
+.paymentDetailsError {
+    width: 100%;
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color-4);
+}
+
+.hostedField {
+    position: relative;
+    width: 100%;
+    height: 5rem;
+    padding: 0 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 0 1px var(--color-2-darker);
+    transition: box-shadow 0.2s;
+    font-size: 1.6rem;
+    color: var(--color-1);
+}
+
+
+//Success and error message
+.message {
+    position: relative;
+    width: 100%;
+    margin: 2.5rem auto 4rem auto;
+
+    code {
+        width: 100%;
+        display: block;
+        margin: 2rem 0 0 0;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        background-color: var(--color-4-light);
+        font-family: monospace;
+        font-weight: 600;
+        color: var(--color-4);
+    }
+}
+
+
+// Controls
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 3rem;
+    background-color: var(--color-2);
+
+    button:last-of-type {
+        margin-left: 1rem;
     }
 }

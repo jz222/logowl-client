@@ -15,6 +15,9 @@ const initialState = {
         identifier: '',
         receivedRequests: {},
         monthlyRequestLimit: 0,
+        plan: '',
+        subscriptionId: '',
+        paidThroughDate: '',
         createdAt: '',
         updatedAt: ''
     },
@@ -29,6 +32,8 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'updateOrganization':
+            return { ...state, organization: { ...state.organization, ...action.payload } };
         case 'update':
             return { ...state, ...action.payload };
         default:

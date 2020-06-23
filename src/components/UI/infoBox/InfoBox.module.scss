@@ -1,0 +1,50 @@
+.base {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+
+    h6 {
+        margin-bottom: 0.5rem;
+    }
+
+    span {
+        text-transform: capitalize;
+    }
+
+    p {
+        font-size: 1.4rem;
+    }
+}
+
+.icon {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 2.5rem;
+
+    svg:nth-child(2) {
+        cursor: pointer;
+    }
+}
+
+.alert {
+    @extend .base;
+    background-color: var(--color-4-light);
+    color: var(--color-4);
+
+    p {
+        color: var(--color-4);
+    }
+}
+
+.warning {
+    @extend .base;
+    background-color: var(--color-10-lighter);
+    color: var(--color-10);
+
+    p {
+        color: var(--color-10);
+    }
+}
