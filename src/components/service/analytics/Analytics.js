@@ -100,7 +100,6 @@ const Analytics = ({ serviceId = '' }) => {
         return <LoadingSpinner />;
     }
     
-    
     const placeholder = (
         <Placeholder>
             <h4>No analytic data available</h4>

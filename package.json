@@ -1,6 +1,6 @@
 {
     "name": "logowl-client",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
