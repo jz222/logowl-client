@@ -19,6 +19,12 @@ const Counter = ({ number: newNumber }) => {
     useEffect(() => {
         clearInterval(timer.current);
         
+        // Don't show count animation if the number was shortened
+        if (isNaN(Number(newNumber))) {
+            setNumber(newNumber);
+            return;
+        }
+        
         const start = prevNumber.current;
         const end = newNumber;
         
