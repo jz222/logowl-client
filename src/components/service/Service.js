@@ -35,7 +35,7 @@ const Service = ({ history, match }) => {
             {activeTab === 'errors' && <Errors serviceId={service.id} type={service.type} history={history} />}
             {activeTab === 'analytics' && <Analytics serviceId={service.id} />}
             {activeTab === 'ticket' && <Ticket serviceName={service.name} ticket={service.ticket} />}
-            {activeTab === 'integrations' && <Integrations serviceId={service.id} slackWebhookURL={service.slackWebhookURL} webhookURL={service.webhookURL} />}
+            {activeTab === 'integrations' && <Integrations serviceId={service.id} slackWebhookURL={service.slackWebhookURL} discordWebhookURL={service.discordWebhookURL} webhookURL={service.webhookURL} />}
             {activeTab === 'settings' && <Settings history={history} serviceName={service.name} serviceId={service.id} />}
         </>
     );
