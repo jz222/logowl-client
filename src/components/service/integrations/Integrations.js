@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiAnchor, FiCode, FiSlack } from 'react-icons/fi';
+import { FaDiscord } from 'react-icons/fa';
 
 import InputField from 'components/UI/inputField/InputField';
 import Card, { Header, Title } from 'components/UI/card/Card';
@@ -13,11 +14,13 @@ import styling from './Integrations.module.scss';
 const Integrations = (props) => {
     const [store, dispatch, setError] = useStore();
     
-    const [{ prevWebhookURL, webhookURL, slackURL, prevSlackURL, loading }, setState] = useState({
+    const [{ prevWebhookURL, webhookURL, slackURL, prevSlackURL, discordURL, prevDiscordURL, loading }, setState] = useState({
         webhookURL: '',
         prevWebhookURL: '',
         slackURL: '',
         prevSlackURL: '',
+        discordURL: '',
+        prevDiscordURL: '',
         loading: false
     });
     
@@ -31,7 +34,7 @@ const Integrations = (props) => {
         try {
             setState(prevState => ({ ...prevState, loading: true }));
             
-            const update = { slackWebhookURL: slackURL, webhookURL };
+            const update = { slackWebhookURL: slackURL, discordWebhookURL: discordURL, webhookURL };
             
             await fetchClient('updateService', update, '/service/' + props.serviceId);
             
@@ -39,6 +42,7 @@ const Integrations = (props) => {
             const index = tmpServices.findIndex(x => x.id === props.serviceId);
             
             tmpServices[index].slackWebhookURL = slackURL;
+            tmpServices[index].discordURL = discordURL;
             tmpServices[index].webhookURL = webhookURL;
             
             dispatch({ action: 'update', payload: { services: tmpServices } });
@@ -47,6 +51,7 @@ const Integrations = (props) => {
                 ...prevState,
                 loading: false,
                 prevSlackURL: slackURL,
+                prevDiscordURL: discordURL,
                 prevWebhookURL: webhookURL
             }));
             
@@ -71,7 +76,7 @@ const Integrations = (props) => {
             return false;
         }
         
-        if (slackURL === prevSlackURL && webhookURL === prevWebhookURL) {
+        if (slackURL === prevSlackURL && webhookURL === prevWebhookURL && discordURL === prevDiscordURL) {
             return false;
         }
         
@@ -87,10 +92,12 @@ const Integrations = (props) => {
             ...prevState,
             prevSlackURL: props.slackWebhookURL || '',
             slackURL: props.slackWebhookURL || '',
+            prevDiscordURL: props.discordWebhookURL || '',
+            discordURL: props.discordWebhookURL || '',
             prevWebhookURL: props.webhookURL || '',
             webhookURL: props.webhookURL || ''
         }));
-    }, [props.slackWebhookURL, props.webhookURL]);
+    }, [props.discordWebhookURL, props.slackWebhookURL, props.webhookURL]);
     
     
     return (
@@ -107,6 +114,23 @@ const Integrations = (props) => {
                 value={webhookURL}
                 onChange={({ target }) => setState(prevState => ({ ...prevState, webhookURL: target.value }))}
                 placeholder='Webhook URL'
+            />
+            
+            <Title icon={<FaDiscord />}>Discord</Title>
+            
+            <p className={styling.caption}>
+                Create a webhook in Discord for the desired server and channel and add the webhook URL below. For
+                further help, please refer to the <a
+                href='https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks' target='_blank'
+                rel='noopener noreferrer'>Discord Documentation</a>. Make sure to add <b>"/slack"</b> at the end of the
+                webhook URL.
+            </p>
+            
+            <InputField
+                value={discordURL}
+                onChange={({ target }) => setState(prevState => ({ ...prevState, discordURL: target.value }))}
+                placeholder='Discord Webhook URL'
+                test={/https:\/\/discord.com\/api\/webhooks\//}
             />
             
             <Title icon={<FiSlack />}>Slack</Title>
