@@ -168,7 +168,7 @@ const Setup = ({ history }) => {
                     />
                     
                     <span className={config.regex.password.test(password) ? styling.passwordNoticeValid : styling.passwordNotice}>
-                        At least 12 upper and lower case characters and one of #?!@$%^&*-
+                        Minimum 8-15 lower case, special characters and numbers
                     </span>
                 </div>
             </div>

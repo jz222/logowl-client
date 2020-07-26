@@ -250,7 +250,7 @@ const Authentication = ({ history, location }) => {
                         </WideButton>
                         
                         <span className={styling.passwordNotice} hidden={!showPasswordNotice()}>
-                            12-20 lower case, upper case and special characters and numbers
+                            minimum 8-15 lower case, special characters and numbers
                         </span>
                         
                         <div className={styling.resetPassword} hidden={mode === 'signUp'}>

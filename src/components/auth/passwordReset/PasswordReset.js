@@ -147,7 +147,7 @@ const PasswordReset = ({ history }) => {
                 />
                 
                 <span className={passwordValid ? styling.noticeValid : styling.notice}>
-                    12-20 lower case, upper case and special characters and numbers
+                    Minimum 8-15 lower case, special characters and numbers
                 </span>
                 
                 <InputField
