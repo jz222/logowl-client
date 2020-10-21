@@ -100,20 +100,20 @@ const Analytics = ({ serviceId = '' }) => {
         return <LoadingSpinner />;
     }
     
-    const placeholder = (
-        <Placeholder>
-            <h4>No analytic data available</h4>
-            
-            <p>Install and configure the adapter to use analytics</p>
-            
-            <Button onClick={() => window.open(config.links.adapters.browser, '_blank').focus()}>
-                Get Started
-            </Button>
-        </Placeholder>
-    );
-    
-    const analyticData = (
+    return (
         <>
+            <div className={styling.placeholder} hidden={pageViews.length}>
+                <Placeholder>
+                    <h4>No data available for the selected period of time</h4>
+                    
+                    <p>Install and configure the adapter to use analytics</p>
+                    
+                    <Button onClick={() => window.open(config.links.adapters.browser, '_blank').focus()}>
+                        Get Started
+                    </Button>
+                </Placeholder>
+            </div>
+            
             <Header
                 mode={mode}
                 dropdownHandler={dropdownHandler}
@@ -151,9 +151,6 @@ const Analytics = ({ serviceId = '' }) => {
             <TimeOnPage pageViews={pageViews} />
         </>
     );
-    
-    
-    return pageViews.length ? analyticData : placeholder;
 };
 
 export default Analytics;
