@@ -106,7 +106,7 @@ const Analytics = ({ serviceId = '' }) => {
                 <Placeholder>
                     <h4>No data available for the selected period of time</h4>
                     
-                    <p>Install and configure the adapter to use analytics</p>
+                    <p>Install and configure the adapter to use analytics or select a broader time window</p>
                     
                     <Button onClick={() => window.open(config.links.adapters.browser, '_blank').focus()}>
                         Get Started
