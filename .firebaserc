@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "logowl"
+  },
+  "targets": {
+    "logowl": {
+      "hosting": {
+        "app": [
+          "logowl-app"
+        ]
+      }
+    }
+  }
+}
